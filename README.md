@@ -31,12 +31,15 @@ Configuration can also be provided through a config file like the following
 	.*[Ww]arning.*==yellow
 
 Notes:
+
 	1. no spaces are allowed at both sides of == sign
+	
 		error == red		WRONG
 		error== red		WRONG
 		error ==red		WRONG
 		error==red		OK
 	2. if a pattern contains spaces, they must be defined using "\s" symbol, for example:
+	
 		could not==red_bold	WRONG
 		could\snot==red_bold	OK
 
