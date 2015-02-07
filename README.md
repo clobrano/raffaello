@@ -3,7 +3,8 @@
 Raffaello is a command line (CLI) output colorizer
 
 Usage:
-	raffaello <arguments> --- command [arguments]
+
+	./raffaello <arguments> --- command [arguments]
 
 Raffaello needs to be configured to colorize the CLI output.
 
