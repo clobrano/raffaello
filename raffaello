@@ -1,0 +1,306 @@
+#!/usr/bin/env python
+"""
+Raffaello is a command line (CLI) output colorizer
+
+Usage:
+	raffaello <arguments> --- command [arguments]
+
+Raffaello needs to be configured to colorize the CLI output.
+
+Configuration can be provided direclty through command line with arguments:
+
+	.$ /raffaello "pattern1==colorA" "pattern2==colorB" "pattern3==colorA" ... --- command [arguments]
+
+	e.g.
+
+		$ ./raffaello "\d+\.\d+==blue" --- dmesg	# this will make dmesg numbers blue
+		$ ./raffaello '.*[Ee]rror.*==red' --- dmesg	# this will highlight lines with error messages (if any) in red
+
+
+Configuration can also be provided through a config file like the following
+
+	$ ./raffaello file=dmesg.cfg --- dmesg
+
+
+	$ cat dmesg.cfg
+
+	# Dmesg config file example. Comment lines will be ignored
+	.*[Ee]rror.*==red_bold
+	.*ERROR.*==red_bold
+	timed\sout==red
+	.*[Ww]arning.*==yellow
+
+Notes:
+	1. no spaces are allowed at both sides of == sign
+		error == red		WRONG
+		error== red		WRONG
+		error ==red		WRONG
+		error==red		OK
+	2. if a pattern contains spaces, they must be defined using "\s" symbol, for example:
+		could not==red_bold	WRONG
+		could\snot==red_bold	OK
+
+"""
+
+import sys
+import os
+import re
+
+
+def usage():
+	print(__doc__)
+
+def help():
+	usage()
+	print('Available color list\n')
+	for key in sorted(color_filters.keys()):
+		print('\t%s' % key)
+
+# [ COLOR CODES]
+color_codes = {
+	'black'			: chr(27)+'[30m',
+	'red'			: chr(27)+'[31m',
+	'green'			: chr(27)+'[32m',
+	'brown'			: chr(27)+'[33m',
+	'blue'			: chr(27)+'[34m',
+	'purple'		: chr(27)+'[35m',
+	'cyan'			: chr(27)+'[36m',
+	'light_grey'	: chr(27)+'[37m',
+	'dark_grey'		: chr(27)+'[30m',
+	'light_red'		: chr(27)+'[31m',
+	'light_green'	: chr(27)+'[32m',
+	'yellow'		: chr(27)+'[33m',
+	'light_blue'	: chr(27)+'[34m',
+	'light_purple'	: chr(27)+'[35m',
+	'light_cyan'	: chr(27)+'[36m',
+	'white'			: chr(27)+'[37m'
+}
+end_color = chr(27)+'[39m'
+
+# [ STYLE CODES ]
+style_codes = {
+	'bold' : chr(27) + '[1m',
+}
+end_bold = chr(27) + '[22m'
+
+
+class Filter(object):
+	"""
+	Encapsulate open and close tag codes
+	"""
+	def __init__(self, name, open_code, close_code):
+		self.__name = name
+		self.open = open_code
+		self.close = close_code
+
+	def apply(self, line, matches):
+		'''
+		Apply filter to all matches in line
+		'''
+		for match in matches:
+			replacement = '%s%s%s' % (self.open, match, self.close)
+			line = line.replace(match, replacement)
+
+		return line
+
+
+	def __repr__(self):
+		return self.__name
+
+
+# [ FILTERS ]
+color_filters = {}
+for key, color_code in color_codes.items():
+	color_filter = Filter(key, color_code, end_color)
+	color_filters.update({key : color_filter})
+
+	# bold version
+	color_filter = Filter(key, '%s%s' % (color_code, style_codes['bold']),
+							end_bold + end_color)
+	color_filters.update({'%s_bold' % key : color_filter})
+
+
+def get_options(optargs):
+	arguments_line = ' '.join(optargs)
+
+	separator = ' --- '
+	options = arguments_line.split(separator)[0]
+	command_line = arguments_line.split(separator)[1]
+
+	if 'file' in options:
+		config_file_path = options.split('=')[1].rstrip()
+
+		if os.path.exists(config_file_path):
+			patterns = parse_config_file(config_file_path)
+		else:
+			print('Could not find config file "%s"' % config_file_path)
+
+	else:
+		patterns = parse_color_option(options)
+
+	command_list = command_line.split(' ')
+
+	return (patterns, command_list)
+
+
+
+def parse_color_option(color_options):
+	"""
+	A color option is a string in the form
+	pattern==color. No space is allowed at both sides
+	of the double equal (==) sign.
+	"""
+
+	separator = "=="
+	patterns = {}
+
+	for option in color_options.split(' '):
+
+		if len(re.findall(separator, option)) > 1:
+			print('[Error] Can not parse option %s. Too many separator symbols (%s) in option' % (option, separator))
+			sys.exit(1)
+
+		pattern, color = option.split(separator)
+
+		# Remove initial quote if any
+		matches = re.findall("^'", pattern)
+		if matches:
+			pattern = pattern[1:]
+
+		# Remove final quote if any
+		matches = re.findall("'$", pattern)
+		if matches:
+			pattern = pattern[:len(pattern)-1]
+
+		if color in color_filters:
+			patterns.update( {r'%s' % pattern : color_filters[color]} )
+
+	return patterns
+
+
+
+def parse_config_file(path):
+	"""
+	Get Pattern/Color pairs from configuration file
+
+	Config rules:
+		PATTERN = color
+
+		e.g.
+		'tel: \d+' = red
+		'name.surname@email.com' = purple
+	"""
+	config = open(path).readlines()
+	patterns = {}
+	for line in config:
+		line = line.rstrip()
+
+		if len(line) == 0 or line[0] == '#':	# skip empty lines and comments
+			continue
+
+		new_pattern = parse_color_option(line)
+
+		patterns.update(new_pattern)
+
+#		# TODO: allow the use of different number of spaces or tabs around "="
+#		pattern, color = line.split("'=")
+#
+#		# Remove initial quote if exists
+#		matches = re.findall("^'", pattern)
+#		if matches:
+#			pattern = pattern[1:]
+#
+#		# Remove final quote if exists
+#		matches = re.findall("'$", pattern)
+#		if matches:
+#			pattern = pattern[:len(pattern)-1]
+#
+#		if color in color_filters:
+#			patterns.update( {r'%s' % pattern : color_filters[color]} )
+
+	return patterns
+
+
+def paint(line):
+	"""
+	Highlight line according to the given
+	pattern/color dictionary
+	"""
+	for pattern, filter in patterns.items():
+		matches = re.findall(pattern, line)
+		line = filter.apply(line, matches)
+		#for match in matches:
+		#	replacement = '%s%s%s' % (filter.open, match, filter.close)
+		#	line = line.replace(match, replacement)
+
+	return line.rstrip()
+
+
+def main(args):
+	try:
+		# TODO: work in progress. Enable using raffaello in a pipe directly
+		#		from command line
+		if len(args) == 0:
+			print('No arguments provided, reading from stdin')
+			while True:
+				try:
+					print(paint(input()))
+				except (EOFError, KeyboardInterrupt) as e:
+					print(e)
+					sys.exit(1)
+
+		# Executable binary along with its arguments is passed as
+		#	raffaello's arguments
+		else:
+			pipe_read, pipe_write = os.pipe()
+
+			proc_id = os.fork()
+
+			# child process executes the given command,
+			#	parent process parses its output
+			if proc_id:
+				# run the provided command
+				os.close(pipe_read)
+
+				# redirect stdout to pipe
+				os.dup2(pipe_write, sys.stdout.fileno())
+				os.dup2(pipe_write, sys.stderr.fileno())
+
+				cmd  = args[0]
+				args = args[1:]
+
+				if args == []:
+					args = ['',]
+
+				os.execvp(cmd, args)
+			else:
+				# read and modify command output
+				os.close(pipe_write)
+				fd_read = os.fdopen(pipe_read)
+
+				while True:
+					try:
+						line = fd_read.readline()
+
+						if line:
+							print(paint(line))
+						else:
+							break
+					except KeyboardInterrupt:
+						pass
+				#os.close(pipe_read)
+				os._exit(os.EX_OK)
+
+	except Exception as ex:
+		print('[Error] %s' % ex)
+
+	return 0
+
+
+
+if __name__ == '__main__':
+	if len(sys.argv) < 3:
+		usage()
+		sys.exit(1)
+	patterns, command_list = get_options(sys.argv[1:])
+	sys.exit(main(command_list))
