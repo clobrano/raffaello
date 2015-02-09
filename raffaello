@@ -125,7 +125,7 @@ def get_options(optargs):
 
 	separator = ' --- '
 	options = arguments_line.split(separator)[0]
-	command_line = arguments_line.split(separator)[1]
+	command = arguments_line.split(separator)[1]
 
 	patterns = {}
 	if 'file' in options:
@@ -140,9 +140,7 @@ def get_options(optargs):
 	else:
 		patterns = parse_color_option(options)
 
-	command_list = command_line.split(' ')
-
-	return (patterns, command_list)
+	return (patterns, command)
 
 
 
@@ -240,7 +238,7 @@ def paint(line):
 	return line.rstrip()
 
 
-def main(args):
+def main(command):
 	pipe_read, pipe_write = os.pipe()
 
 	proc_id = os.fork()
@@ -255,13 +253,8 @@ def main(args):
 		os.dup2(pipe_write, sys.stdout.fileno())
 		os.dup2(pipe_write, sys.stderr.fileno())
 
-		cmd  = args[0]
-		args = args[1:]
+		os.system(command)
 
-		if args == []:
-			args = ['',]
-
-		os.execvp(cmd, args)
 	else:
 		# read and modify command output
 		os.close(pipe_write)
@@ -288,5 +281,5 @@ if __name__ == '__main__':
 	if len(sys.argv) < 3:
 		usage()
 		sys.exit(1)
-	patterns, command_list = get_options(sys.argv[1:])
-	sys.exit(main(command_list))
+	patterns, command = get_options(sys.argv[1:])
+	sys.exit(main(command))
