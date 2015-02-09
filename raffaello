@@ -127,6 +127,7 @@ def get_options(optargs):
 	options = arguments_line.split(separator)[0]
 	command_line = arguments_line.split(separator)[1]
 
+	patterns = {}
 	if 'file' in options:
 		config_file_path = options.split('=')[1].rstrip()
 
@@ -134,6 +135,7 @@ def get_options(optargs):
 			patterns = parse_config_file(config_file_path)
 		else:
 			print('Could not find config file "%s"' % config_file_path)
+			sys.exit(1)
 
 	else:
 		patterns = parse_color_option(options)
@@ -174,6 +176,8 @@ def parse_color_option(color_options):
 
 		if color in color_filters:
 			patterns.update( {r'%s' % pattern : color_filters[color]} )
+		else:
+			print('Color "%s" does not exist' % color)
 
 	return patterns
 
@@ -237,62 +241,44 @@ def paint(line):
 
 
 def main(args):
-	try:
-		# TODO: work in progress. Enable using raffaello in a pipe directly
-		#		from command line
-		if len(args) == 0:
-			print('No arguments provided, reading from stdin')
-			while True:
-				try:
-					print(paint(input()))
-				except (EOFError, KeyboardInterrupt) as e:
-					print(e)
-					sys.exit(1)
+	pipe_read, pipe_write = os.pipe()
 
-		# Executable binary along with its arguments is passed as
-		#	raffaello's arguments
-		else:
-			pipe_read, pipe_write = os.pipe()
+	proc_id = os.fork()
 
-			proc_id = os.fork()
+	# child process executes the given command,
+	#	parent process parses its output
+	if proc_id:
+		# run the provided command
+		os.close(pipe_read)
 
-			# child process executes the given command,
-			#	parent process parses its output
-			if proc_id:
-				# run the provided command
-				os.close(pipe_read)
+		# redirect stdout to pipe
+		os.dup2(pipe_write, sys.stdout.fileno())
+		os.dup2(pipe_write, sys.stderr.fileno())
 
-				# redirect stdout to pipe
-				os.dup2(pipe_write, sys.stdout.fileno())
-				os.dup2(pipe_write, sys.stderr.fileno())
+		cmd  = args[0]
+		args = args[1:]
 
-				cmd  = args[0]
-				args = args[1:]
+		if args == []:
+			args = ['',]
 
-				if args == []:
-					args = ['',]
+		os.execvp(cmd, args)
+	else:
+		# read and modify command output
+		os.close(pipe_write)
+		fd_read = os.fdopen(pipe_read)
 
-				os.execvp(cmd, args)
-			else:
-				# read and modify command output
-				os.close(pipe_write)
-				fd_read = os.fdopen(pipe_read)
+		while True:
+			try:
+				line = fd_read.readline()
 
-				while True:
-					try:
-						line = fd_read.readline()
-
-						if line:
-							print(paint(line))
-						else:
-							break
-					except KeyboardInterrupt:
-						pass
-				#os.close(pipe_read)
-				os._exit(os.EX_OK)
-
-	except Exception as ex:
-		print('[Error] %s' % ex)
+				if line:
+					print(paint(line))
+				else:
+					break
+			except KeyboardInterrupt:
+				pass
+		#os.close(pipe_read)
+		os._exit(os.EX_OK)
 
 	return 0
 
