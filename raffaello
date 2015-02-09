@@ -9,12 +9,12 @@ Raffaello needs to be configured to colorize the CLI output.
 
 Configuration can be provided direclty through command line with arguments:
 
-	.$ /raffaello "pattern1==colorA" "pattern2==colorB" "pattern3==colorA" ... --- command [arguments]
+	.$ /raffaello "pattern1=>colorA" "pattern2=>colorB" "pattern3=>colorA" ... --- command [arguments]
 
 	e.g.
 
-		$ ./raffaello "\d+\.\d+==blue" --- dmesg	# this will make dmesg numbers blue
-		$ ./raffaello '.*[Ee]rror.*==red' --- dmesg	# this will highlight lines with error messages (if any) in red
+		$ ./raffaello "\d+\.\d+=>blue" --- dmesg	# this will make dmesg numbers blue
+		$ ./raffaello '.*[Ee]rror.*=>red' --- dmesg	# this will highlight lines with error messages (if any) in red
 
 
 Configuration can also be provided through a config file like the following
@@ -25,20 +25,20 @@ Configuration can also be provided through a config file like the following
 	$ cat dmesg.cfg
 
 	# Dmesg config file example. Comment lines will be ignored
-	.*[Ee]rror.*==red_bold
-	.*ERROR.*==red_bold
-	timed\sout==red
-	.*[Ww]arning.*==yellow
+	.*[Ee]rror.*=>red_bold
+	.*ERROR.*=>red_bold
+	timed\sout=>red
+	.*[Ww]arning.*=>yellow
 
 Notes:
-	1. no spaces are allowed at both sides of == sign
-		error == red		WRONG
-		error== red		WRONG
-		error ==red		WRONG
-		error==red		OK
+	1. no spaces are allowed at both sides of => sign
+		error => red		WRONG
+		error=> red		WRONG
+		error =>red		WRONG
+		error=>red		OK
 	2. if a pattern contains spaces, they must be defined using "\s" symbol, for example:
-		could not==red_bold	WRONG
-		could\snot==red_bold	OK
+		could not=>red_bold	WRONG
+		could\snot=>red_bold	OK
 
 """
 
@@ -147,11 +147,11 @@ def get_options(optargs):
 def parse_color_option(color_options):
 	"""
 	A color option is a string in the form
-	pattern==color. No space is allowed at both sides
-	of the double equal (==) sign.
+	pattern=>color. No space is allowed at both sides
+	of the double equal (=>) sign.
 	"""
 
-	separator = "=="
+	separator = "=>"
 	patterns = {}
 
 	for option in color_options.split(' '):
@@ -184,14 +184,8 @@ def parse_color_option(color_options):
 def parse_config_file(path):
 	"""
 	Get Pattern/Color pairs from configuration file
-
-	Config rules:
-		PATTERN = color
-
-		e.g.
-		'tel: \d+' = red
-		'name.surname@email.com' = purple
 	"""
+
 	config = open(path).readlines()
 	patterns = {}
 	for line in config:
@@ -203,22 +197,6 @@ def parse_config_file(path):
 		new_pattern = parse_color_option(line)
 
 		patterns.update(new_pattern)
-
-#		# TODO: allow the use of different number of spaces or tabs around "="
-#		pattern, color = line.split("'=")
-#
-#		# Remove initial quote if exists
-#		matches = re.findall("^'", pattern)
-#		if matches:
-#			pattern = pattern[1:]
-#
-#		# Remove final quote if exists
-#		matches = re.findall("'$", pattern)
-#		if matches:
-#			pattern = pattern[:len(pattern)-1]
-#
-#		if color in color_filters:
-#			patterns.update( {r'%s' % pattern : color_filters[color]} )
 
 	return patterns
 
