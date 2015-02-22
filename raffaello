@@ -5,31 +5,20 @@ Raffaello is a command line (CLI) output colorizer
 Usage:
 	raffaello <arguments> --- command [arguments]
 
-Raffaello needs to be configured to colorize the CLI output.
-
-Configuration can be provided direclty through command line with arguments:
-
-	.$ /raffaello "pattern1=>colorA" "pattern2=>colorB" "pattern3=>colorA" ... --- command [arguments]
+	$./raffaello "pattern1=>colorA" "pattern2=>colorB" "pattern3=>colorA" ... --- command [arguments]
+	$ ./raffaello file=/path/to/config/file --- command [arguments]
 
 	e.g.
 
-		$ ./raffaello "\d+\.\d+=>blue" --- dmesg	# this will make dmesg numbers blue
 		$ ./raffaello '.*[Ee]rror.*=>red' --- dmesg	# this will highlight lines with error messages (if any) in red
+		$ ./raffaello file=dmesg.cfg --- dmesg
 
-
-Configuration can also be provided through a config file like the following
-
-	$ ./raffaello file=dmesg.cfg --- dmesg
-
-
-	$ cat dmesg.cfg
-
-	# Dmesg config file example. Comment lines will be ignored
-	.*[Ee]rror.*=>red_bold
-	.*ERROR.*=>red_bold
-	timed\sout=>red
-	.*[Ww]arning.*=>yellow
-
+		$ cat dmesg.cfg
+			# Dmesg config file example. Comment lines will be ignored
+			.*[Ee]rror.*=>red_bold
+			.*ERROR.*=>red_bold
+			timed\sout=>red
+			.*[Ww]arning.*=>yellow
 Notes:
 	1. no spaces are allowed at both sides of => sign
 		error => red		WRONG
@@ -39,7 +28,6 @@ Notes:
 	2. if a pattern contains spaces, they must be defined using "\s" symbol, for example:
 		could not=>red_bold	WRONG
 		could\snot=>red_bold	OK
-
 """
 
 import sys
@@ -52,9 +40,8 @@ def usage():
 
 def help():
 	usage()
-	print('Available color list\n')
-	for key in sorted(color_filters.keys()):
-		print('\t%s' % key)
+	print('Available color list. NOTE that some colors could be unsupported on your terminal.\n')
+	print(sorted(color_filters.keys()))
 
 # [ COLOR CODES]
 color_codes = {
@@ -122,6 +109,10 @@ for key, color_code in color_codes.items():
 
 def get_options(optargs):
 	arguments_line = ' '.join(optargs)
+
+	if '-h' in arguments_line or '--help' in arguments_line:
+		help()
+		sys.exit(0)
 
 	separator = ' --- '
 	options = arguments_line.split(separator)[0]
@@ -256,7 +247,7 @@ def main(command):
 
 
 if __name__ == '__main__':
-	if len(sys.argv) < 3:
+	if len(sys.argv) < 2:
 		usage()
 		sys.exit(1)
 	patterns, command = get_options(sys.argv[1:])
