@@ -114,6 +114,11 @@ def get_options(optargs):
 		help()
 		sys.exit(0)
 
+	if not '=>' in arguments_line and not 'file' in arguments_line:
+		print('Ill-formatted options')
+		usage()
+		sys.exit(1)
+
 	separator = ' --- '
 	options = arguments_line.split(separator)[0]
 	command = arguments_line.split(separator)[1]
