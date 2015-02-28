@@ -34,13 +34,16 @@ import sys
 import os
 import re
 
+import logging
+logging.basicConfig(format='%(levelname)s %(message)s');
+log = logging.getLogger(__name__)
 
 def usage():
 	print(__doc__)
 
 def help():
 	usage()
-	print('Available color list. NOTE that some colors could be unsupported on your terminal.\n')
+	log.info('Available color list. NOTE that some colors could be unsupported on your terminal.\n')
 	print(sorted(color_filters.keys()))
 
 # [ COLOR CODES]
@@ -115,7 +118,7 @@ def get_options(optargs):
 		sys.exit(0)
 
 	if not '=>' in arguments_line and not 'file' in arguments_line:
-		print('Ill-formatted options')
+		log.error('Ill-formatted options')
 		usage()
 		sys.exit(1)
 
@@ -130,7 +133,7 @@ def get_options(optargs):
 		if os.path.exists(config_file_path):
 			patterns = parse_config_file(config_file_path)
 		else:
-			print('Could not find config file "%s"' % config_file_path)
+			log.error('Could not find config file "%s"' % config_file_path)
 			sys.exit(1)
 
 	else:
@@ -153,7 +156,7 @@ def parse_color_option(color_options):
 	for option in color_options.split(' '):
 
 		if len(re.findall(separator, option)) > 1:
-			print('[Error] Can not parse option %s. Too many separator symbols (%s) in option' % (option, separator))
+			log.error('[Error] Can not parse option %s. Too many separator symbols (%s) in option' % (option, separator))
 			sys.exit(1)
 
 		pattern, color = option.split(separator)
@@ -171,7 +174,8 @@ def parse_color_option(color_options):
 		if color in color_filters:
 			patterns.update( {r'%s' % pattern : color_filters[color]} )
 		else:
-			print('Color "%s" does not exist' % color)
+			log.error('Color "%s" does not exist' % color)
+			sys.exit(1)
 
 	return patterns
 
