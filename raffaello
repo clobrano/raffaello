@@ -38,6 +38,13 @@ import logging
 logging.basicConfig(format='    %(levelname)s %(message)s');
 log = logging.getLogger(__name__)
 
+# Separator between Raffaello configuration and
+# command to execute
+command_separator = '---'
+
+# Separator between pattern and color code
+pattern_separator = '=>'
+
 def usage():
     print(__doc__)
 
@@ -120,14 +127,22 @@ def get_options(optargs):
         help()
         sys.exit(0)
 
-    if not '=>' in arguments_line and not 'file' in arguments_line:
-        log.error('Ill-formatted options')
+
+    if not command_separator in arguments_line:
+        log.error('Missing separator "%s" between raffaello\
+ configuration and command to execute' % command_separator)
         usage()
         sys.exit(1)
 
-    separator = ' --- '
-    options = arguments_line.split(separator)[0]
-    command = arguments_line.split(separator)[1]
+    if not pattern_separator in arguments_line\
+            and not 'file' in arguments_line:
+        log.error("Ill-formatted raffaello's options")
+        usage()
+        sys.exit(1)
+
+    #command_separator = ' --- '
+    options = arguments_line.split(command_separator)[0]
+    command = arguments_line.split(command_separator)[1]
 
     patterns = {}
     if 'file' in options:
@@ -150,16 +165,16 @@ def parse_color_option(color_options):
     of the double equal (=>) sign.
     """
 
-    separator = "=>"
+    pattern_separator = "=>"
     patterns = {}
 
     for option in color_options.split(' '):
 
-        if len(re.findall(separator, option)) > 1:
-            log.error('[Error] Can not parse option %s. Too many separator symbols (%s) in option' % (option, separator))
+        if len(re.findall(pattern_separator, option)) > 1:
+            log.error('[Error] Can not parse option %s. Too many pattern_separator symbols (%s) in option' % (option, pattern_separator))
             sys.exit(1)
 
-        pattern, color = option.split(separator)
+        pattern, color = option.split(pattern_separator)
 
         # Remove initial quote if any
         matches = re.findall("^'", pattern)
@@ -186,6 +201,7 @@ def parse_config_file(path):
     Get Pattern/Color pairs from configuration file
     """
 
+    print(os.getcwd())
     epath = os.path.expanduser(path)
     if not os.path.exists(epath):
         log.error('Could not find config file "%s"' % path)
