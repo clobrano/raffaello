@@ -8,13 +8,17 @@ Usage:
 
 # Examples
 
-## gcc/g++
+## Make
 
+![make](./examples/make.gif)
 
 ## dmsg
 
+![dmesg](./examples/dmesg.gif)
+
 ## ifconfig
 
+![ifconfig](./examples/ifconfig.gif)
 
 # Configuration
 
@@ -32,7 +36,7 @@ Configuration can be provided direclty through command line with arguments:
 
 Configuration can also be provided through a config file like the following
 
-	$ ./raffaello file=dmesg.cfg --- dmesg
+	$ ./raffaello --file=dmesg.cfg --- dmesg
 
 where configuration file is
 
@@ -50,11 +54,6 @@ where configuration file is
 		error=> red		WRONG
 		error =>red		WRONG
 		error=>red		OK
-	2. if a pattern contains spaces, they must be defined using "\s" symbol(1), for example:
+	2. if a pattern contains spaces, they must be defined using "\s" symbol, for example:
 		could not=>red_bold		WRONG
 		could\snot=>red_bold	OK
-
-
-# Notes
-
-(1) so far.
