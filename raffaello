@@ -283,7 +283,7 @@ def main(command):
                 line = fd_read.readline()
 
                 if line:
-                    print(paint(line))
+                    print(paint(line.rstrip()))
                 else:
                     break
             except KeyboardInterrupt:
