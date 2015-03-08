@@ -280,10 +280,10 @@ def main(command):
 
         while True:
             try:
-                line = fd_read.readline()
+                line = fd_read.readline().rstrip()
 
                 if line:
-                    print(paint(line.rstrip()))
+                    print(paint(line))
                 else:
                     break
             except KeyboardInterrupt:
