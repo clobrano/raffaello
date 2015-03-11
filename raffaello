@@ -35,7 +35,7 @@ import os
 import re
 
 import logging
-level = logging.DEBUG
+level = logging.WARNING
 logging.basicConfig(level=level, format='    %(levelname)s %(message)s');
 log = logging.getLogger(__name__)
 
@@ -179,15 +179,18 @@ def parse_color_option(color_options):
     patterns = {}
 
     for option in color_options.split(' '):
+        if len(option) == 0:
+            continue
 
         if len(re.findall(pattern_separator, option)) > 1:
             log.error('[Error] Can not parse option %s. Too many pattern_separator symbols (%s) in option' % (option, pattern_separator))
             sys.exit(1)
+
         try:
             pattern, color = option.split(pattern_separator)
         except ValueError as err:
-            log.error("Could not parse option. (%s)" % err)
-            log.debug("option: {0}".format(option))
+            log.error("Could not parse option '%s'. (%s)" % (option, err))
+            log.debug("Color options: {0}".format(color_options))
             log.debug("pattern_separator: {0}".format(pattern_separator))
             sys.exit(1)
 
