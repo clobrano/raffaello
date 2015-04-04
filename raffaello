@@ -39,6 +39,11 @@ level = logging.WARNING
 logging.basicConfig(level=level, format='    %(levelname)s %(message)s');
 log = logging.getLogger(__name__)
 
+
+# Default directory
+root = '/'
+home = os.path.join(root, 'home', 'carlo', '.raffaello')
+
 # Separator between Raffaello configuration and
 # command to execute
 command_separator = '---'
@@ -160,8 +165,19 @@ def get_options(optargs):
     patterns = {}
 
     if '--file' in options or '-f' in options:
-        config_file_path = options.split('=')[1].rstrip()
-        patterns = parse_config_file(config_file_path)
+        path = options.split('=')[1].rstrip()
+        epath = os.path.expanduser(path)
+
+        if not os.path.exists(epath):
+
+            if os.path.exists(os.path.join(home, path)):
+                epath = os.path.join(home, path)
+            else:
+                log.error('Could not find config file "%s"' % path)
+                sys.exit(1)
+
+        patterns = parse_config_file(epath)
+
     else:
         patterns = parse_color_option(options)
 
@@ -219,14 +235,9 @@ def parse_config_file(path):
     Get Pattern/Color pairs from configuration file
     """
 
-    print(os.getcwd())
-    epath = os.path.expanduser(path)
-    if not os.path.exists(epath):
-        log.error('Could not find config file "%s"' % path)
-        sys.exit(1)
 
-    log.debug('Reading config file %s' % epath)
-    config = open(epath).readlines()
+    log.debug('Reading config file %s' % path)
+    config = open(path).readlines()
     patterns = {}
     for line in config:
         line = line.rstrip()
@@ -298,6 +309,7 @@ def main(command):
 
 
 if __name__ == '__main__':
+    print home
     if len(sys.argv) < 2:
         usage()
         sys.exit(1)
