@@ -169,6 +169,7 @@ def get_options(optargs):
         epath = os.path.expanduser(path)
 
         if not os.path.exists(epath):
+            log.debug("Looking for config file '%s' in '%s' folder" % (epath, home))
             epath = os.path.join(home, os.path.basename(path))
 
             if not os.path.exists(epath):
@@ -269,7 +270,7 @@ def paint(line):
     return line.rstrip()
 
 
-def main(command):
+def run(command):
     pipe_read, pipe_write = os.pipe()
 
     proc_id = os.fork()
@@ -306,6 +307,16 @@ def main(command):
     return 0
 
 
+def main():
+    global patterns
+    global command
+    if len(sys.argv) < 2:
+        usage()
+        sys.exit(1)
+    patterns, command = get_options(sys.argv[1:])
+    sys.exit(run(command))
+
+
 
 if __name__ == '__main__':
     print home
@@ -313,4 +324,4 @@ if __name__ == '__main__':
         usage()
         sys.exit(1)
     patterns, command = get_options(sys.argv[1:])
-    sys.exit(main(command))
+    sys.exit(run(command))

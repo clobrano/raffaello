@@ -10,8 +10,7 @@ setup(name = 'Raffaello',
         long_description = open('README.md').read(),
         license = 'LICENCE',
         packages = find_packages(),
-        scripts = ['raffaello'],
-
+        entry_points = {'console_scripts': ['raffaello = Raffaello.raffaello:main'], },
         package_data = {
             'examples' : ['*.cfg'],
             },
