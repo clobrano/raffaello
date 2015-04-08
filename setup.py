@@ -8,10 +8,7 @@ setup(name = 'Raffaello',
         author_email = 'clobrano@gmail.com',
         url = 'https://github.com/clobrano/raffaello',
         long_description = open('README.md').read(),
-        license = 'LICENCE',
         packages = find_packages(),
         entry_points = {'console_scripts': ['raffaello = Raffaello.raffaello:main'], },
-        package_data = {
-            'examples' : ['*.cfg'],
-            },
-        )
+        include_package_data = True,
+    )
