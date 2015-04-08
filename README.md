@@ -1,34 +1,39 @@
 # Raffaello
 
-Raffaello is a command line (CLI) output colorizer
+Raffaello is a command line (CLI) output colorizer.
 
-Usage:
+## Installation
+
+    # python setup.py install
+
+
+## Usage
 
 	raffaello <arguments> --- command [arguments]
 
-# Examples
+## Examples
 
-## Make
+### Make
 
 ![make](./examples/make.gif)
 
-## dmsg
+### dmsg
 
 ![dmesg](./examples/dmesg.gif)
 
-## ifconfig
+### ifconfig
 
 The following is an example of "conditional" hightlightning. I wanted to highlight the word "errors" only when actual errors have occurred. This is the pattern
 
 	(errors):[1-9]=>red_bold
-	
+
 this way, strings like *errors:0" are not highlighted and I do not get false warnings.
 
 ![ifconfig](./examples/ifconfig.gif)
 
 
 
-# Configuration
+## Configuration
 
 Raffaello needs to be configured to colorize the CLI output.
 
