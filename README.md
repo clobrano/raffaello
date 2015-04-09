@@ -5,28 +5,32 @@ What is it?
 -----------
 
 Raffaello is a powerful yet simple to use command line (CLI) output colorizer. What does that mean?
-Let say you have a CLI tool that prints out lot of information (e.g. gcc(1)/g++, dmsg, etc.) you have to read carefully, more specifically when some error/warning messages occurs, how hard is that? How easier would it be if some keywords were highlighted with meaningful colors? Well, Raffaello just does that.
+Let say you have a CLI tool that prints out lot of information you have to read carefully (gcc, g++, dmesg, etc.), how hard is that? And how easier would it be if some keywords were highlighted with meaningful colors? Well, Raffaello does just that.
 
-
-Here are some examples, since *a picture is worth a thousand words*, more pictures are even better:
+Since *a picture is worth a thousand words* and more pictures are even better, here are some examples.
 
 ### Make
 
-![make](./examples/make.gif)
+![make](./Raffaello/examples/make.gif)
 
 ### dmsg
 
-![dmesg](./examples/dmesg.gif)
+![dmesg](./Raffaello/examples/dmesg.gif)
 
 ### ifconfig
 
-The following is an example of "conditional" hightlightning. I wanted to highlight the word "errors" only when actual errors have occurred. This is the pattern
+
+The following is an example of **conditional hightlightning** make it possible by regular expressions.
+
+`ifconfig` reports the number of errors in packets RX and TX and I wanted to highlight the word "errors" only when actual errors have occurred.
+
+This is the pattern
 
     (errors):[1-9]=>red_bold
 
 this way, strings like `*errors:0"` are not highlighted and I do not get false warnings.
 
-![ifconfig](./examples/ifconfig.gif)
+![ifconfig](./Raffaello/examples/ifconfig.gif)
 
 
 ## Installation
@@ -38,7 +42,8 @@ this way, strings like `*errors:0"` are not highlighted and I do not get false w
 
 ## Usage
 
-`Raffaello` is simple to use. It just needs to know which **keywords** you want to colorize (you can even use [regular expressions](https://docs.python.org/2/library/re.html) using Python syntax) and with which **colors**.
+`Raffaello` is simple to use. It just needs to know which **keywords** you want to colorize ([regular expressions](https://docs.python.org/2/library/re.html) using Python syntax are possible) and which **colors**.
+
 The basic syntax is the following.
 
     raffaello <arguments> --- command-line-tool [command-line-tool-arguments]
@@ -50,13 +55,12 @@ Color **configuration** can be provided **direclty through command line** with a
 
     e.g.
 
-        $ ./raffaello "\d+\.\d+=>blue" --- dmesg        # this will make dmesg numbers blue
-        $ ./raffaello '.*[Ee]rror.*=>red' --- dmesg     # this will highlight lines with error messages (if any) in red
-
+        $ raffaello "error=>red" "Error=>red" --- dmesg     # this will highlight the word error in a messages in red
+        $ raffaello '[Ee]rror=>red' --- dmesg               # this does the same highlight but with regex
 
 **Configuration** can also be provided **through a config file** like the following
 
-    $ ./raffaello --file=dmesg.cfg --- dmesg
+    $ raffaello --file=dmesg.cfg --- dmesg
 
 where configuration file is
 
@@ -69,6 +73,8 @@ where configuration file is
     .*[Ww]arning.*=>yellow
 
 
+Note that:
+
     1. no spaces are allowed at both sides of `=>` sign
         error => red            WRONG
         error=> red             WRONG
@@ -78,8 +84,4 @@ where configuration file is
         could not=>red_bold     WRONG
         could\snot=>red_bold    OK
 
-To **avoid long file paths** it is possible to put your config files under `<your-home>/.raffaello` directory. Raffaello will look there to find some config files
-
-#### Notes
-
-1. Well, `gcc` has also a --color option at least
+To **avoid long file paths**, it is possible to put your config files under `<HOME>/.raffaello` hidden directory.
