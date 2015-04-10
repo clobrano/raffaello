@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 setup(name = 'Raffaello',
-        version = '1.1.0',
+        version = '1.2.0',
         description = 'Raffaello is a command-line output colorizer',
         author = 'Carlo Lobrano',
         author_email = 'clobrano@gmail.com',

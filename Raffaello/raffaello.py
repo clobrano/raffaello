@@ -1,17 +1,24 @@
 #!/usr/bin/env python
 """
-Raffaello is a command line (CLI) output colorizer
+Raffaello is a powerful yet simple to use command line (CLI) output colorizer.
 
 Usage:
-    raffaello <arguments> --- command [arguments]
 
-    $./raffaello "pattern1=>colorA" "pattern2=>colorB" "pattern3=>colorA" ... --- command [arguments]
-    $ ./raffaello file=/path/to/config/file --- command [arguments]
+    raffaello <arguments> --- command-line-tool [command-line-tool-arguments]
 
-    e.g.
+    OR using pipe
 
-        $ ./raffaello '.*[Ee]rror.*=>red' --- dmesg    # this will highlight lines with error messages (if any) in red
-        $ ./raffaello --file=dmesg.cfg --- dmesg
+    command-line-tool [command-line-tool-arguments] | raffaello <arguments>
+
+    Pattern and color configuration is provided using "inline" patterns or --file parameter:
+
+        $ raffaello "pattern1=>colorA" "pattern2=>colorB" "pattern3=>colorA" ... --- command [arguments]
+        $ raffaello --file=/path/to/config/file --- command [arguments]
+
+        e.g.
+
+        $ raffaello '.*[Ee]rror.*=>red' --- dmesg    # this will highlight lines with error messages (if any) in red
+        $ raffaello --file=dmesg.cfg --- dmesg
 
         $ cat dmesg.cfg
             # Dmesg config file example. Comment lines will be ignored
@@ -19,15 +26,23 @@ Usage:
             .*ERROR.*=>red_bold
             timed\sout=>red
             .*[Ww]arning.*=>yellow
+
 Notes:
+
     1. no spaces are allowed at both sides of => sign
         error => red        WRONG
         error=> red        WRONG
         error =>red        WRONG
         error=>red        OK
+
     2. if a pattern contains spaces, they must be defined using "\s" symbol, for example:
         could not=>red_bold    WRONG
         could\snot=>red_bold    OK
+
+    3. Raffaello looks for config files also in <HOME>/.raffaello hidden directory, so that
+
+        $ raffaello --file=<home>/.raffaello/config-file...     is equal to
+        $ raffaello --file=config-file
 """
 
 import sys
@@ -35,7 +50,7 @@ import os
 import re
 
 import logging
-level = logging.WARNING
+level = logging.INFO
 logging.basicConfig(level=level, format='    %(levelname)s %(message)s');
 log = logging.getLogger(__name__)
 
@@ -43,6 +58,8 @@ log = logging.getLogger(__name__)
 # Default directory
 root = '/'
 home = os.path.join(root, 'home', 'carlo', '.raffaello')
+
+piping = False
 
 # Separator between Raffaello configuration and
 # command to execute
@@ -127,6 +144,7 @@ def get_options(optargs):
     """
     Parse command-line options
     """
+    global piping
     global pattern_separator
 
     arguments_line = ' '.join(optargs)
@@ -136,10 +154,8 @@ def get_options(optargs):
         sys.exit(0)
 
     if not command_separator in arguments_line:
-        log.error('Missing separator "%s" between raffaello\
- configuration and command to execute' % command_separator)
-        usage()
-        sys.exit(1)
+        log.debug("No command separator found. Are we using pipes? Let's try")
+        piping = True
 
     if not pattern_separator in arguments_line\
             and not 'file' in arguments_line:
@@ -148,7 +164,11 @@ def get_options(optargs):
         sys.exit(1)
 
     options = arguments_line.split(command_separator)[0]
-    command = arguments_line.split(command_separator)[1]
+
+    if not piping:
+        command = arguments_line.split(command_separator)[1]
+    else:
+        command = None
 
     pattern_sep_option = None
     if '--sep' in options or '-s' in options:
@@ -169,10 +189,12 @@ def get_options(optargs):
         epath = os.path.expanduser(path)
 
         if not os.path.exists(epath):
-            log.debug("Looking for config file '%s' in '%s' folder" % (epath, home))
+            log.info("Looking for config file '%s' in '%s' folder..." % (epath, home))
             epath = os.path.join(home, os.path.basename(path))
 
-            if not os.path.exists(epath):
+            if os.path.exists(epath):
+                log.info("Config file found")
+            else:
                 log.error('Could not find config file "%s"' % path)
                 sys.exit(1)
 
@@ -271,13 +293,15 @@ def paint(line):
 
 
 def run(command):
-    pipe_read, pipe_write = os.pipe()
 
-    proc_id = os.fork()
+    if command:
+        pipe_read, pipe_write = os.pipe()
+
+        proc_id = os.fork()
 
     # child process executes the given command,
     #    parent process parses its output
-    if proc_id:
+    if command and proc_id:
         # run the provided command
         os.close(pipe_read)
 
@@ -288,13 +312,17 @@ def run(command):
         os.system(command)
 
     else:
-        # read and modify command output
-        os.close(pipe_write)
-        fd_read = os.fdopen(pipe_read)
+        if command:
+            # read and modify command output
+            os.close(pipe_write)
+            fd_read = os.fdopen(pipe_read)
 
         while True:
             try:
-                line = fd_read.readline().rstrip()
+                if not command:
+                    line = raw_input()
+                else:
+                    line = fd_read.readline().rstrip()
 
                 if line:
                     print(paint(line))
@@ -302,6 +330,9 @@ def run(command):
                     break
             except KeyboardInterrupt:
                 pass
+            except EOFError:
+                log.debug("EOF reached. Nothing to do");
+                break;
         os._exit(os.EX_OK)
 
     return 0
@@ -323,5 +354,6 @@ if __name__ == '__main__':
     if len(sys.argv) < 2:
         usage()
         sys.exit(1)
+    command = None
     patterns, command = get_options(sys.argv[1:])
     sys.exit(run(command))

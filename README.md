@@ -9,15 +9,15 @@ Let say you have a CLI tool that prints out lot of information you have to read 
 
 Since *a picture is worth a thousand words* and more pictures are even better, here are some examples.
 
-### Make
+### GGC
 
-![make](./Raffaello/examples/make.gif)
+![gcc](./Raffaello/examples/make.gif)
 
-### dmsg
+### DMSG
 
 ![dmesg](./Raffaello/examples/dmesg.gif)
 
-### ifconfig
+### IFCONFIG
 
 
 The following is an example of **conditional hightlightning** make it possible by regular expressions.
@@ -44,14 +44,18 @@ this way, strings like `*errors:0"` are not highlighted and I do not get false w
 
 `Raffaello` is simple to use. It just needs to know which **keywords** you want to colorize ([regular expressions](https://docs.python.org/2/library/re.html) using Python syntax are possible) and which **colors**.
 
-The basic syntax is the following.
+The basic syntax is the following:
 
     raffaello <arguments> --- command-line-tool [command-line-tool-arguments]
+
+OR using **pipes**
+
+    command-line-tool [command-line-tool-arguments] | raffaello <arguments>
 
 
 Color **configuration** can be provided **direclty through command line** with arguments:
 
-    .$ /raffaello "pattern1=>colorA" "pattern2=>colorB" "pattern3=>colorA" ... --- command [arguments]
+    $ raffaello "pattern1=>colorA" "pattern2=>colorB" "pattern3=>colorA" ... --- command [arguments]
 
     e.g.
 
@@ -61,6 +65,7 @@ Color **configuration** can be provided **direclty through command line** with a
 **Configuration** can also be provided **through a config file** like the following
 
     $ raffaello --file=dmesg.cfg --- dmesg
+    $ dmesg | raffaello --file=dmesg.cfg
 
 where configuration file is
 
