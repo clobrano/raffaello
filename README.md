@@ -9,7 +9,7 @@ Let say you have a CLI tool that prints out lot of information you have to read 
 
 Since *a picture is worth a thousand words* and more pictures are even better, here are some examples.
 
-### GGC
+### GCC/G++
 
 ![gcc](./Raffaello/examples/make.gif)
 
