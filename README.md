@@ -48,7 +48,7 @@ The basic syntax is the following:
 
     raffaello <arguments> --- command-line-tool [command-line-tool-arguments]
 
-OR using **pipes**
+OR using **pipe**
 
     command-line-tool [command-line-tool-arguments] | raffaello <arguments>
 
