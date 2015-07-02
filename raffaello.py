@@ -48,8 +48,10 @@ Notes:
 import sys
 import os
 import re
-
 import logging
+
+__version__='1.2.0'
+
 level = logging.INFO
 logging.basicConfig(level=level, format='    %(levelname)s %(message)s');
 log = logging.getLogger(__name__)
