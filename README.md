@@ -42,6 +42,8 @@ this way, strings like `*errors:0"` are not highlighted and I do not get false w
 
 ## Usage
 
+### Command line
+
 `Raffaello` is simple to use. It just needs to know which **keywords** you want to colorize ([regular expressions](https://docs.python.org/2/library/re.html) using Python syntax are possible) and which **colors**.
 
 The basic syntax is the following:
@@ -90,3 +92,17 @@ Note that:
         could\snot=>red_bold    OK
 
 To **avoid long file paths**, it is possible to put your config files under `<HOME>/.raffaello` hidden directory.
+
+### Python module
+
+Since version 1.3.0, Raffaello can be used as python module in a source code.
+
+Once imported the module, use `raffaello.parse_color_option` or `raffallo.parse_config_file` to get the color configuration, and then use `raffaello.paint (<string>, configuration)` to apply the color codes to your text.
+
+e.g.
+
+    import readline
+    configuration = readline.parse_color_option ('this=>red')
+    print (readline.paint ('I want to parse this', configuration))
+
+
