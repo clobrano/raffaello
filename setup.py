@@ -11,6 +11,6 @@ setup(name = 'raffaello',
         py_modules = ['raffaello'],
         long_description = open('README.md').read(),
         packages = find_packages(),
-        entry_points = {'console_scripts': ['raffaello = Raffaello.raffaello:main'], },
+        entry_points = {'console_scripts': ['raffaello = raffaello:main'], },
         include_package_data = True,
     )

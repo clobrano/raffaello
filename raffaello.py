@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+__version__='1.3.0'
+
 """
 Raffaello is a powerful yet simple to use command line (CLI) output colorizer.
 
@@ -50,7 +52,6 @@ import os
 import re
 import logging
 
-__version__='1.2.0'
 
 level = logging.INFO
 logging.basicConfig(level=level, format='    %(levelname)s %(message)s');
@@ -276,7 +277,7 @@ def parse_config_file(path):
     return patterns
 
 
-def paint(line):
+def paint(line, patterns):
     """
     Highlight line according to the given
     pattern/color dictionary
@@ -294,7 +295,7 @@ def paint(line):
     return line.rstrip()
 
 
-def run(command):
+def run(command, patterns):
 
     if command:
         pipe_read, pipe_write = os.pipe()
@@ -327,7 +328,7 @@ def run(command):
                     line = fd_read.readline().rstrip()
 
                 if line:
-                    print(paint(line))
+                    print(paint(line, patterns))
                 else:
                     break
             except KeyboardInterrupt:
@@ -347,7 +348,7 @@ def main():
         usage()
         sys.exit(1)
     patterns, command = get_options(sys.argv[1:])
-    sys.exit(run(command))
+    sys.exit(run(command, patterns))
 
 
 

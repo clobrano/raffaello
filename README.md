@@ -11,11 +11,11 @@ Since *a picture is worth a thousand words* and more pictures are even better, h
 
 ### GCC/G++
 
-![gcc](./Raffaello/examples/make.gif)
+![gcc](./examples/make.gif)
 
 ### DMSG
 
-![dmesg](./Raffaello/examples/dmesg.gif)
+![dmesg](./examples/dmesg.gif)
 
 ### IFCONFIG
 
@@ -30,7 +30,7 @@ This is the pattern
 
 this way, strings like `*errors:0"` are not highlighted and I do not get false warnings.
 
-![ifconfig](./Raffaello/examples/ifconfig.gif)
+![ifconfig](./examples/ifconfig.gif)
 
 
 ## Installation
