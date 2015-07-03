@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 """
-Raffaello is a powerful yet simple to use command line (CLI) output colorizer.
+Raffaello is a powerful, yet simple to use, output colorizer. You are now using the script version.
+
 
 Usage:
 
