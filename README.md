@@ -4,7 +4,9 @@ Raffaello
 What is it?
 -----------
 
-Raffaello is a powerful yet simple to use command line (CLI) output colorizer. What does that mean?
+Raffaello is a powerful yet simple to use output colorizer.
+
+What does that mean?
 Let say you have a CLI tool that prints out lot of information you have to read carefully (gcc, g++, dmesg, etc.), how hard is that? And how easier would it be if some keywords were highlighted with meaningful colors? Well, Raffaello does just that.
 
 Since *a picture is worth a thousand words* and more pictures are even better, here are some examples.
