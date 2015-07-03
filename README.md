@@ -4,7 +4,7 @@ Raffaello
 What is it?
 -----------
 
-Raffaello is a powerful yet simple to use output colorizer.
+Raffaello is a powerful, yet simple to use, output colorizer.
 
 What does that mean?
 Let say you have a CLI tool that prints out lot of information you have to read carefully (gcc, g++, dmesg, etc.), how hard is that? And how easier would it be if some keywords were highlighted with meaningful colors? Well, Raffaello does just that.
@@ -103,8 +103,9 @@ Once imported the module, use `raffaello.parse_color_option` or `raffallo.parse_
 
 e.g.
 
-    import readline
-    configuration = readline.parse_color_option ('this=>red')
-    print (readline.paint ('I want to parse this', configuration))
+    import raffaello
+    configuration = raffaello.parse_color_option ('this=>red')
+    print (raffaello.paint ('I want to highlight this in red', configuration))
 
+![module](./examples/raffaello-as-a-python-module.png)
 
