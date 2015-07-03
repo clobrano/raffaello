@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-__version__='1.3.0'
 
 """
 Raffaello is a powerful yet simple to use command line (CLI) output colorizer.
@@ -53,6 +52,7 @@ import re
 import logging
 
 
+__version__='1.3.0'
 level = logging.INFO
 logging.basicConfig(level=level, format='    %(levelname)s %(message)s');
 log = logging.getLogger(__name__)
