@@ -53,8 +53,8 @@ import re
 import logging
 
 
-__version__='1.3.0'
-level = logging.INFO
+__version__='2.0.0'
+level = logging.DEBUG
 logging.basicConfig(level=level, format='    %(levelname)s %(message)s');
 log = logging.getLogger(__name__)
 
@@ -62,54 +62,205 @@ log = logging.getLogger(__name__)
 # Default directory
 home = os.path.expanduser (os.path.join('~', '.raffaello'))
 
-piping = False
-
-# Separator between Raffaello configuration and
-# command to execute
-command_separator = '---'
-
-# Separator between pattern and color code
-pattern_separator = '=>'
-
-def usage():
-    print(__doc__)
-
-def help():
-    usage()
-    log.info('Available color list. NOTE that some colors could be unsupported on your terminal.\n')
-    print(sorted(color_filters.keys()))
-
 # [ COLOR CODES]
 color_codes = {
-    'black'            : chr(27)+'[30m',
-    'red'            : chr(27)+'[31m',
-    'green'            : chr(27)+'[32m',
-    'brown'            : chr(27)+'[33m',
-    'blue'            : chr(27)+'[34m',
-    'purple'        : chr(27)+'[35m',
-    'cyan'            : chr(27)+'[36m',
-    'light_grey'    : chr(27)+'[37m',
-    'dark_grey'        : chr(27)+'[30m',
-    'light_red'        : chr(27)+'[31m',
-    'light_green'    : chr(27)+'[32m',
-    'yellow'        : chr(27)+'[33m',
-    'light_blue'    : chr(27)+'[34m',
-    'light_purple'    : chr(27)+'[35m',
-    'light_cyan'    : chr(27)+'[36m',
-    'white'            : chr(27)+'[37m'
+    'black'        : chr(27)+'[30m',
+    'red'          : chr(27)+'[31m',
+    'green'        : chr(27)+'[32m',
+    'brown'        : chr(27)+'[33m',
+    'blue'         : chr(27)+'[34m',
+    'purple'       : chr(27)+'[35m',
+    'cyan'         : chr(27)+'[36m',
+    'light_grey'   : chr(27)+'[37m',
+    'dark_grey'    : chr(27)+'[30m',
+    'light_red'    : chr(27)+'[31m',
+    'light_green'  : chr(27)+'[32m',
+    'yellow'       : chr(27)+'[33m',
+    'light_blue'   : chr(27)+'[34m',
+    'light_purple' : chr(27)+'[35m',
+    'light_cyan'   : chr(27)+'[36m',
+    'white'        : chr(27)+'[37m'
 }
 end_color = chr(27)+'[39m'
 
-# [ STYLE CODES ]
+# style codes
 style_codes = {
     'bold' : chr(27) + '[1m',
 }
 end_bold = chr(27) + '[22m'
 
 
+class Script (object):
+    '''
+    Wrapper class for methods that Raffaello
+    uses when run as command-line utility
+    '''
+
+    cmd_dlms = '---'
+    pattern_dlms = '=>'
+    command = None
+    patterns = {}
+    use_pipe = False
+
+    def __check_cmd_line_format (self, cmd_line):
+        if ('-h' in cmd_line) or ('--help' in cmd_line):
+            help()
+            sys.exit(0)
+
+        if not self.cmd_dlms in cmd_line:
+            log.debug("No command separator found. Are we using pipes?")
+            self.use_pipe = True
+
+        if (not self.pattern_dlms in cmd_line) and\
+                (not 'file' in cmd_line):
+                    log.debug ('pattern_dlms: {0}'.format (self.pattern_dlms))
+                    log.error("Ill-formatted raffaello's options")
+                    self.usage()
+                    sys.exit(1)
+
+
+    def __update_pattern_dlms (self, options):
+        '''Manage custom pattern_dlms'''
+        custom_dlms = None
+        if ('--sep' in options) or ('-s' in options):
+            custom_dlms = re.findall ('-s=.', options)
+            if not custom_dlms:
+                custom_dlms = re.findall ('--sep=.', options)
+
+        if custom_dlms:
+            self.pattern_dlms = custom_dlms [0].split ('=') [1]
+            log.debug ('Changed pattern delimiters in "%s"' % self.pattern_dlms)
+            options = options.split (' ') [1:]
+            log.debug ('Remaining options: {0}'.format (options))
+
+        return options
+
+
+    def __init__ (self, args = []):
+        '''Parse command line options'''
+
+        if 2 > len (args):
+            self.usage ()
+            sys.exit (1)
+
+        cmd_line = ' '.join (args)
+        self.__check_cmd_line_format (cmd_line)
+
+        opt_and_cmd = cmd_line.split (self.cmd_dlms)
+
+        options = opt_and_cmd [0]
+
+        if 1 == len (opt_and_cmd):
+            self.command = None
+        else:
+            self.command = opt_and_cmd [1]
+
+        #options = self.__update_pattern_dlms (options)
+
+        if ('--file' in options) or ('-f' in options):
+            path = options.split ('=') [1].rstrip ()
+            epath = os.path.expanduser(path)
+
+            # Let use relative path
+            if not os.path.exists(epath):
+                log.info("Looking for config file '%s' in '%s' folder..." % (epath, home))
+                epath = os.path.join(home, os.path.basename(path))
+
+                if os.path.exists(epath):
+                    log.info("Config file found")
+                else:
+                    log.error('Could not find config file "%s"' % path)
+                    sys.exit(1)
+
+                self.patterns = parse_config_file(epath, self.pattern_dlms)
+
+        else:
+            # Inline pattern=>color option list
+            self.patterns = parse_color_option(options, self.pattern_dlms)
+
+
+    def usage (self):
+        '''
+        Print doc information
+        '''
+        print (__doc__)
+
+
+    def help (self):
+        self.__usage ()
+        log.info('Available color list. NOTE that some colors could be unsupported on your terminal.\n')
+        print(sorted(color_filters.keys()))
+
+
+    def run (self):
+        '''
+        Run raffaello as a script
+        '''
+        command = self.command
+        patterns = self.patterns
+
+        # Raffaello is encapsulating the command line command to colorize
+        if command:
+            # Get output file's descriptors
+            pipe_read, pipe_write = os.pipe()
+            proc_id = os.fork()
+
+        # Child process executes the given command,
+        #    parent process (Raffaello) parses its output
+        if command and proc_id:
+            # Child
+            os.close(pipe_read)
+
+            # redirect stdout to pipe in order to let
+            # parent process read
+            os.dup2(pipe_write, sys.stdout.fileno())
+            os.dup2(pipe_write, sys.stderr.fileno())
+
+            # execute the command
+            os.system(command)
+
+        else:
+            # Parent
+            if command:
+                # read child's output
+                os.close(pipe_write)
+                fd_read = os.fdopen(pipe_read)
+
+            # Process the output. This code is shared between when
+            # raffaello is run as parent process and when is run throught pipe
+            while True:
+                try:
+                    if not command:
+                        # we are in a pipe, just read from ouptut
+                        line = raw_input()
+                    else:
+                        # we are not in a pipe, run from file's descriptors
+                        line = fd_read.readline().rstrip()
+
+                    if line:
+                        # And here is the magic
+                        print(paint(line, patterns))
+
+                    else:
+                        break
+
+                except KeyboardInterrupt:
+                    pass
+
+                except EOFError:
+                    log.debug("EOF reached. Nothing to do");
+                    break;
+
+            os._exit(os.EX_OK)
+
+        return 0
+
+
+
+
 class Filter(object):
     """
-    Encapsulate open and close tag codes
+    Encapsulate open and close tag codes for each color
     """
     def __init__(self, name, open_code, close_code):
         self.__name = name
@@ -143,96 +294,29 @@ for key, color_code in color_codes.items():
     color_filters.update({'%s_bold' % key : color_filter})
 
 
-def get_options(optargs):
-    """
-    Parse command-line options
-    """
-    global piping
-    global pattern_separator
 
-    arguments_line = ' '.join(optargs)
-
-    if '-h' in arguments_line or '--help' in arguments_line:
-        help()
-        sys.exit(0)
-
-    if not command_separator in arguments_line:
-        log.debug("No command separator found. Are we using pipes? Let's try")
-        piping = True
-
-    if not pattern_separator in arguments_line\
-            and not 'file' in arguments_line:
-        log.error("Ill-formatted raffaello's options")
-        usage()
-        sys.exit(1)
-
-    options = arguments_line.split(command_separator)[0]
-
-    if not piping:
-        command = arguments_line.split(command_separator)[1]
-    else:
-        command = None
-
-    pattern_sep_option = None
-    if '--sep' in options or '-s' in options:
-        pattern_sep_option = re.findall("-s=.", options)
-        if not pattern_sep_option:
-            pattern_sep_option = re.findall("--sep=.", options)
-
-    if pattern_sep_option:
-        pattern_separator = pattern_sep_option[0].split('=')[1]
-        log.debug("Changed pattern_separator in %s" % pattern_separator)
-        options = options.split(' ')[1:]
-        log.debug('Remaining options: {0}'.format(options))
-
-    patterns = {}
-
-    if '--file' in options or '-f' in options:
-        path = options.split('=')[1].rstrip()
-        epath = os.path.expanduser(path)
-
-        if not os.path.exists(epath):
-            log.info("Looking for config file '%s' in '%s' folder..." % (epath, home))
-            epath = os.path.join(home, os.path.basename(path))
-
-            if os.path.exists(epath):
-                log.info("Config file found")
-            else:
-                log.error('Could not find config file "%s"' % path)
-                sys.exit(1)
-
-        patterns = parse_config_file(epath)
-
-    else:
-        patterns = parse_color_option(options)
-
-    return (patterns, command)
-
-
-
-def parse_color_option(color_options):
+def parse_color_option(color_options, pattern_dlms='=>'):
     """
     A color option is a string in the form
     pattern=>color. No space is allowed at both sides
     of the double equal (=>) sign.
     """
-
     patterns = {}
 
     for option in color_options.split(' '):
         if len(option) == 0:
             continue
 
-        if len(re.findall(pattern_separator, option)) > 1:
-            log.error('[Error] Can not parse option %s. Too many pattern_separator symbols (%s) in option' % (option, pattern_separator))
+        if len(re.findall(pattern_dlms, option)) > 1:
+            log.error('[Error] Can not parse option %s. Too many pattern separator symbols (%s) in option' % (option, pattern_dlms))
             sys.exit(1)
 
         try:
-            pattern, color = option.split(pattern_separator)
+            pattern, color = option.split(pattern_dlms)
         except ValueError as err:
             log.error("Could not parse option '%s'. (%s)" % (option, err))
             log.debug("Color options: {0}".format(color_options))
-            log.debug("pattern_separator: {0}".format(pattern_separator))
+            log.debug("pattern_dlms: {0}".format(pattern_dlms))
             sys.exit(1)
 
         # Remove initial quote if any
@@ -255,12 +339,10 @@ def parse_color_option(color_options):
 
 
 
-def parse_config_file(path):
+def parse_config_file(path, pattern_dlms='=>'):
     """
     Get Pattern/Color pairs from configuration file
     """
-
-
     log.debug('Reading config file %s' % path)
     config = open(path).readlines()
     patterns = {}
@@ -295,68 +377,7 @@ def paint(line, patterns):
     return line.rstrip()
 
 
-def run(command, patterns):
 
-    if command:
-        pipe_read, pipe_write = os.pipe()
-
-        proc_id = os.fork()
-
-    # child process executes the given command,
-    #    parent process parses its output
-    if command and proc_id:
-        # run the provided command
-        os.close(pipe_read)
-
-        # redirect stdout to pipe
-        os.dup2(pipe_write, sys.stdout.fileno())
-        os.dup2(pipe_write, sys.stderr.fileno())
-
-        os.system(command)
-
-    else:
-        if command:
-            # read and modify command output
-            os.close(pipe_write)
-            fd_read = os.fdopen(pipe_read)
-
-        while True:
-            try:
-                if not command:
-                    line = raw_input()
-                else:
-                    line = fd_read.readline().rstrip()
-
-                if line:
-                    print(paint(line, patterns))
-                else:
-                    break
-            except KeyboardInterrupt:
-                pass
-            except EOFError:
-                log.debug("EOF reached. Nothing to do");
-                break;
-        os._exit(os.EX_OK)
-
-    return 0
-
-
-def main():
-    global patterns
-    global command
-    if len(sys.argv) < 2:
-        usage()
-        sys.exit(1)
-    patterns, command = get_options(sys.argv[1:])
-    sys.exit(run(command, patterns))
-
-
-
-if __name__ == '__main__':
-    print home
-    if len(sys.argv) < 2:
-        usage()
-        sys.exit(1)
-    command = None
-    patterns, command = get_options(sys.argv[1:])
-    sys.exit(run(command))
+def main ():
+    script = Script (sys.argv [1:])
+    sys.exit (script.run ())
