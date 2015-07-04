@@ -54,7 +54,7 @@ import logging
 
 
 __version__='2.0.0'
-level = logging.DEBUG
+level = logging.INFO
 logging.basicConfig(level=level, format='    %(levelname)s %(message)s');
 log = logging.getLogger(__name__)
 
@@ -104,8 +104,12 @@ class Script (object):
 
     def __check_cmd_line_format (self, cmd_line):
         if ('-h' in cmd_line) or ('--help' in cmd_line):
-            help()
+            self.help()
             sys.exit(0)
+
+        if ('--version' in cmd_line) or ('-v' in cmd_line):
+            print (__version__)
+            sys.exit (0)
 
         if not self.cmd_dlms in cmd_line:
             log.debug("No command separator found. Are we using pipes?")
@@ -138,10 +142,6 @@ class Script (object):
 
     def __init__ (self, args = []):
         '''Parse command line options'''
-
-        if 2 > len (args):
-            self.usage ()
-            sys.exit (1)
 
         cmd_line = ' '.join (args)
         self.__check_cmd_line_format (cmd_line)
@@ -187,7 +187,7 @@ class Script (object):
 
 
     def help (self):
-        self.__usage ()
+        self.usage ()
         log.info('Available color list. NOTE that some colors could be unsupported on your terminal.\n')
         print(sorted(color_filters.keys()))
 
