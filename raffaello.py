@@ -60,8 +60,7 @@ log = logging.getLogger(__name__)
 
 
 # Default directory
-root = '/'
-home = os.path.join(root, 'home', 'carlo', '.raffaello')
+home = os.path.expanduser (os.path.join('~', '.raffaello'))
 
 piping = False
 
