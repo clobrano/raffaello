@@ -16,35 +16,6 @@ Usage:
 
         $ raffaello "pattern1=>colorA" "pattern2=>colorB" "pattern3=>colorA" ... --- command [arguments]
         $ raffaello --file=/path/to/config/file --- command [arguments]
-
-        e.g.
-
-        $ raffaello '.*[Ee]rror.*=>red' --- dmesg    # this will highlight lines with error messages (if any) in red
-        $ raffaello --file=dmesg.cfg --- dmesg
-
-        $ cat dmesg.cfg
-            # Dmesg config file example. Comment lines will be ignored
-            .*[Ee]rror.*=>red_bold
-            .*ERROR.*=>red_bold
-            timed\sout=>red
-            .*[Ww]arning.*=>yellow
-
-Notes:
-
-    1. no spaces are allowed at both sides of => sign
-        error => red        WRONG
-        error=> red        WRONG
-        error =>red        WRONG
-        error=>red        OK
-
-    2. if a pattern contains spaces, they must be defined using "\s" symbol, for example:
-        could not=>red_bold    WRONG
-        could\snot=>red_bold    OK
-
-    3. Raffaello looks for config files also in <HOME>/.raffaello hidden directory, so that
-
-        $ raffaello --file=<home>/.raffaello/config-file...     is equal to
-        $ raffaello --file=config-file
 """
 
 import sys
