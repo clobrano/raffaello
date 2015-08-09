@@ -165,7 +165,7 @@ class Script (object):
 
     def run (self):
         '''
-        Run raffaello as a script
+        Run raffaello as a command-line utility
         '''
         command = self.command
         patterns = self.patterns
@@ -352,3 +352,11 @@ def paint(line, patterns):
 def main ():
     script = Script (sys.argv [1:])
     sys.exit (script.run ())
+
+
+if __name__ == '__main__':
+    '''
+    This will permit to use raffaello without installing it
+    into the filesystem (which is the suggested usage, though).
+    '''
+    main ()
