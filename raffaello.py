@@ -24,8 +24,8 @@ import re
 import logging
 
 
-__version__='2.0.0'
-level = logging.INFO
+__version__='2.1.0'
+level = logging.DEBUG
 logging.basicConfig(level=level, format='    %(levelname)s %(message)s');
 log = logging.getLogger(__name__)
 
@@ -64,14 +64,17 @@ end_bold = chr(27) + '[22m'
 class Script (object):
     '''
     Wrapper class for methods that Raffaello
-    uses when run as command-line utility
+    uses when running as command-line utility
     '''
 
-    cmd_dlms = '---'
+    # Separator between Raffaello's options and CLI tool command
+    cli_dlms = '---'
+    # Separator between pattern and desired color
     pattern_dlms = '=>'
     command = None
     patterns = {}
     use_pipe = False
+
 
     def __check_cmd_line_format (self, cmd_line):
         if ('-h' in cmd_line) or ('--help' in cmd_line):
@@ -82,7 +85,7 @@ class Script (object):
             print (__version__)
             sys.exit (0)
 
-        if not self.cmd_dlms in cmd_line:
+        if not self.cli_dlms in cmd_line:
             log.debug("No command separator found. Are we using pipes?")
             self.use_pipe = True
 
@@ -114,40 +117,44 @@ class Script (object):
     def __init__ (self, args = []):
         '''Parse command line options'''
 
-        cmd_line = ' '.join (args)
-        self.__check_cmd_line_format (cmd_line)
-
-        opt_and_cmd = cmd_line.split (self.cmd_dlms)
-
-        options = opt_and_cmd [0]
-
-        if 1 == len (opt_and_cmd):
-            self.command = None
-        else:
-            self.command = opt_and_cmd [1]
+        (options, self.command) = self.__get_cli_options (args)
 
         #options = self.__update_pattern_dlms (options)
 
         if ('--file' in options) or ('-f' in options):
             path = options.split ('=') [1].rstrip ()
-            epath = os.path.expanduser(path)
 
-            # Let use relative path
-            if not os.path.exists(epath):
-                log.info("Looking for config file '%s' in '%s' folder..." % (epath, home))
-                epath = os.path.join(home, os.path.basename(path))
+            fullpath = get_config_full_path (path)
 
-                if os.path.exists(epath):
-                    log.info("Config file found")
-                else:
-                    log.error('Could not find config file "%s"' % path)
-                    sys.exit(1)
+            if None == fullpath:
+                sys.exit(1)
 
-                self.patterns = parse_config_file(epath, self.pattern_dlms)
+            self.patterns = parse_config_file(fullpath, self.pattern_dlms)
 
         else:
-            # Inline pattern=>color option list
+            # Inline 'pattern=>color' option list
             self.patterns = parse_color_option(options, self.pattern_dlms)
+
+
+    def __get_cli_options (self, args = []):
+        '''
+        Parses command line options and returns a tuple made of two elements:
+        1. Raffaello's options.
+        2. CLI tool whose output is to be colorized if provided, None otherwise.
+        '''
+        cmd_line = ' '.join (args)
+        self.__check_cmd_line_format (cmd_line)
+
+        opts_and_cmd = cmd_line.split (self.cli_dlms)
+        options = opts_and_cmd [0]
+
+        if 1 == len (opts_and_cmd):
+            command = None
+        else:
+            command = opts_and_cmd [1]
+
+        return (options, command)
+
 
 
     def usage (self):
@@ -170,20 +177,21 @@ class Script (object):
         command = self.command
         patterns = self.patterns
 
-        # Raffaello is encapsulating the command line command to colorize
+        # Raffaello encapsulates the command line command whose ouput
+        #  is to be colorized
         if command:
             # Get output file's descriptors
             pipe_read, pipe_write = os.pipe()
             proc_id = os.fork()
 
         # Child process executes the given command,
-        #    parent process (Raffaello) parses its output
+        #  parent process (Raffaello) parses its output
         if command and proc_id:
             # Child
             os.close(pipe_read)
 
             # redirect stdout to pipe in order to let
-            # parent process read
+            #  parent process read
             os.dup2(pipe_write, sys.stdout.fileno())
             os.dup2(pipe_write, sys.stderr.fileno())
 
@@ -197,12 +205,10 @@ class Script (object):
                 os.close(pipe_write)
                 fd_read = os.fdopen(pipe_read)
 
-            # Process the output. This code is shared between when
-            # raffaello is run as parent process and when is run throught pipe
             while True:
                 try:
                     if not command:
-                        # we are in a pipe, just read from ouptut
+                        # we are in a pipe, just read from output
                         line = raw_input()
                     else:
                         # we are not in a pipe, run from file's descriptors
@@ -265,6 +271,29 @@ for key, color_code in color_codes.items():
     color_filters.update({'%s_bold' % key : color_filter})
 
 
+# ======================================================
+# Utilities
+# ======================================================
+def get_config_full_path (filepath):
+    '''Build the fullpath to config file'''
+    log.debug ('Building full path for "%s"' % filepath)
+    fullpath = os.path.expanduser (filepath)
+
+    if not os.path.exists(fullpath):
+        log.info("Looking for config file '%s' in '%s' folder..." %
+                (filepath, home))
+        fullpath = os.path.join(home, os.path.basename(fullpath))
+
+        if os.path.exists(fullpath):
+            log.info("Using '%s'" % fullpath)
+        else:
+            log.error('Could not find config file "%s"' % filepath)
+            fullpath = None
+
+    return fullpath
+
+
+
 
 def parse_color_option(color_options, pattern_dlms='=>'):
     """
@@ -317,11 +346,30 @@ def parse_config_file(path, pattern_dlms='=>'):
     log.debug('Reading config file %s' % path)
     config = open(path).readlines()
     patterns = {}
+    include_pattern = re.compile ('^include (.*)')
     for line in config:
         line = line.rstrip()
 
-        if len(line) == 0 or line[0] == '#':    # skip empty lines and comments
+        # Skip empty lines
+        if 0 == len (line):
             continue
+
+        # Skip comments
+        if '#'== line [0]:
+            continue
+
+        # Check inner config files
+        includes = include_pattern.match (line)
+        if includes:
+            subconfig = includes.group (1)
+            log.debug ('got subconfig %s' % subconfig)
+
+            subconf_fullpath = get_config_full_path (subconfig)
+
+            if subconf_fullpath:
+                subdict = parse_config_file (subconf_fullpath, pattern_dlms)
+                patterns.update (subdict)
+                continue
 
         new_pattern = parse_color_option(line)
 
