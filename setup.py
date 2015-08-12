@@ -13,4 +13,5 @@ setup(name = 'raffaello',
         packages = find_packages(),
         entry_points = {'console_scripts': ['raffaello = raffaello:main'], },
         include_package_data = True,
+        keywords = ['formatter', 'cli', 'colorizer'],
     )
