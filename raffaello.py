@@ -24,7 +24,7 @@ import re
 import logging
 
 
-__version__='2.1.0'
+__version__='2.1.1'
 level = logging.DEBUG
 logging.basicConfig(level=level, format='    %(levelname)s %(message)s');
 log = logging.getLogger(__name__)
