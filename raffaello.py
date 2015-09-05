@@ -22,10 +22,10 @@ import sys
 import os
 import re
 import logging
+import collections
 
-
-__version__='2.1.2'
-level = logging.DEBUG
+__version__='2.2.0'
+level = logging.INFO
 logging.basicConfig(level=level, format='    %(levelname)s %(message)s');
 log = logging.getLogger(__name__)
 
@@ -301,7 +301,8 @@ def parse_color_option(color_options, pattern_dlms='=>'):
     pattern=>color. No space is allowed at both sides
     of the double equal (=>) sign.
     """
-    patterns = {}
+
+    patterns = []
 
     for option in color_options.split(' '):
         if len(option) == 0:
@@ -330,11 +331,14 @@ def parse_color_option(color_options, pattern_dlms='=>'):
             pattern = pattern[:len(pattern) - 1]
 
         if color in color_filters:
-            patterns.update( {r'%s' % pattern : color_filters[color]} )
+            item = {r'%s' % pattern : color_filters[color]}
+            log.debug ('adding "{0}"'.format (item))
+            patterns.insert (-1, item)
         else:
             log.error('Color "%s" does not exist' % color)
             sys.exit(1)
-
+    
+    log.debug ('returnining {0}'.format (patterns))
     return patterns
 
 
@@ -345,7 +349,7 @@ def parse_config_file(path, pattern_dlms='=>'):
     """
     log.debug('Reading config file %s' % path)
     config = open(path).readlines()
-    patterns = {}
+    patterns = []
     include_pattern = re.compile ('^include (.*)')
     for line in config:
         line = line.rstrip()
@@ -368,12 +372,12 @@ def parse_config_file(path, pattern_dlms='=>'):
 
             if subconf_fullpath:
                 subdict = parse_config_file (subconf_fullpath, pattern_dlms)
-                patterns.update (subdict)
+                patterns.join (subdict)
                 continue
 
         new_pattern = parse_color_option(line)
 
-        patterns.update(new_pattern)
+        patterns.extend (new_pattern)
 
     return patterns
 
@@ -383,7 +387,13 @@ def paint(line, patterns):
     Highlight line according to the given
     pattern/color dictionary
     """
-    for pattern, filter in patterns.items():
+    log.debug ('paint')
+    for item in patterns:
+        log.debug ('considering item {0}'.format (item)) 
+        pattern = item.keys () [0]
+        log.debug ('pattern {0}'.format (pattern))
+        filter = item [pattern]
+        log.debug ('filter {0}'.format (filter))
         try:
             matches = re.findall(pattern, line)
         except Exception as err:
