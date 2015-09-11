@@ -1,0 +1,8 @@
+# Basic Raffaello configuration for logcat
+include errors
+.*I/=>blue
+.*W/=>yellow
+.*E/=>red
+.*D/=>cyan
+
+

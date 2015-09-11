@@ -1,0 +1,23 @@
+include errors
+
+# Processes
+([\w-]*)\[\d+\]:=>cyan
+
+# Events
+USB\sdisconnect.*=>yellow_bold
+device\connected=>green_bold
+
+# Other
+option=>green
+NetworkManager=>blue
+ntpdate=>purple
+
+tty\w*=>green_bold
+
+[kK]ernel=>purple
+New\sUSB\sdevice.*=>green
+idVendor=(\w{4})=>green_bold
+idProduct=(\w{4})=>green_bold
+CDC-\w*=>green_bold
+cdc_\w*=>green_bold
+qmi_wwan=>green_bold

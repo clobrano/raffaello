@@ -1,0 +1,21 @@
+# Raffaello's configuration for basic error/warning highlight
+
+warning=>yellow_bold
+Warning=>yellow_bold
+WARNING=>yellow_bold
+[iI]nvalid=>yellow_bold
+not\sable=>yellow_bold
+cannot\sfind=>yellow_bold
+
+error=>red_bold
+Error=>red_bold
+ERROR=>red_bold
+
+exception=>red_bold
+Exception=>red_bold
+EXCEPTION=>red_bold
+
+fail=>red_bold
+broken=>red_bold
+
+
