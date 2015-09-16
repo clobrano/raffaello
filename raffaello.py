@@ -166,8 +166,9 @@ class Script (object):
 
     def help (self):
         self.usage ()
-        log.info('Available color list. NOTE that some colors could be unsupported on your terminal.\n')
+        log.info('Available color list.')
         print(sorted(color_filters.keys()))
+        log.info('NOTE that some colors could be unsupported on your terminal.')
 
 
     def run (self):
@@ -228,6 +229,7 @@ class Script (object):
                     log.debug("EOF reached. Nothing to do");
                     break;
 
+            log.debug("End of stream")
             os._exit(os.EX_OK)
 
         return 0
@@ -309,7 +311,9 @@ def parse_color_option(color_options, pattern_dlms='=>'):
             continue
 
         if len(re.findall(pattern_dlms, option)) > 1:
-            log.error('[Error] Can not parse option %s. Too many pattern separator symbols (%s) in option' % (option, pattern_dlms))
+            log.error('[Error] Can not parse option %s.')
+            log.error('    Too many pattern separator symbols (%s) in option'\
+                    % (option, pattern_dlms))
             sys.exit(1)
 
         try:
@@ -337,7 +341,7 @@ def parse_color_option(color_options, pattern_dlms='=>'):
         else:
             log.error('Color "%s" does not exist' % color)
             sys.exit(1)
-    
+
     log.debug ('returnining {0}'.format (patterns))
     return patterns
 
@@ -372,7 +376,8 @@ def parse_config_file(path, pattern_dlms='=>'):
 
             if subconf_fullpath:
                 subdict = parse_config_file (subconf_fullpath, pattern_dlms)
-                patterns.join (subdict)
+                patterns.extend (subdict)
+                #patterns.join (subdict)
                 continue
 
         new_pattern = parse_color_option(line)
@@ -387,22 +392,24 @@ def paint(line, patterns):
     Highlight line according to the given
     pattern/color dictionary
     """
-    log.debug ('paint')
+    log.debug ('paint line "%s"' % line)
     for item in patterns:
-        log.debug ('considering item {0}'.format (item)) 
         pattern = item.keys () [0]
-        log.debug ('pattern {0}'.format (pattern))
         filter = item [pattern]
-        log.debug ('filter {0}'.format (filter))
+        log.debug('considering {0} => key:"{1}", pattern:"{2}"'\
+                .format (item, pattern, filter))
         try:
             matches = re.findall(pattern, line)
         except Exception as err:
             log.error('%s' % err)
-            log.debug('pattern: %s' % pattern)
             log.debug('line: %s' % line)
             sys.exit(1)
 
-        line = filter.apply(line, matches)
+        if matches:
+            log.debug('Match found')
+            line = filter.apply(line, matches)
+            break
+
     return line.rstrip()
 
 
