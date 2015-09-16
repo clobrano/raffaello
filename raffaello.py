@@ -127,6 +127,7 @@ class Script (object):
             fullpath = get_config_full_path (path)
 
             if None == fullpath:
+                log.error("Could not find configuration file %s", path);
                 sys.exit(1)
 
             self.patterns = parse_config_file(fullpath, self.pattern_dlms)
@@ -206,6 +207,8 @@ class Script (object):
                 os.close(pipe_write)
                 fd_read = os.fdopen(pipe_read)
 
+            endofstream = False
+
             while True:
                 try:
                     if not command:
@@ -215,18 +218,27 @@ class Script (object):
                         # we are not in a pipe, run from file's descriptors
                         line = fd_read.readline().rstrip()
 
-                    if line:
-                        # And here is the magic
-                        print(paint(line, patterns))
-
+                    if command and not line:
+                        # Not using pipe, we need to understand when the
+                        # program ends. Two empty lines will be considered
+                        # as the end of the stream
+                        log.debug ('Is the end of the stream?')
+                        if endofstream:
+                            break
+                        else:
+                            endofstream = True
                     else:
-                        break
+                        endofstream = False
+
+                    # And here is the magic
+                    print(paint(line, patterns))
 
                 except KeyboardInterrupt:
+                    log.info("User iterruption")
                     pass
 
                 except EOFError:
-                    log.debug("EOF reached. Nothing to do");
+                    log.info("EOF reached. Nothing to do");
                     break;
 
             log.debug("End of stream")
