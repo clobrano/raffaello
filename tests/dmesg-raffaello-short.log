@@ -1,0 +1,33 @@
+[32m[20067.645949] [39m[33musb 1-1.1[39m: [33m[1mUSB disconnect, device number 8[22m[39m
+[32m[20098.513135] [39m[33musb 1-1.1[39m: new high-speed USB device [32m[1mnumber 9 [22m[39musing [32m[1mxhci_hcd[22m[39m
+[32m[20098.602116] [39m[33musb 1-1.1[39m: [32m[1mNew USB device found[22m[39m, idVendor=[32m[1m1bc7[22m[39m, idProduct=[32m[1m1201[22m[39m
+[32m[20098.602118] [39m[33musb 1-1.1[39m: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[32m[20098.602120] [39m[33musb 1-1.1[39m: Product: [32m[1mAndroid[22m[39m
+[32m[20098.602121] [39m[33musb 1-1.1[39m: Manufacturer: [32m[1mAndroid[22m[39m
+[32m[20098.602121] [39m[33musb 1-1.1[39m: SerialNumber: [32m[1m0123456789ABCDEF[22m[39m
+[32m[20098.619263] [39m[33m[32moption[39m 1-1.1:1.0[39m: GSM modem (1-port) converter detected
+[32m[20098.619377] [39m[33musb 1-1.1[39m: GSM modem (1-port) converter now attached to [32m[1mttyUSB0[22m[39m
+[32m[20098.619871] [39m[33m[32m[1mqmi_wwan[22m[39m 1-1.1:1.2[39m: cdc-wdm0: USB WDM device
+[32m[20098.620013] [39m[33m[32m[1m[32m[1mqmi_wwan[22m[39m[22m[39m 1-1.1:1.2 wwan0[39m: register '[32m[1m[32m[1mqmi_wwan[22m[39m[22m[39m' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[32m[20098.620045] [39m[33m[32moption[39m 1-1.1:1.3[39m: GSM modem (1-port) converter detected
+[32m[20098.620235] [39m[33musb 1-1.1[39m: GSM modem (1-port) converter now attached to [32m[1mttyUSB1[22m[39m
+[32m[20098.620295] [39m[33m[32moption[39m 1-1.1:1.4[39m: GSM modem (1-port) converter detected
+[32m[20098.620358] [39m[33musb 1-1.1[39m: GSM modem (1-port) converter now attached to [32m[1mttyUSB2[22m[39m
+[32m[20098.620426] [39m[33m[32moption[39m 1-1.1:1.5[39m: GSM modem (1-port) converter detected
+[32m[20098.620466] [39m[33musb 1-1.1[39m: GSM modem (1-port) converter now attached to [32m[1mttyUSB3[22m[39m
+[32m[20098.620516] [39m[33m[32moption[39m 1-1.1:1.6[39m: GSM modem (1-port) converter detected
+[32m[20098.620572] [39m[33musb 1-1.1[39m: GSM modem (1-port) converter now attached to [32m[1mttyUSB4[22m[39m
+[32m[20113.946667] [39m[33m[32moption[39m1 [32m[1m[32m[1mttyUSB0[22m[39m[22m[39m[39m: GSM modem (1-port) converter now disconnected from [32m[1m[32m[1mttyUSB0[22m[39m[22m[39m
+[32m[20113.946696] [39m[33m[32moption[39m 1-1.1:1.0[39m: device disconnected
+[32m[20113.946704] [39m[33m[32m[1m[32m[1mqmi_wwan[22m[39m[22m[39m 1-1.1:1.2 wwan0[39m: unregister '[32m[1m[32m[1mqmi_wwan[22m[39m[22m[39m' usb-0000:00:14.0-1.1, WWAN/QMI device
+[32m[20113.978115] [39m[33m[32moption[39m1 [32m[1m[32m[1mttyUSB1[22m[39m[22m[39m[39m: GSM modem (1-port) converter now disconnected from [32m[1m[32m[1mttyUSB1[22m[39m[22m[39m
+[32m[20113.978136] [39m[33m[32moption[39m 1-1.1:1.3[39m: device disconnected
+[32m[20113.978423] [39m[33m[32moption[39m1 [32m[1m[32m[1mttyUSB2[22m[39m[22m[39m[39m: GSM modem (1-port) converter now disconnected from [32m[1m[32m[1mttyUSB2[22m[39m[22m[39m
+[32m[20113.978432] [39m[33m[32moption[39m 1-1.1:1.4[39m: device disconnected
+[32m[20113.978657] [39m[33m[32moption[39m1 [32m[1m[32m[1mttyUSB3[22m[39m[22m[39m[39m: GSM modem (1-port) converter now disconnected from [32m[1m[32m[1mttyUSB3[22m[39m[22m[39m
+[32m[20113.978678] [39m[33m[32moption[39m 1-1.1:1.5[39m: device disconnected
+[32m[20113.978911] [39m[33m[32moption[39m1 [32m[1m[32m[1mttyUSB4[22m[39m[22m[39m[39m: GSM modem (1-port) converter now disconnected from [32m[1m[32m[1mttyUSB4[22m[39m[22m[39m
+[32m[20113.978921] [39m[33m[32moption[39m 1-1.1:1.6[39m: device disconnected
+[32m[20777.339152] [39m[33musb 1-1.1[39m: [33m[1mUSB disconnect, device number 9[22m[39m
+[32m[78306.524579] [39m[33mmce[39m: [Hardware [31m[1m[31m[1mError[22m[39m[22m[39m]: Machine check events logged
+[32m[78416.026117] [39m[33mmce[39m: [Hardware [31m[1m[31m[1mError[22m[39m[22m[39m]: Machine check events logged

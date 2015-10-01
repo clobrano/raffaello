@@ -1,0 +1,2421 @@
+[    0.143913] ACPI: Power Resource [FN02] (off)
+[    0.143957] ACPI: Power Resource [FN03] (off)
+[    0.143998] ACPI: Power Resource [FN04] (off)
+[    0.144640] ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-3e])
+[    0.144643] acpi PNP0A08:00: _OSC: OS supports [ExtendedConfig ASPM ClockPM Segments MSI]
+[    0.144785] acpi PNP0A08:00: _OSC: platform does not support [PCIeHotplug PME]
+[    0.144860] acpi PNP0A08:00: _OSC: OS now controls [AER PCIeCapability]
+[    0.144861] acpi PNP0A08:00: FADT indicates ASPM is unsupported, using BIOS configuration
+[    0.145197] PCI host bridge to bus 0000:00
+[    0.145198] pci_bus 0000:00: root bus resource [bus 00-3e]
+[    0.145200] pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7]
+[    0.145201] pci_bus 0000:00: root bus resource [io  0x0d00-0xffff]
+[    0.145202] pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff]
+[    0.145202] pci_bus 0000:00: root bus resource [mem 0x000d0000-0x000d3fff]
+[    0.145203] pci_bus 0000:00: root bus resource [mem 0x000d4000-0x000d7fff]
+[    0.145204] pci_bus 0000:00: root bus resource [mem 0x000d8000-0x000dbfff]
+[    0.145205] pci_bus 0000:00: root bus resource [mem 0x000dc000-0x000dffff]
+[    0.145206] pci_bus 0000:00: root bus resource [mem 0x000e0000-0x000e3fff]
+[    0.145207] pci_bus 0000:00: root bus resource [mem 0x000e4000-0x000e7fff]
+[    0.145208] pci_bus 0000:00: root bus resource [mem 0xe0000000-0xfeafffff]
+[    0.145213] pci 0000:00:00.0: [8086:0c00] type 00 class 0x060000
+[    0.145269] pci 0000:00:01.0: [8086:0c01] type 01 class 0x060400
+[    0.145296] pci 0000:00:01.0: PME# supported from D0 D3hot D3cold
+[    0.145325] pci 0000:00:01.0: System wakeup disabled by ACPI
+[    0.145369] pci 0000:00:14.0: [8086:8c31] type 00 class 0x0c0330
+[    0.145386] pci 0000:00:14.0: reg 0x10: [mem 0xf7f20000-0xf7f2ffff 64bit]
+[    0.145439] pci 0000:00:14.0: PME# supported from D3hot D3cold
+[    0.145462] pci 0000:00:14.0: System wakeup disabled by ACPI
+[    0.145488] pci 0000:00:16.0: [8086:8c3a] type 00 class 0x078000
+[    0.145505] pci 0000:00:16.0: reg 0x10: [mem 0xf7f3c000-0xf7f3c00f 64bit]
+[    0.145561] pci 0000:00:16.0: PME# supported from D0 D3hot D3cold
+[    0.145609] pci 0000:00:16.3: [8086:8c3d] type 00 class 0x070002
+[    0.145623] pci 0000:00:16.3: reg 0x10: [io  0xf0a0-0xf0a7]
+[    0.145630] pci 0000:00:16.3: reg 0x14: [mem 0xf7f3a000-0xf7f3afff]
+[    0.145731] pci 0000:00:19.0: [8086:153a] type 00 class 0x020000
+[    0.145746] pci 0000:00:19.0: reg 0x10: [mem 0xf7f00000-0xf7f1ffff]
+[    0.145753] pci 0000:00:19.0: reg 0x14: [mem 0xf7f39000-0xf7f39fff]
+[    0.145760] pci 0000:00:19.0: reg 0x18: [io  0xf040-0xf05f]
+[    0.145812] pci 0000:00:19.0: PME# supported from D0 D3hot D3cold
+[    0.145836] pci 0000:00:19.0: System wakeup disabled by ACPI
+[    0.145864] pci 0000:00:1a.0: [8086:8c2d] type 00 class 0x0c0320
+[    0.145882] pci 0000:00:1a.0: reg 0x10: [mem 0xf7f38000-0xf7f383ff]
+[    0.145960] pci 0000:00:1a.0: PME# supported from D0 D3hot D3cold
+[    0.145993] pci 0000:00:1a.0: System wakeup disabled by ACPI
+[    0.146019] pci 0000:00:1b.0: [8086:8c20] type 00 class 0x040300
+[    0.146033] pci 0000:00:1b.0: reg 0x10: [mem 0xf7f30000-0xf7f33fff 64bit]
+[    0.146093] pci 0000:00:1b.0: PME# supported from D0 D3hot D3cold
+[    0.146118] pci 0000:00:1b.0: System wakeup disabled by ACPI
+[    0.146141] pci 0000:00:1c.0: [8086:8c10] type 01 class 0x060400
+[    0.146200] pci 0000:00:1c.0: PME# supported from D0 D3hot D3cold
+[    0.146227] pci 0000:00:1c.0: System wakeup disabled by ACPI
+[    0.146251] pci 0000:00:1c.3: [8086:8c16] type 01 class 0x060400
+[    0.146310] pci 0000:00:1c.3: PME# supported from D0 D3hot D3cold
+[    0.146336] pci 0000:00:1c.3: System wakeup disabled by ACPI
+[    0.146367] pci 0000:00:1d.0: [8086:8c26] type 00 class 0x0c0320
+[    0.146384] pci 0000:00:1d.0: reg 0x10: [mem 0xf7f37000-0xf7f373ff]
+[    0.146462] pci 0000:00:1d.0: PME# supported from D0 D3hot D3cold
+[    0.146495] pci 0000:00:1d.0: System wakeup disabled by ACPI
+[    0.146521] pci 0000:00:1f.0: [8086:8c4e] type 00 class 0x060100
+[    0.146655] pci 0000:00:1f.2: [8086:8c02] type 00 class 0x010601
+[    0.146668] pci 0000:00:1f.2: reg 0x10: [io  0xf090-0xf097]
+[    0.146674] pci 0000:00:1f.2: reg 0x14: [io  0xf080-0xf083]
+[    0.146681] pci 0000:00:1f.2: reg 0x18: [io  0xf070-0xf077]
+[    0.146687] pci 0000:00:1f.2: reg 0x1c: [io  0xf060-0xf063]
+[    0.146694] pci 0000:00:1f.2: reg 0x20: [io  0xf020-0xf03f]
+[    0.146700] pci 0000:00:1f.2: reg 0x24: [mem 0xf7f36000-0xf7f367ff]
+[    0.146733] pci 0000:00:1f.2: PME# supported from D3hot
+[    0.146777] pci 0000:00:1f.3: [8086:8c22] type 00 class 0x0c0500
+[    0.146788] pci 0000:00:1f.3: reg 0x10: [mem 0xf7f35000-0xf7f350ff 64bit]
+[    0.146806] pci 0000:00:1f.3: reg 0x20: [io  0x0580-0x059f]
+[    0.146888] pci 0000:01:00.0: [1002:68f9] type 00 class 0x030000
+[    0.146899] pci 0000:01:00.0: reg 0x10: [mem 0xe0000000-0xefffffff 64bit pref]
+[    0.146907] pci 0000:01:00.0: reg 0x18: [mem 0xf7e20000-0xf7e3ffff 64bit]
+[    0.146913] pci 0000:01:00.0: reg 0x20: [io  0xe000-0xe0ff]
+[    0.146923] pci 0000:01:00.0: reg 0x30: [mem 0xf7e00000-0xf7e1ffff pref]
+[    0.146951] pci 0000:01:00.0: supports D1 D2
+[    0.146962] pci 0000:01:00.0: System wakeup disabled by ACPI
+[    0.152430] pci 0000:00:01.0: PCI bridge to [bus 01]
+[    0.152431] pci 0000:00:01.0:   bridge window [io  0xe000-0xefff]
+[    0.152433] pci 0000:00:01.0:   bridge window [mem 0xf7e00000-0xf7efffff]
+[    0.152435] pci 0000:00:01.0:   bridge window [mem 0xe0000000-0xefffffff 64bit pref]
+[    0.152489] acpiphp: Slot [1] registered
+[    0.152494] pci 0000:00:1c.0: PCI bridge to [bus 02]
+[    0.152604] pci 0000:03:00.0: [1283:8893] type 01 class 0x060401
+[    0.152990] pci 0000:03:00.0: supports D1 D2
+[    0.152991] pci 0000:03:00.0: PME# supported from D0 D1 D2 D3hot D3cold
+[    0.153042] pci 0000:03:00.0: System wakeup disabled by ACPI
+[    0.153061] pci 0000:00:1c.3: PCI bridge to [bus 03-04]
+[    0.153212] pci 0000:03:00.0: PCI bridge to [bus 04] (subtractive decode)
+[    0.153839] ACPI: PCI Interrupt Link [LNKA] (IRQs 3 4 5 6 10 *11 12 14 15)
+[    0.153869] ACPI: PCI Interrupt Link [LNKB] (IRQs 3 4 5 6 10 *11 12 14 15)
+[    0.153897] ACPI: PCI Interrupt Link [LNKC] (IRQs 3 4 5 6 10 *11 12 14 15)
+[    0.153926] ACPI: PCI Interrupt Link [LNKD] (IRQs 3 4 5 6 *10 11 12 14 15)
+[    0.153953] ACPI: PCI Interrupt Link [LNKE] (IRQs 3 4 *5 6 10 11 12 14 15)
+[    0.153982] ACPI: PCI Interrupt Link [LNKF] (IRQs 3 4 5 6 10 11 12 14 15) *0, disabled.
+[    0.154010] ACPI: PCI Interrupt Link [LNKG] (IRQs 3 4 5 6 *10 11 12 14 15)
+[    0.154039] ACPI: PCI Interrupt Link [LNKH] (IRQs 3 4 *5 6 10 11 12 14 15)
+[    0.154255] ACPI: Enabled 7 GPEs in block 00 to 3F
+[    0.154319] vgaarb: setting as boot device: PCI:0000:01:00.0
+[    0.154320] vgaarb: device added: PCI:0000:01:00.0,decodes=io+mem,owns=io+mem,locks=none
+[    0.154321] vgaarb: loaded
+[    0.154322] vgaarb: bridge control possible 0000:01:00.0
+[    0.154449] SCSI subsystem initialized
+[    0.154470] libata version 3.00 loaded.
+[    0.154483] ACPI: bus type USB registered
+[    0.154494] usbcore: registered new interface driver usbfs
+[    0.154499] usbcore: registered new interface driver hub
+[    0.154507] usbcore: registered new device driver usb
+[    0.154582] PCI: Using ACPI for IRQ routing
+[    0.155785] PCI: pci_cache_line_size set to 64 bytes
+[    0.155823] e820: reserve RAM buffer [mem 0x0009d800-0x0009ffff]
+[    0.155824] e820: reserve RAM buffer [mem 0xcbd2e000-0xcbffffff]
+[    0.155825] e820: reserve RAM buffer [mem 0xcc182000-0xcfffffff]
+[    0.155826] e820: reserve RAM buffer [mem 0xdd90e000-0xdfffffff]
+[    0.155827] e820: reserve RAM buffer [mem 0xdf000000-0xdfffffff]
+[    0.155828] e820: reserve RAM buffer [mem 0x21e000000-0x21fffffff]
+[    0.155894] NetLabel: Initializing
+[    0.155895] NetLabel:  domain hash size = 128
+[    0.155896] NetLabel:  protocols = UNLABELED CIPSOv4
+[    0.155903] NetLabel:  unlabeled traffic allowed by default
+[    0.155940] hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0, 0, 0, 0, 0, 0
+[    0.155943] hpet0: 8 comparators, 64-bit 14.318180 MHz counter
+[    0.157973] Switched to clocksource hpet
+[    0.161774] AppArmor: AppArmor Filesystem Enabled
+[    0.161811] pnp: PnP ACPI init
+[    0.161931] system 00:00: [io  0x0680-0x069f] has been reserved
+[    0.161933] system 00:00: [io  0xffff] has been reserved
+[    0.161934] system 00:00: [io  0xffff] has been reserved
+[    0.161936] system 00:00: [io  0xffff] has been reserved
+[    0.161937] system 00:00: [io  0x1c00-0x1cfe] has been reserved
+[    0.161938] system 00:00: [io  0x1d00-0x1dfe] has been reserved
+[    0.161939] system 00:00: [io  0x1e00-0x1efe] has been reserved
+[    0.161939] system 00:00: [io  0x1f00-0x1ffe] has been reserved
+[    0.161941] system 00:00: [io  0x1800-0x18fe] could not be reserved
+[    0.161942] system 00:00: [io  0x164e-0x164f] has been reserved
+[    0.161943] system 00:00: Plug and Play ACPI device, IDs PNP0c02 (active)
+[    0.161962] pnp 00:01: Plug and Play ACPI device, IDs PNP0b00 (active)
+[    0.161995] system 00:02: [io  0x1854-0x1857] has been reserved
+[    0.161996] system 00:02: Plug and Play ACPI device, IDs INT3f0d PNP0c02 (active)
+[    0.162073] system 00:03: [io  0x0a00-0x0a2f] has been reserved
+[    0.162074] system 00:03: [io  0x0a30-0x0a3f] has been reserved
+[    0.162075] system 00:03: [io  0x0a40-0x0a4f] has been reserved
+[    0.162076] system 00:03: Plug and Play ACPI device, IDs PNP0c02 (active)
+[    0.162108] system 00:04: [io  0x04d0-0x04d1] has been reserved
+[    0.162109] system 00:04: Plug and Play ACPI device, IDs PNP0c02 (active)
+[    0.162230] pnp 00:05: [dma 0 disabled]
+[    0.162252] pnp 00:05: Plug and Play ACPI device, IDs PNP0501 (active)
+[    0.162425] pnp 00:06: [dma 0 disabled]
+[    0.162443] pnp 00:06: Plug and Play ACPI device, IDs PNP0501 (active)
+[    0.162547] pnp 00:07: Plug and Play ACPI device, IDs PNP0c31 (active)
+[    0.162791] system 00:08: [mem 0xfed1c000-0xfed1ffff] has been reserved
+[    0.162792] system 00:08: [mem 0xfed10000-0xfed17fff] has been reserved
+[    0.162793] system 00:08: [mem 0xfed18000-0xfed18fff] has been reserved
+[    0.162794] system 00:08: [mem 0xfed19000-0xfed19fff] has been reserved
+[    0.162795] system 00:08: [mem 0xf8000000-0xfbffffff] has been reserved
+[    0.162796] system 00:08: [mem 0xfed20000-0xfed3ffff] has been reserved
+[    0.162797] system 00:08: [mem 0xfed90000-0xfed93fff] could not be reserved
+[    0.162798] system 00:08: [mem 0xfed45000-0xfed8ffff] has been reserved
+[    0.162800] system 00:08: [mem 0xff000000-0xffffffff] has been reserved
+[    0.162801] system 00:08: [mem 0xfee00000-0xfeefffff] could not be reserved
+[    0.162802] system 00:08: [mem 0xf7fdf000-0xf7fdffff] has been reserved
+[    0.162803] system 00:08: [mem 0xf7fe0000-0xf7feffff] has been reserved
+[    0.162804] system 00:08: Plug and Play ACPI device, IDs PNP0c02 (active)
+[    0.162959] pnp: PnP ACPI: found 9 devices
+[    0.168728] pci 0000:00:01.0: PCI bridge to [bus 01]
+[    0.168730] pci 0000:00:01.0:   bridge window [io  0xe000-0xefff]
+[    0.168732] pci 0000:00:01.0:   bridge window [mem 0xf7e00000-0xf7efffff]
+[    0.168734] pci 0000:00:01.0:   bridge window [mem 0xe0000000-0xefffffff 64bit pref]
+[    0.168736] pci 0000:00:1c.0: PCI bridge to [bus 02]
+[    0.168745] pci 0000:03:00.0: PCI bridge to [bus 04]
+[    0.168767] pci 0000:00:1c.3: PCI bridge to [bus 03-04]
+[    0.168776] pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7]
+[    0.168777] pci_bus 0000:00: resource 5 [io  0x0d00-0xffff]
+[    0.168778] pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff]
+[    0.168779] pci_bus 0000:00: resource 7 [mem 0x000d0000-0x000d3fff]
+[    0.168779] pci_bus 0000:00: resource 8 [mem 0x000d4000-0x000d7fff]
+[    0.168780] pci_bus 0000:00: resource 9 [mem 0x000d8000-0x000dbfff]
+[    0.168781] pci_bus 0000:00: resource 10 [mem 0x000dc000-0x000dffff]
+[    0.168782] pci_bus 0000:00: resource 11 [mem 0x000e0000-0x000e3fff]
+[    0.168783] pci_bus 0000:00: resource 12 [mem 0x000e4000-0x000e7fff]
+[    0.168784] pci_bus 0000:00: resource 13 [mem 0xe0000000-0xfeafffff]
+[    0.168785] pci_bus 0000:01: resource 0 [io  0xe000-0xefff]
+[    0.168786] pci_bus 0000:01: resource 1 [mem 0xf7e00000-0xf7efffff]
+[    0.168787] pci_bus 0000:01: resource 2 [mem 0xe0000000-0xefffffff 64bit pref]
+[    0.168804] NET: Registered protocol family 2
+[    0.168918] TCP established hash table entries: 65536 (order: 7, 524288 bytes)
+[    0.169037] TCP bind hash table entries: 65536 (order: 8, 1048576 bytes)
+[    0.169204] TCP: Hash tables configured (established 65536 bind 65536)
+[    0.169219] TCP: reno registered
+[    0.169226] UDP hash table entries: 4096 (order: 5, 131072 bytes)
+[    0.169255] UDP-Lite hash table entries: 4096 (order: 5, 131072 bytes)
+[    0.169302] NET: Registered protocol family 1
+[    0.210091] pci 0000:01:00.0: Video device with shadowed ROM
+[    0.210096] PCI: CLS 64 bytes, default 64
+[    0.210129] Trying to unpack rootfs image as initramfs...
+[    0.420781] Freeing initrd memory: 20348K (ffff880035832000 - ffff880036c11000)
+[    0.420798] PCI-DMA: Using software bounce buffering for IO (SWIOTLB)
+[    0.420800] software IO TLB [mem 0xd990e000-0xdd90e000] (64MB) mapped at [ffff8800d990e000-ffff8800dd90dfff]
+[    0.420932] RAPL PMU detected, hw unit 2^-14 Joules, API unit is 2^-32 Joules, 4 fixed counters 655360 ms ovfl timer
+[    0.420992] microcode: CPU0 sig=0x306c3, pf=0x2, revision=0x1c
+[    0.420998] microcode: CPU1 sig=0x306c3, pf=0x2, revision=0x1c
+[    0.421001] microcode: CPU2 sig=0x306c3, pf=0x2, revision=0x1c
+[    0.421006] microcode: CPU3 sig=0x306c3, pf=0x2, revision=0x1c
+[    0.421035] microcode: Microcode Update Driver: v2.00 <tigran@aivazian.fsnet.co.uk>, Peter Oruba
+[    0.421054] Scanning for low memory corruption every 60 seconds
+[    0.421278] futex hash table entries: 1024 (order: 4, 65536 bytes)
+[    0.421293] Initialise system trusted keyring
+[    0.421307] audit: initializing netlink subsys (disabled)
+[    0.421320] audit: type=2000 audit(1443439445.416:1): initialized
+[    0.421541] HugeTLB registered 2 MB page size, pre-allocated 0 pages
+[    0.422442] zpool: loaded
+[    0.422444] zbud: loaded
+[    0.422550] VFS: Disk quotas dquot_6.5.2
+[    0.422571] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[    0.422852] fuse init (API version 7.23)
+[    0.422933] Key type big_key registered
+[    0.423229] Key type asymmetric registered
+[    0.423231] Asymmetric key parser 'x509' registered
+[    0.423252] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 252)
+[    0.423281] io scheduler noop registered
+[    0.423283] io scheduler deadline registered (default)
+[    0.423300] io scheduler cfq registered
+[    0.423608] pci_hotplug: PCI Hot Plug PCI Core version: 0.5
+[    0.423618] pciehp: PCI Express Hot Plug Controller Driver version: 0.4
+[    0.423642] vesafb: mode is 1280x1024x32, linelength=5120, pages=0
+[    0.423643] vesafb: scrolling: redraw
+[    0.423644] vesafb: Truecolor: size=0:8:8:8, shift=0:16:8:0
+[    0.425682] vesafb: framebuffer at 0xe0000000, mapped to 0xffffc90004f00000, using 5120k, total 5120k
+[    0.425754] Console: switching to colour frame buffer device 160x64
+[    0.425764] fb0: VESA VGA frame buffer device
+[    0.425783] intel_idle: MWAIT substates: 0x42120
+[    0.425784] intel_idle: v0.4 model 0x3C
+[    0.425785] intel_idle: lapic_timer_reliable_states 0xffffffff
+[    0.425941] input: Power Button as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0C:00/input/input0
+[    0.425944] ACPI: Power Button [PWRB]
+[    0.425967] input: Power Button as /devices/LNXSYSTM:00/LNXPWRBN:00/input/input1
+[    0.425969] ACPI: Power Button [PWRF]
+[    0.426453] thermal LNXTHERM:00: registered as thermal_zone0
+[    0.426454] ACPI: Thermal Zone [TZ00] (28 C)
+[    0.426568] thermal LNXTHERM:01: registered as thermal_zone1
+[    0.426569] ACPI: Thermal Zone [TZ01] (30 C)
+[    0.426590] GHES: HEST is not enabled!
+[    0.426663] Serial: 8250/16550 driver, 32 ports, IRQ sharing enabled
+[    0.447575] 00:05: ttyS0 at I/O 0x3f8 (irq = 4, base_baud = 115200) is a 16550A
+[    0.468526] 00:06: ttyS1 at I/O 0x2f8 (irq = 3, base_baud = 115200) is a 16550A
+[    0.489722] 0000:00:16.3: ttyS4 at I/O 0xf0a0 (irq = 19, base_baud = 115200) is a 16550A
+[    0.490019] Linux agpgart interface v0.103
+[    0.490152] tpm_tis 00:07: 1.2 TPM (device-id 0x0, rev-id 78)
+[    0.546337] tpm_tis 00:07: TPM is disabled/deactivated (0x6)
+[    0.547382] brd: module loaded
+[    0.547776] loop: module loaded
+[    0.547901] libphy: Fixed MDIO Bus: probed
+[    0.547903] tun: Universal TUN/TAP device driver, 1.6
+[    0.547904] tun: (C) 1999-2004 Max Krasnyansky <maxk@qualcomm.com>
+[    0.547934] PPP generic driver version 2.4.2
+[    0.548035] xhci_hcd 0000:00:14.0: xHCI Host Controller
+[    0.548040] xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 1
+[    0.548122] xhci_hcd 0000:00:14.0: cache line size of 64 is not supported
+[    0.548181] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+[    0.548182] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    0.548183] usb usb1: Product: xHCI Host Controller
+[    0.548184] usb usb1: Manufacturer: Linux 3.19.0-28-generic xhci-hcd
+[    0.548185] usb usb1: SerialNumber: 0000:00:14.0
+[    0.548255] hub 1-0:1.0: USB hub found
+[    0.548270] hub 1-0:1.0: 15 ports detected
+[    0.550660] xhci_hcd 0000:00:14.0: xHCI Host Controller
+[    0.550663] xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 2
+[    0.550689] usb usb2: New USB device found, idVendor=1d6b, idProduct=0003
+[    0.550690] usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    0.550691] usb usb2: Product: xHCI Host Controller
+[    0.550692] usb usb2: Manufacturer: Linux 3.19.0-28-generic xhci-hcd
+[    0.550693] usb usb2: SerialNumber: 0000:00:14.0
+[    0.550750] hub 2-0:1.0: USB hub found
+[    0.550760] hub 2-0:1.0: 6 ports detected
+[    0.551491] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    0.551494] ehci-pci: EHCI PCI platform driver
+[    0.551552] ehci-pci 0000:00:1a.0: EHCI Host Controller
+[    0.551555] ehci-pci 0000:00:1a.0: new USB bus registered, assigned bus number 3
+[    0.551564] ehci-pci 0000:00:1a.0: debug port 2
+[    0.555454] ehci-pci 0000:00:1a.0: cache line size of 64 is not supported
+[    0.555463] ehci-pci 0000:00:1a.0: irq 17, io mem 0xf7f38000
+[    0.566316] ehci-pci 0000:00:1a.0: USB 2.0 started, EHCI 1.00
+[    0.566344] usb usb3: New USB device found, idVendor=1d6b, idProduct=0002
+[    0.566345] usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    0.566346] usb usb3: Product: EHCI Host Controller
+[    0.566347] usb usb3: Manufacturer: Linux 3.19.0-28-generic ehci_hcd
+[    0.566348] usb usb3: SerialNumber: 0000:00:1a.0
+[    0.566430] hub 3-0:1.0: USB hub found
+[    0.566433] hub 3-0:1.0: 3 ports detected
+[    0.566566] ehci-pci 0000:00:1d.0: EHCI Host Controller
+[    0.566570] ehci-pci 0000:00:1d.0: new USB bus registered, assigned bus number 4
+[    0.566579] ehci-pci 0000:00:1d.0: debug port 2
+[    0.570479] ehci-pci 0000:00:1d.0: cache line size of 64 is not supported
+[    0.570488] ehci-pci 0000:00:1d.0: irq 23, io mem 0xf7f37000
+[    0.582327] ehci-pci 0000:00:1d.0: USB 2.0 started, EHCI 1.00
+[    0.582356] usb usb4: New USB device found, idVendor=1d6b, idProduct=0002
+[    0.582357] usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    0.582358] usb usb4: Product: EHCI Host Controller
+[    0.582359] usb usb4: Manufacturer: Linux 3.19.0-28-generic ehci_hcd
+[    0.582360] usb usb4: SerialNumber: 0000:00:1d.0
+[    0.582445] hub 4-0:1.0: USB hub found
+[    0.582447] hub 4-0:1.0: 3 ports detected
+[    0.582529] ehci-platform: EHCI generic platform driver
+[    0.582535] ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+[    0.582539] ohci-pci: OHCI PCI platform driver
+[    0.582545] ohci-platform: OHCI generic platform driver
+[    0.582551] uhci_hcd: USB Universal Host Controller Interface driver
+[    0.582582] i8042: PNP: No PS/2 controller found. Probing ports directly.
+[    0.583067] serio: i8042 KBD port at 0x60,0x64 irq 1
+[    0.583070] serio: i8042 AUX port at 0x60,0x64 irq 12
+[    0.583183] mousedev: PS/2 mouse device common for all mice
+[    0.583326] rtc_cmos 00:01: RTC can wake from S4
+[    0.583441] rtc_cmos 00:01: rtc core: registered rtc_cmos as rtc0
+[    0.583463] rtc_cmos 00:01: alarms up to one month, y3k, 242 bytes nvram, hpet irqs
+[    0.583473] i2c /dev entries driver
+[    0.583514] device-mapper: uevent: version 1.0.3
+[    0.583566] device-mapper: ioctl: 4.29.0-ioctl (2014-10-28) initialised: dm-devel@redhat.com
+[    0.583580] Intel P-state driver initializing.
+[    0.583676] Consider also installing thermald for improved thermal control.
+[    0.583680] ledtrig-cpu: registered to indicate activity on CPUs
+[    0.583859] PCCT header not found.
+[    0.583860] ACPI PCC probe failed.
+[    0.583920] TCP: cubic registered
+[    0.583983] NET: Registered protocol family 10
+[    0.584153] NET: Registered protocol family 17
+[    0.584163] Key type dns_resolver registered
+[    0.584443] Loading compiled-in X.509 certificates
+[    0.585025] Loaded X.509 cert 'Magrathea: Glacier signing key: 99112ef1a6ba85be992582e9fef3a23f1a888175'
+[    0.585034] registered taskstats version 1
+[    0.586303] Key type trusted registered
+[    0.588787] Key type encrypted registered
+[    0.588791] AppArmor: AppArmor sha1 policy hashing enabled
+[    0.598380] tpm_tis 00:07: A TPM error (6) occurred attempting to read a pcr value
+[    0.598381] ima: No TPM chip found, activating TPM-bypass!
+[    0.598397] evm: HMAC attrs: 0x1
+[    0.598867]   Magic number: 15:662:429
+[    0.598965] rtc_cmos 00:01: setting system clock to 2015-09-28 11:24:06 UTC (1443439446)
+[    0.599092] BIOS EDD facility v0.16 2004-Jun-25, 0 devices found
+[    0.599093] EDD information not available.
+[    0.599150] PM: Hibernation image not present or could not be loaded.
+[    0.599381] Freeing unused kernel memory: 1408K (ffffffff81d36000 - ffffffff81e96000)
+[    0.599382] Write protecting the kernel read-only data: 12288k
+[    0.599543] Freeing unused kernel memory: 176K (ffff8800017d4000 - ffff880001800000)
+[    0.599610] Freeing unused kernel memory: 332K (ffff880001bad000 - ffff880001c00000)
+[    0.606323] random: systemd-udevd urandom read with 3 bits of entropy available
+[    0.619220] pps_core: LinuxPPS API ver. 1 registered
+[    0.619221] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.620014] PTP clock support registered
+[    0.622323] e1000e: Intel(R) PRO/1000 Network Driver - 2.3.2-k
+[    0.622324] e1000e: Copyright(c) 1999 - 2014 Intel Corporation.
+[    0.622460] e1000e 0000:00:19.0: Interrupt Throttling Rate (ints/sec) set to dynamic conservative mode
+[    0.797193] e1000e 0000:00:19.0 eth0: registered PHC clock
+[    0.797196] e1000e 0000:00:19.0 eth0: (PCI Express:2.5GT/s:Width x1) 44:8a:5b:c1:1b:90
+[    0.797197] e1000e 0000:00:19.0 eth0: Intel(R) PRO/1000 Network Connection
+[    0.797242] e1000e 0000:00:19.0 eth0: MAC: 11, PHY: 12, PBA No: FFFFFF-0FF
+[    0.797293] ahci 0000:00:1f.2: version 3.0
+[    0.797472] ahci 0000:00:1f.2: SSS flag set, parallel bus scan disabled
+[    0.797505] ahci 0000:00:1f.2: AHCI 0001.0300 32 slots 5 ports 6 Gbps 0xb impl SATA mode
+[    0.797506] ahci 0000:00:1f.2: flags: 64bit ncq stag pm led clo pio slum part ems sxs apst
+[    0.811076] scsi host0: ahci
+[    0.811344] scsi host1: ahci
+[    0.811497] scsi host2: ahci
+[    0.811614] scsi host3: ahci
+[    0.811715] scsi host4: ahci
+[    0.811743] ata1: SATA max UDMA/133 abar m2048@0xf7f36000 port 0xf7f36100 irq 28
+[    0.811746] ata2: SATA max UDMA/133 abar m2048@0xf7f36000 port 0xf7f36180 irq 28
+[    0.811746] ata3: DUMMY
+[    0.811749] ata4: SATA max UDMA/133 abar m2048@0xf7f36000 port 0xf7f36280 irq 28
+[    0.811749] ata5: DUMMY
+[    0.862561] usb 1-1: new high-speed USB device number 2 using xhci_hcd
+[    0.878587] usb 3-1: new high-speed USB device number 2 using ehci-pci
+[    0.894649] usb 4-1: new high-speed USB device number 2 using ehci-pci
+[    0.990905] usb 1-1: New USB device found, idVendor=0424, idProduct=2512
+[    0.990908] usb 1-1: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+[    0.991353] hub 1-1:1.0: USB hub found
+[    0.991378] hub 1-1:1.0: 2 ports detected
+[    1.011157] usb 3-1: New USB device found, idVendor=8087, idProduct=8008
+[    1.011160] usb 3-1: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+[    1.011415] hub 3-1:1.0: USB hub found
+[    1.011523] hub 3-1:1.0: 6 ports detected
+[    1.027227] usb 4-1: New USB device found, idVendor=8087, idProduct=8000
+[    1.027230] usb 4-1: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+[    1.027553] hub 4-1:1.0: USB hub found
+[    1.027667] hub 4-1:1.0: 8 ports detected
+[    1.130844] ata1: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+[    1.144762] ata1.00: ATAPI: MATSHITA DVD-RAM SW830, 8.82, max UDMA/100
+[    1.157844] ata1.00: configured for UDMA/100
+[    1.158866] usb 1-9: new low-speed USB device number 3 using xhci_hcd
+[    1.164277] scsi 0:0:0:0: CD-ROM            MATSHITA DVD-RAM SW830    8.82 PQ: 0 ANSI: 5
+[    1.182827] sr 0:0:0:0: [sr0] scsi3-mmc drive: 40x/40x writer dvd-ram cd/rw xa/form2 cdda tray
+[    1.182830] cdrom: Uniform CD-ROM driver Revision: 3.20
+[    1.182965] sr 0:0:0:0: Attached scsi CD-ROM sr0
+[    1.183065] sr 0:0:0:0: Attached scsi generic sg0 type 5
+[    1.293245] usb 1-9: New USB device found, idVendor=0461, idProduct=4e04
+[    1.293258] usb 1-9: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[    1.293259] usb 1-9: Product: USB NETVISTA FULL WIDTH KEYBOARD
+[    1.293260] usb 1-9: Manufacturer: NOVATEK
+[    1.293424] usb 1-9: ep 0x81 - rounding interval to 64 microframes, ep desc says 80 microframes
+[    1.293427] usb 1-9: ep 0x82 - rounding interval to 64 microframes, ep desc says 80 microframes
+[    1.295861] hidraw: raw HID events driver (C) Jiri Kosina
+[    1.302788] usbcore: registered new interface driver usbhid
+[    1.302790] usbhid: USB HID core driver
+[    1.303786] input: NOVATEK USB NETVISTA FULL WIDTH KEYBOARD as /devices/pci0000:00/0000:00:14.0/usb1/1-9/1-9:1.0/0003:0461:4E04.0001/input/input5
+[    1.359098] hid-generic 0003:0461:4E04.0001: input,hidraw0: USB HID v1.10 Keyboard [NOVATEK USB NETVISTA FULL WIDTH KEYBOARD] on usb-0000:00:14.0-9/input0
+[    1.359925] input: NOVATEK USB NETVISTA FULL WIDTH KEYBOARD as /devices/pci0000:00/0000:00:14.0/usb1/1-9/1-9:1.1/0003:0461:4E04.0002/input/input6
+[    1.415248] hid-generic 0003:0461:4E04.0002: input,hidraw1: USB HID v1.10 Device [NOVATEK USB NETVISTA FULL WIDTH KEYBOARD] on usb-0000:00:14.0-9/input1
+[    1.419067] tsc: Refined TSC clocksource calibration: 3192.606 MHz
+[    1.459102] usb 1-10: new low-speed USB device number 4 using xhci_hcd
+[    1.503148] ata2: SATA link up 6.0 Gbps (SStatus 133 SControl 300)
+[    1.504944] ata2.00: ATA-8: WDC WD5000AAKX-08U6AA0, 19.01H19, max UDMA/100
+[    1.504947] ata2.00: 976773168 sectors, multi 16: LBA48 NCQ (depth 31/32), AA
+[    1.506870] ata2.00: configured for UDMA/100
+[    1.507000] scsi 1:0:0:0: Direct-Access     ATA      WDC WD5000AAKX-0 1H19 PQ: 0 ANSI: 5
+[    1.507194] sd 1:0:0:0: [sda] 976773168 512-byte logical blocks: (500 GB/465 GiB)
+[    1.507212] sd 1:0:0:0: Attached scsi generic sg1 type 0
+[    1.507250] sd 1:0:0:0: [sda] Write Protect is off
+[    1.507252] sd 1:0:0:0: [sda] Mode Sense: 00 3a 00 00
+[    1.507280] sd 1:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+[    1.560502]  sda: sda1 sda2 sda3 < sda5 sda6 sda7 >
+[    1.561115] sd 1:0:0:0: [sda] Attached SCSI disk
+[    1.591179] usb 1-10: New USB device found, idVendor=17ef, idProduct=6019
+[    1.591181] usb 1-10: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[    1.591182] usb 1-10: Product: Lenovo USB Optical Mouse
+[    1.591183] usb 1-10: Manufacturer: Logitech
+[    1.591343] usb 1-10: ep 0x81 - rounding interval to 64 microframes, ep desc says 80 microframes
+[    1.593467] input: Logitech Lenovo USB Optical Mouse as /devices/pci0000:00/0000:00:14.0/usb1/1-10/1-10:1.0/0003:17EF:6019.0003/input/input7
+[    1.593660] hid-generic 0003:17EF:6019.0003: input,hidraw2: USB HID v1.11 Mouse [Logitech Lenovo USB Optical Mouse] on usb-0000:00:14.0-10/input0
+[    1.827408] ata4: SATA link down (SStatus 0 SControl 300)
+[    2.420011] Switched to clocksource tsc
+[    2.940530] EXT4-fs (sda7): mounted filesystem with ordered data mode. Opts: (null)
+[    3.533664] random: nonblocking pool is initialized
+[    3.590192] systemd[1]: RTC configured in localtime, applying delta of 120 minutes to system time.
+[    3.824734] systemd[1]: Inserted module 'autofs4'
+[    3.910304] systemd[1]: systemd 219 running in system mode. (+PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT -GNUTLS +ACL +XZ -LZ4 -SECCOMP +BLKID -ELFUTILS +KMOD -IDN)
+[    3.910396] systemd[1]: Detected architecture x86-64.
+[    3.917927] systemd[1]: Set hostname to <d2092>.
+[    6.678973] systemd[1]: Cannot add dependency job for unit ModemManager.service, ignoring: Unit ModemManager.service is masked.
+[    6.679346] systemd[1]: Reached target Encrypted Volumes.
+[    6.679353] systemd[1]: Starting Encrypted Volumes.
+[    6.679373] systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+[    6.679377] systemd[1]: Starting Forward Password Requests to Wall Directory Watch.
+[    6.679492] systemd[1]: Set up automount Arbitrary Executable File Formats File System Automount Point.
+[    6.679499] systemd[1]: Starting Arbitrary Executable File Formats File System Automount Point.
+[    6.679520] systemd[1]: Created slice Root Slice.
+[    6.679524] systemd[1]: Starting Root Slice.
+[    6.679572] systemd[1]: Listening on Journal Audit Socket.
+[    6.679576] systemd[1]: Starting Journal Audit Socket.
+[    6.679595] systemd[1]: Listening on Journal Socket (/dev/log).
+[    6.679599] systemd[1]: Starting Journal Socket (/dev/log).
+[    6.679620] systemd[1]: Listening on udev Control Socket.
+[    6.679624] systemd[1]: Starting udev Control Socket.
+[    6.679633] systemd[1]: Listening on Delayed Shutdown Socket.
+[    6.679636] systemd[1]: Starting Delayed Shutdown Socket.
+[    6.679645] systemd[1]: Listening on fsck to fsckd communication Socket.
+[    6.679649] systemd[1]: Starting fsck to fsckd communication Socket.
+[    6.679696] systemd[1]: Created slice User and Session Slice.
+[    6.679701] systemd[1]: Starting User and Session Slice.
+[    6.679714] systemd[1]: Listening on udev Kernel Socket.
+[    6.679718] systemd[1]: Starting udev Kernel Socket.
+[    6.679738] systemd[1]: Listening on Journal Socket.
+[    6.679744] systemd[1]: Starting Journal Socket.
+[    6.679789] systemd[1]: Created slice System Slice.
+[    6.679796] systemd[1]: Starting System Slice.
+[    6.679840] systemd[1]: Created slice system-getty.slice.
+[    6.679844] systemd[1]: Starting system-getty.slice.
+[    6.680106] systemd[1]: Starting udev Coldplug all Devices...
+[    6.680349] systemd[1]: Mounting POSIX Message Queue File System...
+[    6.680620] systemd[1]: Mounting Huge Pages File System...
+[    6.680905] systemd[1]: Starting Increase datagram queue length...
+[    6.680970] systemd[1]: Created slice system-systemd\x2dfsck.slice.
+[    6.680977] systemd[1]: Starting system-systemd\x2dfsck.slice.
+[    6.681232] systemd[1]: Starting Nameserver information manager...
+[    6.681483] systemd[1]: Starting Setup Virtual Console...
+[    6.681500] systemd[1]: Reached target Slices.
+[    6.681507] systemd[1]: Starting Slices.
+[    6.681761] systemd[1]: Started Read required files in advance.
+[    6.681885] systemd[1]: Starting Read required files in advance...
+[    6.682192] systemd[1]: Starting Uncomplicated firewall...
+[    6.682460] systemd[1]: Started Braille Device Support.
+[    6.682488] systemd[1]: Starting Braille Device Support...
+[    6.809206] systemd[1]: Starting Load Kernel Modules...
+[    6.868762] systemd[1]: Started Set Up Additional Binary Formats.
+[    6.869111] systemd[1]: Mounting Debug File System...
+[    6.869158] systemd[1]: Listening on /dev/initctl Compatibility Named Pipe.
+[    6.869168] systemd[1]: Starting /dev/initctl Compatibility Named Pipe.
+[    6.869176] systemd[1]: Reached target Remote File Systems (Pre).
+[    6.869180] systemd[1]: Starting Remote File Systems (Pre).
+[    6.869519] systemd[1]: Starting Create list of required static device nodes for the current kernel...
+[    6.870231] systemd[1]: Started Setup Virtual Console.
+[    6.875868] systemd[1]: Started udev Coldplug all Devices.
+[    6.876182] systemd[1]: Starting udev Wait for Complete Device Initialization...
+[    6.934314] systemd[1]: Started Create list of required static device nodes for the current kernel.
+[    6.934666] systemd[1]: Starting Create Static Device Nodes in /dev...
+[    6.962637] systemd[1]: Mounted POSIX Message Queue File System.
+[    6.962655] systemd[1]: Mounted Huge Pages File System.
+[    6.962664] systemd[1]: Mounted Debug File System.
+[    6.962873] systemd[1]: Started Increase datagram queue length.
+[    6.967704] systemd[1]: Listening on Syslog Socket.
+[    6.967711] systemd[1]: Starting Syslog Socket.
+[    6.967985] systemd[1]: Starting Journal Service...
+[    6.978166] systemd[1]: Started Uncomplicated firewall.
+[    7.081769] systemd[1]: Started Nameserver information manager.
+[    7.561623] systemd[1]: Started Journal Service.
+[    7.626829] lp: driver loaded but no devices found
+[    7.680106] ppdev: user-space parallel port driver
+[    8.950730] shpchp: Standard Hot Plug PCI Controller Driver version: 0.4
+[    9.037521] wmi: Mapper loaded
+[    9.213336] [drm] Initialized drm 1.1.0 20060810
+[    9.292993] device-mapper: multipath: version 1.7.0 loaded
+[    9.461642] AVX2 version of gcm_enc/dec engaged.
+[    9.461644] AES CTR mode by8 optimization enabled
+[    9.621870] sound hdaudioC0D2: autoconfig: line_outs=1 (0x14/0x0/0x0/0x0/0x0) type:line
+[    9.621873] sound hdaudioC0D2:    speaker_outs=1 (0x15/0x0/0x0/0x0/0x0)
+[    9.621874] sound hdaudioC0D2:    hp_outs=1 (0x1b/0x0/0x0/0x0/0x0)
+[    9.621875] sound hdaudioC0D2:    mono: mono_out=0x0
+[    9.621876] sound hdaudioC0D2:    inputs:
+[    9.621877] sound hdaudioC0D2:      Front Mic=0x19
+[    9.621879] sound hdaudioC0D2:      Rear Mic=0x18
+[    9.621880] sound hdaudioC0D2:      Line=0x1a
+[    9.629975] input: HDA Intel PCH Front Mic as /devices/pci0000:00/0000:00:1b.0/sound/card0/input8
+[    9.630017] input: HDA Intel PCH Rear Mic as /devices/pci0000:00/0000:00:1b.0/sound/card0/input9
+[    9.630049] input: HDA Intel PCH Line as /devices/pci0000:00/0000:00:1b.0/sound/card0/input10
+[    9.630099] input: HDA Intel PCH Line Out as /devices/pci0000:00/0000:00:1b.0/sound/card0/input11
+[    9.630186] input: HDA Intel PCH Front Headphone as /devices/pci0000:00/0000:00:1b.0/sound/card0/input12
+[    9.877533] [drm] radeon kernel modesetting enabled.
+[   10.159820] AMD IOMMUv2 driver by Joerg Roedel <joerg.roedel@amd.com>
+[   10.159822] AMD IOMMUv2 functionality not available on this system
+[   10.165003] intel_rapl: Found RAPL domain package
+[   10.165007] intel_rapl: Found RAPL domain core
+[   10.165011] intel_rapl: Found RAPL domain dram
+[   10.258423] CRAT table not found
+[   10.258425] Finished initializing topology ret=0
+[   10.258460] kfd kfd: Initialized module
+[   10.258646] checking generic (e0000000 500000) vs hw (e0000000 10000000)
+[   10.258648] fb: switching to radeondrmfb from VESA VGA
+[   10.258681] Console: switching to colour dummy device 80x25
+[   10.258938] [drm] initializing kernel modesetting (CEDAR 0x1002:0x68F9 0x103C:0x2126).
+[   10.258954] [drm] register mmio base: 0xF7E20000
+[   10.258954] [drm] register mmio size: 131072
+[   10.258996] ATOM BIOS: C09001
+[   10.259041] radeon 0000:01:00.0: VRAM: 512M 0x0000000000000000 - 0x000000001FFFFFFF (512M used)
+[   10.259043] radeon 0000:01:00.0: GTT: 1024M 0x0000000020000000 - 0x000000005FFFFFFF
+[   10.259044] [drm] Detected VRAM RAM=512M, BAR=256M
+[   10.259044] [drm] RAM width 64bits DDR
+[   10.259086] [TTM] Zone  kernel: Available graphics memory: 4049254 kiB
+[   10.259088] [TTM] Zone   dma32: Available graphics memory: 2097152 kiB
+[   10.259089] [TTM] Initializing pool allocator
+[   10.259091] [TTM] Initializing DMA pool allocator
+[   10.259102] [drm] radeon: 512M of VRAM memory ready
+[   10.259103] [drm] radeon: 1024M of GTT memory ready.
+[   10.259111] [drm] Loading CEDAR Microcode
+[   10.628646] [drm] Internal thermal controller with fan control
+[   10.650468] [drm] radeon: dpm initialized
+[   10.780863] [drm] GART: num cpu pages 262144, num gpu pages 262144
+[   10.781278] [drm] enabling PCIE gen 2 link speeds, disable with radeon.pcie_gen2=0
+[   10.800687] [drm] PCIE GART of 1024M enabled (table at 0x000000000025E000).
+[   10.800776] radeon 0000:01:00.0: WB enabled
+[   10.800778] radeon 0000:01:00.0: fence driver on ring 0 use gpu addr 0x0000000020000c00 and cpu addr 0xffff880212852c00
+[   10.800779] radeon 0000:01:00.0: fence driver on ring 3 use gpu addr 0x0000000020000c0c and cpu addr 0xffff880212852c0c
+[   10.801516] radeon 0000:01:00.0: fence driver on ring 5 use gpu addr 0x000000000005c418 and cpu addr 0xffffc9000559c418
+[   10.801517] [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+[   10.801518] [drm] Driver supports precise vblank timestamp query.
+[   10.801518] radeon 0000:01:00.0: radeon: MSI limited to 32-bit
+[   10.801543] radeon 0000:01:00.0: radeon: using MSI.
+[   10.801559] [drm] radeon: irq initialized.
+[   10.817947] [drm] ring test on 0 succeeded in 1 usecs
+[   10.817952] [drm] ring test on 3 succeeded in 3 usecs
+[   10.994326] [drm] ring test on 5 succeeded in 1 usecs
+[   10.994330] [drm] UVD initialized successfully.
+[   10.994455] [drm] ib test on ring 0 succeeded in 0 usecs
+[   10.994477] [drm] ib test on ring 3 succeeded in 0 usecs
+[   11.442051] Adding 8787964k swap on /dev/sda5.  Priority:-1 extents:1 across:8787964k FS
+[   11.651442] [drm] ib test on ring 5 succeeded
+[   11.652378] [drm] Radeon Display Connectors
+[   11.652380] [drm] Connector 0:
+[   11.652381] [drm]   DVI-I-1
+[   11.652381] [drm]   HPD2
+[   11.652383] [drm]   DDC: 0x6460 0x6460 0x6464 0x6464 0x6468 0x6468 0x646c 0x646c
+[   11.652383] [drm]   Encoders:
+[   11.652384] [drm]     DFP1: INTERNAL_UNIPHY1
+[   11.652385] [drm]     CRT2: INTERNAL_KLDSCP_DAC2
+[   11.652385] [drm] Connector 1:
+[   11.652386] [drm]   DVI-I-2
+[   11.652386] [drm]   HPD4
+[   11.652387] [drm]   DDC: 0x6450 0x6450 0x6454 0x6454 0x6458 0x6458 0x645c 0x645c
+[   11.652388] [drm]   Encoders:
+[   11.652388] [drm]     DFP2: INTERNAL_UNIPHY
+[   11.652389] [drm]     CRT1: INTERNAL_KLDSCP_DAC1
+[   11.728739] [drm] fb mappable at 0xE045F000
+[   11.728740] [drm] vram apper at 0xE0000000
+[   11.728741] [drm] size 8294400
+[   11.728741] [drm] fb depth is 24
+[   11.728742] [drm]    pitch is 7680
+[   11.728785] fbcon: radeondrmfb (fb0) is primary device
+[   11.728823] Console: switching to colour frame buffer device 160x64
+[   11.728834] radeon 0000:01:00.0: fb0: radeondrmfb frame buffer device
+[   11.728835] radeon 0000:01:00.0: registered panic notifier
+[   11.743500] [drm] Initialized radeon 2.40.0 20080528 for 0000:01:00.0 on minor 0
+[   13.094725] EXT4-fs (sda7): re-mounted. Opts: errors=remount-ro
+[   13.134250] systemd-journald[240]: Received request to flush runtime journal from PID 1
+[   13.424216] EXT4-fs (sda6): mounted filesystem with ordered data mode. Opts: (null)
+[   14.292144] audit: type=1400 audit(1443432260.176:2): apparmor="STATUS" operation="profile_load" profile="unconfined" name="docker-default" pid=577 comm="apparmor_parser"
+[   14.318054] audit: type=1400 audit(1443432260.204:3): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/lib/lightdm/lightdm-guest-session" pid=577 comm="apparmor_parser"
+[   14.318058] audit: type=1400 audit(1443432260.204:4): apparmor="STATUS" operation="profile_load" profile="unconfined" name="chromium" pid=577 comm="apparmor_parser"
+[   14.333337] audit: type=1400 audit(1443432260.216:5): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/sbin/dhclient" pid=577 comm="apparmor_parser"
+[   14.333343] audit: type=1400 audit(1443432260.216:6): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/lib/NetworkManager/nm-dhcp-client.action" pid=577 comm="apparmor_parser"
+[   14.333346] audit: type=1400 audit(1443432260.216:7): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/lib/NetworkManager/nm-dhcp-helper" pid=577 comm="apparmor_parser"
+[   14.333349] audit: type=1400 audit(1443432260.216:8): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/lib/connman/scripts/dhclient-script" pid=577 comm="apparmor_parser"
+[   14.355620] audit: type=1400 audit(1443432260.240:9): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/bin/evince" pid=577 comm="apparmor_parser"
+[   14.355625] audit: type=1400 audit(1443432260.240:10): apparmor="STATUS" operation="profile_load" profile="unconfined" name="sanitized_helper" pid=577 comm="apparmor_parser"
+[   14.355628] audit: type=1400 audit(1443432260.240:11): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/bin/evince-previewer" pid=577 comm="apparmor_parser"
+[   14.723761] cgroup: new mount options do not match the existing superblock, will be ignored
+[   18.945524] cfg80211: Calling CRDA to update world regulatory domain
+[   19.533817] cfg80211: World regulatory domain updated:
+[   19.533819] cfg80211:  DFS Master region: unset
+[   19.533820] cfg80211:   (start_freq - end_freq @ bandwidth), (max_antenna_gain, max_eirp), (dfs_cac_time)
+[   19.533821] cfg80211:   (2402000 KHz - 2472000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[   19.533822] cfg80211:   (2457000 KHz - 2482000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[   19.533823] cfg80211:   (2474000 KHz - 2494000 KHz @ 20000 KHz), (N/A, 2000 mBm), (N/A)
+[   19.533825] cfg80211:   (5170000 KHz - 5250000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (N/A)
+[   19.533826] cfg80211:   (5250000 KHz - 5330000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (0 s)
+[   19.533827] cfg80211:   (5490000 KHz - 5730000 KHz @ 160000 KHz), (N/A, 2000 mBm), (0 s)
+[   19.533828] cfg80211:   (5735000 KHz - 5835000 KHz @ 80000 KHz), (N/A, 2000 mBm), (N/A)
+[   19.533829] cfg80211:   (57240000 KHz - 63720000 KHz @ 2160000 KHz), (N/A, 0 mBm), (N/A)
+[   21.240785] e1000e: eth0 NIC Link is Up 100 Mbps Full Duplex, Flow Control: None
+[   21.240789] e1000e 0000:00:19.0 eth0: 10/100 speed: disabling TSO
+[   26.351414] vboxdrv: module verification failed: signature and/or  required key missing - tainting kernel
+[   26.353251] vboxdrv: Found 4 processor cores.
+[   26.353740] vboxdrv: fAsync=0 offMin=0x1ac offMax=0x1015
+[   26.353804] vboxdrv: TSC mode is 'synchronous', kernel timer mode is 'normal'.
+[   26.353805] vboxdrv: Successfully loaded version 4.3.26_Ubuntu (interface 0x001a000a).
+[   26.568710] vboxpci: IOMMU not found (not registered)
+[   30.660255] ip_tables: (C) 2000-2006 Netfilter Core Team
+[   30.746921] ip6_tables: (C) 2000-2006 Netfilter Core Team
+[   31.561761] Ebtables v2.0 registered
+[   35.590646] bridge: automatic filtering via arp/ip/ip6tables has been deprecated. Update your scripts to load br_netfilter if you need this.
+[   35.650823] device virbr0-nic entered promiscuous mode
+[   35.830983] nf_conntrack version 0.5.0 (16384 buckets, 65536 max)
+[   35.880032] virbr0: port 1(virbr0-nic) entered listening state
+[   35.880039] virbr0: port 1(virbr0-nic) entered listening state
+[   35.899872] virbr0: port 1(virbr0-nic) entered disabled state
+[ 4694.484908] kvm: zapping shadow pages for mmio generation wraparound
+[ 4698.552824] kvm [5361]: vcpu0 disabled perfctr wrmsr: 0xc1 data 0xffff
+[ 6447.460064] perf interrupt took too long (2501 > 2500), lowering kernel.perf_event_max_sample_rate to 50000
+[ 6513.275605] kvm [5361]: vcpu0 disabled perfctr wrmsr: 0xc1 data 0xffff
+[15072.381307] capability: warning: `VirtualBox' uses 32-bit capabilities (legacy support in use)
+[17542.283725] usb 1-1.1: new high-speed USB device number 5 using xhci_hcd
+[17542.372685] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[17542.372687] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[17542.372689] usb 1-1.1: Product: Android
+[17542.372690] usb 1-1.1: Manufacturer: Android
+[17542.372691] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[17542.417778] usbcore: registered new interface driver usbserial
+[17542.417898] usbcore: registered new interface driver usbserial_generic
+[17542.417935] usbserial: USB Serial support registered for generic
+[17542.474822] usbcore: registered new interface driver option
+[17542.474851] usbserial: USB Serial support registered for GSM modem (1-port)
+[17542.474916] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[17542.475158] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[17542.475206] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[17542.475763] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[17542.475783] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[17542.476260] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[17542.476280] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[17542.476699] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[17542.476717] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[17542.476803] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[17542.482833] usbcore: registered new interface driver cdc_wdm
+[17542.498881] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[17542.499092] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[17542.499114] usbcore: registered new interface driver qmi_wwan
+[17558.627080] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[17558.627102] option 1-1.1:1.0: device disconnected
+[17558.627111] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[17558.657429] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[17558.657444] option 1-1.1:1.3: device disconnected
+[17558.657506] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[17558.657515] option 1-1.1:1.4: device disconnected
+[17558.657578] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[17558.657589] option 1-1.1:1.5: device disconnected
+[17558.657633] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[17558.657640] option 1-1.1:1.6: device disconnected
+[18125.019329] usb 1-1.1: reset high-speed USB device number 5 using xhci_hcd
+[18125.108053] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010ca85048
+[18125.108056] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010ca85000
+[18125.108057] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010ca854c8
+[18125.108058] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010ca85480
+[18125.108059] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fdac90
+[18125.108060] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fdac48
+[18125.108061] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fda390
+[18125.108062] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fdac00
+[18125.108063] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fda490
+[18125.108063] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fda348
+[18125.108064] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fdae90
+[18125.108065] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fda300
+[18125.108066] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fda690
+[18125.108067] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fda448
+[18125.108068] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fda400
+[18125.108069] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fdae48
+[18125.108070] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fdae00
+[18125.108070] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fda648
+[18125.108071] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fda600
+[18125.125138] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[18125.125518] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[18125.126958] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[18125.127199] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[18125.127334] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[18125.127390] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[18125.127405] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[18125.127447] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[18125.127462] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[18125.127508] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[18125.127523] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[18125.127559] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[18126.605541] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[18126.605564] option 1-1.1:1.0: device disconnected
+[18126.605573] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[18126.637496] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[18126.637912] option 1-1.1:1.3: device disconnected
+[18126.637983] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[18126.637999] option 1-1.1:1.4: device disconnected
+[18126.638716] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[18126.638743] option 1-1.1:1.5: device disconnected
+[18126.639562] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[18126.639595] option 1-1.1:1.6: device disconnected
+[18144.451223] usb 1-1.1: reset high-speed USB device number 5 using xhci_hcd
+[18144.539960] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010ca85048
+[18144.539963] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010ca85000
+[18144.539964] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010ca854c8
+[18144.539965] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010ca85480
+[18144.539966] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fdac90
+[18144.539967] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fdac48
+[18144.539967] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fda390
+[18144.539968] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fdac00
+[18144.539969] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fda490
+[18144.539970] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fda348
+[18144.539971] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fdae90
+[18144.539972] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fda300
+[18144.539973] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fda690
+[18144.539974] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fda448
+[18144.539975] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fda400
+[18144.539976] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fdae48
+[18144.539977] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fdae00
+[18144.539978] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fda648
+[18144.539978] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880010fda600
+[18144.557071] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[18144.557190] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[18144.557789] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[18144.558069] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[18144.558201] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[18144.558292] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[18144.558308] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[18144.558374] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[18144.558389] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[18144.558448] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[18144.558462] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[18144.558535] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[18146.229160] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[18146.229197] option 1-1.1:1.0: device disconnected
+[18146.229215] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[18146.261223] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[18146.261247] option 1-1.1:1.3: device disconnected
+[18146.261957] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[18146.261974] option 1-1.1:1.4: device disconnected
+[18146.262257] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[18146.262266] option 1-1.1:1.5: device disconnected
+[18146.262790] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[18146.262816] option 1-1.1:1.6: device disconnected
+[18156.086059] usb 1-1.1: USB disconnect, device number 5
+[18173.955043] usb 1-1.1: new high-speed USB device number 6 using xhci_hcd
+[18174.044007] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[18174.044010] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[18174.044012] usb 1-1.1: Product: Android
+[18174.044013] usb 1-1.1: Manufacturer: Android
+[18174.044014] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[18174.061135] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[18174.061284] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[18174.061871] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[18174.062078] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[18174.062111] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[18174.062294] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[18174.062351] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[18174.062410] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[18174.062463] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[18174.062507] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[18174.062561] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[18174.062606] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[18182.627647] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[18182.627676] option 1-1.1:1.0: device disconnected
+[18182.627684] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[18182.658753] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[18182.658787] option 1-1.1:1.3: device disconnected
+[18182.658895] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[18182.658933] option 1-1.1:1.4: device disconnected
+[18182.659093] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[18182.659103] option 1-1.1:1.5: device disconnected
+[18182.659182] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[18182.659191] option 1-1.1:1.6: device disconnected
+[18247.451155] usb 1-1.1: reset high-speed USB device number 6 using xhci_hcd
+[18247.539841] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801faddc108
+[18247.539845] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801faddc0c0
+[18247.539846] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88018e5aae88
+[18247.539847] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88018e5aae40
+[18247.539848] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3d90
+[18247.539849] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3d48
+[18247.539850] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3190
+[18247.539851] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3d00
+[18247.539852] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3f90
+[18247.539853] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3148
+[18247.539854] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3390
+[18247.539855] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3100
+[18247.539856] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3590
+[18247.539857] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3f48
+[18247.539858] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3f00
+[18247.539859] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3348
+[18247.539860] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3300
+[18247.539861] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3548
+[18247.539861] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3500
+[18247.556989] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[18247.557431] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[18247.559842] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[18247.560444] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[18247.560515] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[18247.562230] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[18247.562281] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[18247.562821] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[18247.562841] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[18247.562980] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[18247.562996] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[18247.564419] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[18249.280347] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[18249.280376] option 1-1.1:1.0: device disconnected
+[18249.280385] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[18249.313490] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[18249.313507] option 1-1.1:1.3: device disconnected
+[18249.313615] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[18249.313638] option 1-1.1:1.4: device disconnected
+[18249.314652] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[18249.314663] option 1-1.1:1.5: device disconnected
+[18249.314756] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[18249.314765] option 1-1.1:1.6: device disconnected
+[18280.442106] usb 1-1.1: reset high-speed USB device number 6 using xhci_hcd
+[18280.530780] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801faddc108
+[18280.530783] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801faddc0c0
+[18280.530784] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88018e5aae88
+[18280.530785] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88018e5aae40
+[18280.530786] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3d90
+[18280.530787] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3d48
+[18280.530788] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3190
+[18280.530789] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3d00
+[18280.530789] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3f90
+[18280.530790] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3148
+[18280.530792] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3390
+[18280.530793] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3100
+[18280.530793] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3590
+[18280.530794] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3f48
+[18280.530795] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3f00
+[18280.530796] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3348
+[18280.530797] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3300
+[18280.530798] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3548
+[18280.530799] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010bca3500
+[18280.547869] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[18280.548217] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[18280.548848] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[18280.549091] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[18280.549111] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[18280.549244] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[18280.549260] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[18280.549369] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[18280.549384] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[18280.549492] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[18280.549506] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[18280.549590] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[18283.437239] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[18283.437263] option 1-1.1:1.0: device disconnected
+[18283.437282] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[18283.468722] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[18283.468746] option 1-1.1:1.3: device disconnected
+[18283.468815] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[18283.468834] option 1-1.1:1.4: device disconnected
+[18283.468913] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[18283.468930] option 1-1.1:1.5: device disconnected
+[18283.468964] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[18283.468971] option 1-1.1:1.6: device disconnected
+[18289.826083] usb 1-1.1: USB disconnect, device number 6
+[18308.232541] usb 1-1.1: new high-speed USB device number 7 using xhci_hcd
+[18308.321590] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[18308.321592] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[18308.321594] usb 1-1.1: Product: Android
+[18308.321595] usb 1-1.1: Manufacturer: Android
+[18308.321595] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[18308.338737] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[18308.338873] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[18308.339470] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[18308.339615] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[18308.339648] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[18308.339712] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[18308.339771] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[18308.339810] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[18308.339860] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[18308.339908] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[18308.339970] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[18308.340014] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[18317.623349] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[18317.623366] option 1-1.1:1.0: device disconnected
+[18317.623373] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[18317.653849] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[18317.653865] option 1-1.1:1.3: device disconnected
+[18317.653964] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[18317.653977] option 1-1.1:1.4: device disconnected
+[18317.654095] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[18317.654106] option 1-1.1:1.5: device disconnected
+[18317.654200] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[18317.654211] option 1-1.1:1.6: device disconnected
+[18955.146624] usb 1-1.1: reset high-speed USB device number 7 using xhci_hcd
+[18955.239410] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010cef1dc8
+[18955.239413] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010cef1d80
+[18955.239414] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010cef1ac8
+[18955.239415] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010cef1a80
+[18955.239417] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bdfa90
+[18955.239417] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bdfa48
+[18955.239418] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bdf490
+[18955.239419] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bdfa00
+[18955.239420] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bdf290
+[18955.239421] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bdf448
+[18955.239422] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8195090
+[18955.239423] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bdf400
+[18955.239424] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8195390
+[18955.239425] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bdf248
+[18955.239426] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bdf200
+[18955.239426] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8195048
+[18955.239427] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8195000
+[18955.239428] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8195348
+[18955.239429] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8195300
+[18955.256506] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[18955.256885] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[18955.257498] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[18955.257712] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[18955.257841] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[18955.257961] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[18955.257980] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[18955.258077] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[18955.258094] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[18955.258188] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[18955.258206] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[18955.258301] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[18957.251913] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[18957.251942] option 1-1.1:1.0: device disconnected
+[18957.251951] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[18957.276890] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[18957.276907] option 1-1.1:1.3: device disconnected
+[18957.277494] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[18957.277510] option 1-1.1:1.4: device disconnected
+[18957.278048] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[18957.278062] option 1-1.1:1.5: device disconnected
+[18957.278436] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[18957.278450] option 1-1.1:1.6: device disconnected
+[18990.191181] usb 1-1.1: reset high-speed USB device number 7 using xhci_hcd
+[18990.279911] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010cef1dc8
+[18990.279914] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010cef1d80
+[18990.279915] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010cef1ac8
+[18990.279916] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010cef1a80
+[18990.279917] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bdfa90
+[18990.279918] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bdfa48
+[18990.279919] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bdf490
+[18990.279920] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bdfa00
+[18990.279920] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bdf290
+[18990.279921] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bdf448
+[18990.279922] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8195090
+[18990.279923] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bdf400
+[18990.279924] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8195390
+[18990.279925] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bdf248
+[18990.279926] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bdf200
+[18990.279927] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8195048
+[18990.279928] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8195000
+[18990.279929] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8195348
+[18990.279930] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8195300
+[18990.297082] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[18990.297316] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[18990.298158] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[18990.298350] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[18990.298482] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[18990.299374] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[18990.299394] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[18990.299899] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[18990.299918] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[18990.299984] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[18990.300001] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[18990.300074] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[18991.503827] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[18991.503847] option 1-1.1:1.0: device disconnected
+[18991.503855] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[18991.528798] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[18991.528839] option 1-1.1:1.3: device disconnected
+[18991.528965] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[18991.528999] option 1-1.1:1.4: device disconnected
+[18991.529736] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[18991.529934] option 1-1.1:1.5: device disconnected
+[18991.530447] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[18991.530641] option 1-1.1:1.6: device disconnected
+[19016.685141] usb 1-1.1: USB disconnect, device number 7
+[19766.915103] usb 1-1.1: new high-speed USB device number 8 using xhci_hcd
+[19767.004119] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[19767.004121] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[19767.004122] usb 1-1.1: Product: Android
+[19767.004123] usb 1-1.1: Manufacturer: Android
+[19767.004124] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[19767.021236] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[19767.021383] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[19767.021964] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[19767.022089] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[19767.022122] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[19767.022335] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[19767.022410] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[19767.022455] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[19767.022524] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[19767.022585] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[19767.022663] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[19767.022713] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[19780.351554] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[19780.351610] option 1-1.1:1.0: device disconnected
+[19780.351620] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[19780.379252] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[19780.379315] option 1-1.1:1.3: device disconnected
+[19780.379416] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[19780.379452] option 1-1.1:1.4: device disconnected
+[19780.379555] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[19780.379590] option 1-1.1:1.5: device disconnected
+[19780.381087] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[19780.381182] option 1-1.1:1.6: device disconnected
+[20048.988956] usb 1-1.1: reset high-speed USB device number 8 using xhci_hcd
+[20049.077635] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880079540348
+[20049.077638] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880079540300
+[20049.077639] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801956ac348
+[20049.077640] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801956ac300
+[20049.077641] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010c9bca90
+[20049.077642] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010c9bca48
+[20049.077643] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010c9bce90
+[20049.077644] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010c9bca00
+[20049.077645] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010c9bc590
+[20049.077646] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010c9bce48
+[20049.077646] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010c9bc490
+[20049.077647] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010c9bce00
+[20049.077648] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010c9bcc90
+[20049.077649] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010c9bc548
+[20049.077650] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010c9bc500
+[20049.077651] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010c9bc448
+[20049.077652] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010c9bc400
+[20049.077653] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010c9bcc48
+[20049.077653] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010c9bcc00
+[20049.094770] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[20049.094938] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[20049.095518] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[20049.095721] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[20049.096123] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[20049.096182] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[20049.096201] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[20049.096241] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[20049.096271] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[20049.096493] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[20049.096513] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[20049.096557] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[20050.695491] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[20050.695518] option 1-1.1:1.0: device disconnected
+[20050.695529] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[20050.726483] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[20050.726494] option 1-1.1:1.3: device disconnected
+[20050.726978] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[20050.726989] option 1-1.1:1.4: device disconnected
+[20050.727190] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[20050.727200] option 1-1.1:1.5: device disconnected
+[20050.727615] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[20050.727624] option 1-1.1:1.6: device disconnected
+[20067.645949] usb 1-1.1: USB disconnect, device number 8
+[20098.513135] usb 1-1.1: new high-speed USB device number 9 using xhci_hcd
+[20098.602116] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[20098.602118] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[20098.602120] usb 1-1.1: Product: Android
+[20098.602121] usb 1-1.1: Manufacturer: Android
+[20098.602121] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[20098.619263] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[20098.619377] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[20098.619871] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[20098.620013] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[20098.620045] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[20098.620235] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[20098.620295] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[20098.620358] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[20098.620426] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[20098.620466] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[20098.620516] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[20098.620572] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[20113.946667] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[20113.946696] option 1-1.1:1.0: device disconnected
+[20113.946704] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[20113.978115] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[20113.978136] option 1-1.1:1.3: device disconnected
+[20113.978423] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[20113.978432] option 1-1.1:1.4: device disconnected
+[20113.978657] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[20113.978678] option 1-1.1:1.5: device disconnected
+[20113.978911] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[20113.978921] option 1-1.1:1.6: device disconnected
+[20777.339152] usb 1-1.1: USB disconnect, device number 9
+[78306.524579] mce: [Hardware Error]: Machine check events logged
+[78416.026117] mce: [Hardware Error]: Machine check events logged
+[78474.664159] usb 1-1.1: new high-speed USB device number 10 using xhci_hcd
+[78474.753275] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[78474.753278] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[78474.753279] usb 1-1.1: Product: Android
+[78474.753280] usb 1-1.1: Manufacturer: Android
+[78474.753281] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[78474.770573] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[78474.770685] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[78474.771652] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[78474.771804] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[78474.771844] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[78474.772088] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[78474.772150] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[78474.772394] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[78474.772464] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[78474.772584] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[78474.772640] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[78474.772737] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[78514.872342] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[78514.872393] option 1-1.1:1.0: device disconnected
+[78514.872402] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[78514.897395] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[78514.897421] option 1-1.1:1.3: device disconnected
+[78514.898719] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[78514.898735] option 1-1.1:1.4: device disconnected
+[78514.898787] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[78514.898795] option 1-1.1:1.5: device disconnected
+[78514.900456] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[78514.900480] option 1-1.1:1.6: device disconnected
+[79574.203882] usb 1-1.1: reset high-speed USB device number 10 using xhci_hcd
+[79574.292575] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88007908ac48
+[79574.292578] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88007908ac00
+[79574.292579] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88007908aac8
+[79574.292580] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88007908aa80
+[79574.292581] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd744590
+[79574.292582] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd744548
+[79574.292583] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd744a90
+[79574.292584] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd744500
+[79574.292585] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd744b90
+[79574.292586] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd744a48
+[79574.292587] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88016a165590
+[79574.292588] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd744a00
+[79574.292589] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88016a165790
+[79574.292590] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd744b48
+[79574.292591] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd744b00
+[79574.292592] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88016a165548
+[79574.292593] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88016a165500
+[79574.292593] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88016a165748
+[79574.292594] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88016a165700
+[79574.309671] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[79574.309886] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[79574.312144] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[79574.312360] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[79574.312517] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[79574.312838] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[79574.312859] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[79574.313220] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[79574.313241] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[79574.313959] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[79574.313980] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[79574.314285] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[79576.093067] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[79576.093098] option 1-1.1:1.0: device disconnected
+[79576.093109] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[79576.125714] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[79576.125759] option 1-1.1:1.3: device disconnected
+[79576.125935] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[79576.127214] option 1-1.1:1.4: device disconnected
+[79576.127605] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[79576.127629] option 1-1.1:1.5: device disconnected
+[79576.128076] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[79576.128536] option 1-1.1:1.6: device disconnected
+[79585.796455] usb 1-1.1: USB disconnect, device number 10
+[79604.728558] usb 1-1.1: new high-speed USB device number 11 using xhci_hcd
+[79604.817819] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[79604.817832] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[79604.817834] usb 1-1.1: Product: Android
+[79604.817835] usb 1-1.1: Manufacturer: Android
+[79604.817835] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[79604.834977] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[79604.835096] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[79604.836098] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[79604.836230] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[79604.836268] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[79604.836451] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[79604.836509] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[79604.836572] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[79604.836632] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[79604.837060] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[79604.837125] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[79604.837193] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[79636.365697] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[79636.365725] option 1-1.1:1.0: device disconnected
+[79636.365734] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[79636.392101] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[79636.392144] option 1-1.1:1.3: device disconnected
+[79636.393161] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[79636.393203] option 1-1.1:1.4: device disconnected
+[79636.394065] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[79636.394145] option 1-1.1:1.5: device disconnected
+[79636.394813] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[79636.394875] option 1-1.1:1.6: device disconnected
+[80245.168911] usb 1-1.1: reset high-speed USB device number 11 using xhci_hcd
+[80245.257655] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88005dd93588
+[80245.257659] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88005dd93540
+[80245.257660] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88005dd93648
+[80245.257661] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88005dd93600
+[80245.257662] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88007abbcf90
+[80245.257663] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88007abbcf48
+[80245.257663] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88007abbcc90
+[80245.257664] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88007abbcf00
+[80245.257665] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88007abbc590
+[80245.257666] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88007abbcc48
+[80245.257667] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88007abbc490
+[80245.257668] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88007abbcc00
+[80245.257669] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88007abbc690
+[80245.257670] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88007abbc548
+[80245.257671] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88007abbc500
+[80245.257672] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88007abbc448
+[80245.257673] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88007abbc400
+[80245.257673] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88007abbc648
+[80245.257674] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88007abbc600
+[80245.274760] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[80245.276474] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[80245.278041] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[80245.278277] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[80245.278438] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[80245.278741] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[80245.278763] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[80245.279614] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[80245.279635] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[80245.279788] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[80245.279807] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[80245.279930] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[80247.307921] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[80247.307956] option 1-1.1:1.0: device disconnected
+[80247.307965] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[80247.338885] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[80247.339020] option 1-1.1:1.3: device disconnected
+[80247.339073] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[80247.339083] option 1-1.1:1.4: device disconnected
+[80247.339135] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[80247.339148] option 1-1.1:1.5: device disconnected
+[80247.339203] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[80247.339223] option 1-1.1:1.6: device disconnected
+[80271.918602] usb 1-1.1: USB disconnect, device number 11
+[80290.765683] usb 1-1.1: new high-speed USB device number 12 using xhci_hcd
+[80290.854623] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[80290.854625] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[80290.854627] usb 1-1.1: Product: Android
+[80290.854628] usb 1-1.1: Manufacturer: Android
+[80290.854628] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[80290.871738] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[80290.871819] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[80290.872307] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[80290.872470] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[80290.872503] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[80290.872721] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[80290.872780] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[80290.872827] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[80290.872879] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[80290.872938] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[80290.872993] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[80290.873046] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[80298.829517] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[80298.829555] option 1-1.1:1.0: device disconnected
+[80298.829566] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[80298.865525] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[80298.865599] option 1-1.1:1.3: device disconnected
+[80298.865702] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[80298.865739] option 1-1.1:1.4: device disconnected
+[80298.865850] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[80298.865882] option 1-1.1:1.5: device disconnected
+[80298.866400] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[80298.866434] option 1-1.1:1.6: device disconnected
+[80310.293740] usb 1-1.1: reset high-speed USB device number 12 using xhci_hcd
+[80310.382420] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b05e27c8
+[80310.382423] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b05e2780
+[80310.382424] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b05e2b88
+[80310.382425] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b05e2b40
+[80310.382426] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640690
+[80310.382427] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640648
+[80310.382428] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640b90
+[80310.382429] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640600
+[80310.382430] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640490
+[80310.382431] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640b48
+[80310.382432] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640e90
+[80310.382433] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640b00
+[80310.382434] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fc743990
+[80310.382435] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640448
+[80310.382435] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640400
+[80310.382436] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640e48
+[80310.382437] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640e00
+[80310.382438] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fc743948
+[80310.382439] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fc743900
+[80310.399507] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[80310.399808] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[80310.400426] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[80310.400595] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[80310.400799] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[80310.400943] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[80310.400963] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[80310.401088] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[80310.401107] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[80310.402547] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[80310.402572] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[80310.402712] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[80311.638937] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[80311.638975] option 1-1.1:1.0: device disconnected
+[80311.638987] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[80311.671064] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[80311.671183] option 1-1.1:1.3: device disconnected
+[80311.671247] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[80311.671263] option 1-1.1:1.4: device disconnected
+[80311.671306] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[80311.671321] option 1-1.1:1.5: device disconnected
+[80311.671375] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[80311.671390] option 1-1.1:1.6: device disconnected
+[82168.865250] usb 1-1.1: reset high-speed USB device number 12 using xhci_hcd
+[82168.954030] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b05e27c8
+[82168.954033] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b05e2780
+[82168.954034] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b05e2b88
+[82168.954035] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b05e2b40
+[82168.954036] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640690
+[82168.954037] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640648
+[82168.954038] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640b90
+[82168.954039] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640600
+[82168.954040] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640490
+[82168.954040] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640b48
+[82168.954041] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640e90
+[82168.954042] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640b00
+[82168.954043] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fc743990
+[82168.954044] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640448
+[82168.954045] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640400
+[82168.954046] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640e48
+[82168.954047] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801b0640e00
+[82168.954048] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fc743948
+[82168.954049] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fc743900
+[82168.971178] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[82168.971465] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[82168.973445] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[82168.973611] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[82168.974340] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[82168.974675] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[82168.974696] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[82168.975361] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[82168.975380] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[82168.975779] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[82168.975798] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[82168.975912] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[82170.419470] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[82170.419502] option 1-1.1:1.0: device disconnected
+[82170.419511] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[82170.454973] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[82170.455391] option 1-1.1:1.3: device disconnected
+[82170.455447] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[82170.455458] option 1-1.1:1.4: device disconnected
+[82170.455493] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[82170.455501] option 1-1.1:1.5: device disconnected
+[82170.455533] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[82170.455541] option 1-1.1:1.6: device disconnected
+[82188.346442] usb 1-1.1: USB disconnect, device number 12
+[82207.372491] usb 1-1.1: new high-speed USB device number 13 using xhci_hcd
+[82207.465550] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[82207.465553] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[82207.465554] usb 1-1.1: Product: Android
+[82207.465555] usb 1-1.1: Manufacturer: Android
+[82207.465556] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[82207.482855] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[82207.482950] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[82207.483485] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[82207.483629] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[82207.483663] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[82207.483955] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[82207.484014] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[82207.484072] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[82207.484122] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[82207.484182] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[82207.484234] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[82207.484289] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[82522.456685] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[82522.456732] option 1-1.1:1.0: device disconnected
+[82522.456742] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[82522.485962] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[82522.485987] option 1-1.1:1.3: device disconnected
+[82522.486047] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[82522.486069] option 1-1.1:1.4: device disconnected
+[82522.486120] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[82522.486139] option 1-1.1:1.5: device disconnected
+[82522.486187] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[82522.488917] option 1-1.1:1.6: device disconnected
+[82531.357065] usb 1-1.1: reset high-speed USB device number 13 using xhci_hcd
+[82531.445830] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010450b588
+[82531.445833] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010450b540
+[82531.445834] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c88dff48
+[82531.445835] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c88dff00
+[82531.445836] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451da490
+[82531.445837] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451da448
+[82531.445838] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451daf90
+[82531.445839] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451da400
+[82531.445840] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451da790
+[82531.445841] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451daf48
+[82531.445842] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451dac90
+[82531.445843] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451daf00
+[82531.445844] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451da190
+[82531.445845] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451da748
+[82531.445846] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451da700
+[82531.445847] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451dac48
+[82531.445848] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451dac00
+[82531.445848] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451da148
+[82531.445849] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451da100
+[82531.462906] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[82531.463212] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[82531.464223] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[82531.464460] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[82531.464482] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[82531.464604] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[82531.464624] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[82531.464717] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[82531.464736] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[82531.464825] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[82531.464843] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[82531.464929] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[82533.817807] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[82533.817844] option 1-1.1:1.0: device disconnected
+[82533.817853] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[82533.848089] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[82533.848121] option 1-1.1:1.3: device disconnected
+[82533.848247] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[82533.848268] option 1-1.1:1.4: device disconnected
+[82533.848500] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[82533.848525] option 1-1.1:1.5: device disconnected
+[82533.848726] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[82533.848736] option 1-1.1:1.6: device disconnected
+[82547.858554] usb 1-1.1: reset high-speed USB device number 13 using xhci_hcd
+[82547.947240] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010450b588
+[82547.947243] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010450b540
+[82547.947244] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c88dff48
+[82547.947245] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c88dff00
+[82547.947246] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451da490
+[82547.947247] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451da448
+[82547.947248] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451daf90
+[82547.947249] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451da400
+[82547.947250] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451da790
+[82547.947251] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451daf48
+[82547.947251] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451dac90
+[82547.947252] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451daf00
+[82547.947253] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451da190
+[82547.947254] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451da748
+[82547.947255] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451da700
+[82547.947256] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451dac48
+[82547.947257] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451dac00
+[82547.947258] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451da148
+[82547.947259] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800451da100
+[82547.964332] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[82547.964643] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[82547.966340] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[82547.966690] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[82547.966808] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[82547.968359] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[82547.968398] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[82547.968560] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[82547.968580] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[82547.968698] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[82547.968717] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[82547.969411] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[82549.822591] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[82549.822620] option 1-1.1:1.0: device disconnected
+[82549.822631] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[82549.849391] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[82549.849597] option 1-1.1:1.3: device disconnected
+[82549.849746] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[82549.849772] option 1-1.1:1.4: device disconnected
+[82549.849877] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[82549.849898] option 1-1.1:1.5: device disconnected
+[82549.850232] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[82549.850258] option 1-1.1:1.6: device disconnected
+[82572.656820] usb 1-1.1: USB disconnect, device number 13
+[82592.090422] usb 1-1.1: new high-speed USB device number 14 using xhci_hcd
+[82592.179388] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[82592.179391] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[82592.179392] usb 1-1.1: Product: Android
+[82592.179393] usb 1-1.1: Manufacturer: Android
+[82592.179394] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[82592.196508] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[82592.196608] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[82592.197158] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[82592.197308] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[82592.197344] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[82592.197564] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[82592.197637] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[82592.197692] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[82592.197744] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[82592.197817] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[82592.197868] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[82592.197925] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[82605.668343] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[82605.668379] option 1-1.1:1.0: device disconnected
+[82605.668388] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[82605.701888] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[82605.701915] option 1-1.1:1.3: device disconnected
+[82605.701974] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[82605.701994] option 1-1.1:1.4: device disconnected
+[82605.702045] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[82605.702064] option 1-1.1:1.5: device disconnected
+[82605.702109] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[82605.703018] option 1-1.1:1.6: device disconnected
+[82673.089979] usb 1-1.1: USB disconnect, device number 14
+[82691.863784] usb 1-1.1: new high-speed USB device number 15 using xhci_hcd
+[82691.952908] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[82691.952920] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[82691.952921] usb 1-1.1: Product: Android
+[82691.952922] usb 1-1.1: Manufacturer: Android
+[82691.952923] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[82691.970074] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[82691.970163] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[82691.970705] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[82691.970846] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[82691.970884] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[82691.971425] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[82691.971492] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[82691.971549] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[82691.971604] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[82691.971649] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[82691.971702] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[82691.971748] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[82702.930324] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[82702.930400] option 1-1.1:1.0: device disconnected
+[82702.930411] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[82702.961189] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[82702.961214] option 1-1.1:1.3: device disconnected
+[82702.961270] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[82702.961290] option 1-1.1:1.4: device disconnected
+[82702.961338] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[82702.961356] option 1-1.1:1.5: device disconnected
+[82702.961401] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[82702.962912] option 1-1.1:1.6: device disconnected
+[82730.607579] usb 1-1.1: reset high-speed USB device number 15 using xhci_hcd
+[82730.696314] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bfe7c8
+[82730.696317] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bfe780
+[82730.696319] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bfe648
+[82730.696320] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bfe600
+[82730.696321] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181390
+[82730.696322] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181348
+[82730.696323] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181c90
+[82730.696323] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181300
+[82730.696324] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181f90
+[82730.696325] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181c48
+[82730.696326] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181d90
+[82730.696327] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181c00
+[82730.696328] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181090
+[82730.696329] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181f48
+[82730.696330] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181f00
+[82730.696331] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181d48
+[82730.696332] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181d00
+[82730.696333] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181048
+[82730.696334] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181000
+[82730.713424] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[82730.713771] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[82730.715199] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[82730.715772] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[82730.715888] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[82730.715981] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[82730.715998] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[82730.716070] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[82730.716085] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[82730.716152] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[82730.716167] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[82730.716233] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[82733.227044] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[82733.227100] option 1-1.1:1.0: device disconnected
+[82733.227111] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[82733.258273] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[82733.258312] option 1-1.1:1.3: device disconnected
+[82733.259215] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[82733.259257] option 1-1.1:1.4: device disconnected
+[82733.259966] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[82733.260186] option 1-1.1:1.5: device disconnected
+[82733.260782] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[82733.260836] option 1-1.1:1.6: device disconnected
+[82750.816024] usb 1-1.1: reset high-speed USB device number 15 using xhci_hcd
+[82750.904914] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bfe7c8
+[82750.904917] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bfe780
+[82750.904918] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bfe648
+[82750.904919] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800d7bfe600
+[82750.904920] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181390
+[82750.904921] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181348
+[82750.904922] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181c90
+[82750.904923] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181300
+[82750.904924] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181f90
+[82750.904925] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181c48
+[82750.904926] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181d90
+[82750.904927] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181c00
+[82750.904928] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181090
+[82750.904929] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181f48
+[82750.904930] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181f00
+[82750.904931] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181d48
+[82750.904932] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181d00
+[82750.904933] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181048
+[82750.904933] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88002f181000
+[82750.922109] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[82750.922342] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[82750.924849] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[82750.925421] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[82750.925551] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[82750.926277] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[82750.926299] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[82750.927630] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[82750.927661] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[82750.929692] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[82750.929715] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[82750.930561] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[82752.530962] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[82752.531003] option 1-1.1:1.0: device disconnected
+[82752.531013] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[82752.562508] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[82752.562551] option 1-1.1:1.3: device disconnected
+[82752.563365] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[82752.563606] option 1-1.1:1.4: device disconnected
+[82752.564194] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[82752.564443] option 1-1.1:1.5: device disconnected
+[82752.565107] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[82752.565396] option 1-1.1:1.6: device disconnected
+[84562.872240] usb 1-1.1: USB disconnect, device number 15
+[84582.176782] usb 1-1.1: new high-speed USB device number 16 using xhci_hcd
+[84582.265742] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[84582.265744] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[84582.265745] usb 1-1.1: Product: Android
+[84582.265746] usb 1-1.1: Manufacturer: Android
+[84582.265747] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[84582.282881] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[84582.282993] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[84582.283478] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[84582.283626] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[84582.283660] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[84582.283937] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[84582.283997] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[84582.284059] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[84582.284112] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[84582.284169] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[84582.284221] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[84582.284274] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[84605.273904] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[84605.273960] option 1-1.1:1.0: device disconnected
+[84605.273969] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[84605.309089] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[84605.309319] option 1-1.1:1.3: device disconnected
+[84605.310270] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[84605.310546] option 1-1.1:1.4: device disconnected
+[84605.311318] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[84605.311550] option 1-1.1:1.5: device disconnected
+[84605.312325] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[84605.312537] option 1-1.1:1.6: device disconnected
+[86984.796339] usb 1-1.1: USB disconnect, device number 16
+[87003.136887] usb 1-1.1: new high-speed USB device number 17 using xhci_hcd
+[87003.225815] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[87003.225817] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[87003.225818] usb 1-1.1: Product: Android
+[87003.225819] usb 1-1.1: Manufacturer: Android
+[87003.225820] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[87003.242915] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[87003.242996] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[87003.243506] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[87003.243638] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[87003.243667] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[87003.243809] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[87003.243857] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[87003.243915] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[87003.243962] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[87003.244041] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[87003.244093] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[87003.244154] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[87015.840615] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[87015.840633] option 1-1.1:1.0: device disconnected
+[87015.840642] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[87015.867584] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[87015.868928] option 1-1.1:1.3: device disconnected
+[87015.869864] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[87015.869917] option 1-1.1:1.4: device disconnected
+[87015.870589] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[87015.871100] option 1-1.1:1.5: device disconnected
+[87015.871206] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[87015.871243] option 1-1.1:1.6: device disconnected
+[87178.488768] usb 1-1.1: USB disconnect, device number 17
+[87197.230935] usb 1-1.1: new high-speed USB device number 18 using xhci_hcd
+[87197.319863] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[87197.319865] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[87197.319866] usb 1-1.1: Product: Android
+[87197.319867] usb 1-1.1: Manufacturer: Android
+[87197.319868] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[87197.336928] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[87197.337003] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[87197.337529] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[87197.337675] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[87197.337705] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[87197.337774] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[87197.337829] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[87197.337881] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[87197.337927] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[87197.338024] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[87197.338083] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[87197.338126] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[87230.674384] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[87230.674409] option 1-1.1:1.0: device disconnected
+[87230.674418] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[87230.706458] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[87230.706467] option 1-1.1:1.3: device disconnected
+[87230.706560] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[87230.706576] option 1-1.1:1.4: device disconnected
+[87230.706620] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[87230.706632] option 1-1.1:1.5: device disconnected
+[87230.706679] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[87230.706696] option 1-1.1:1.6: device disconnected
+[87512.582608] usb 1-1.1: USB disconnect, device number 18
+[87532.800217] usb 1-1.1: new high-speed USB device number 19 using xhci_hcd
+[87532.889187] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[87532.889190] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[87532.889191] usb 1-1.1: Product: Android
+[87532.889192] usb 1-1.1: Manufacturer: Android
+[87532.889193] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[87532.906250] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[87532.906339] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[87532.906852] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[87532.906996] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[87532.907043] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[87532.907197] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[87532.907270] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[87532.907313] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[87532.907362] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[87532.907399] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[87532.907446] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[87532.907514] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[87617.034236] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[87617.034287] option 1-1.1:1.0: device disconnected
+[87617.034297] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[87617.061374] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[87617.061399] option 1-1.1:1.3: device disconnected
+[87617.062211] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[87617.062402] option 1-1.1:1.4: device disconnected
+[87617.062775] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[87617.062964] option 1-1.1:1.5: device disconnected
+[87617.063344] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[87617.063533] option 1-1.1:1.6: device disconnected
+[88352.035399] mce: [Hardware Error]: Machine check events logged
+[88882.297402] mce: [Hardware Error]: Machine check events logged
+[89019.517216] mce: [Hardware Error]: Machine check events logged
+[89044.561210] usb 1-1.1: reset high-speed USB device number 19 using xhci_hcd
+[89044.650005] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801acfbd1c8
+[89044.650008] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801acfbd180
+[89044.650009] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801acfbdf48
+[89044.650010] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801acfbdf00
+[89044.650011] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c82a7390
+[89044.650012] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c82a7348
+[89044.650013] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c82a7f90
+[89044.650013] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c82a7300
+[89044.650014] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c82a7d90
+[89044.650015] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c82a7f48
+[89044.650016] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c82a7790
+[89044.650017] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c82a7f00
+[89044.650018] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c82a7490
+[89044.650019] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c82a7d48
+[89044.650020] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c82a7d00
+[89044.650020] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c82a7748
+[89044.650021] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c82a7700
+[89044.650022] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c82a7448
+[89044.650023] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c82a7400
+[89044.667074] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[89044.667390] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[89044.668264] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[89044.668465] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[89044.668576] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[89044.668647] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[89044.668664] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[89044.669546] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[89044.669566] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[89044.669619] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[89044.669634] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[89044.669681] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[89046.260471] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[89046.260499] option 1-1.1:1.0: device disconnected
+[89046.260509] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[89046.290945] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[89046.290956] option 1-1.1:1.3: device disconnected
+[89046.291445] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[89046.291473] option 1-1.1:1.4: device disconnected
+[89046.291965] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[89046.292036] option 1-1.1:1.5: device disconnected
+[89046.293167] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[89046.293195] option 1-1.1:1.6: device disconnected
+[89052.130069] usb 1-1.1: USB disconnect, device number 19
+[89071.402873] usb 1-1.1: new high-speed USB device number 20 using xhci_hcd
+[89071.491791] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[89071.491794] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[89071.491796] usb 1-1.1: Product: Android
+[89071.491797] usb 1-1.1: Manufacturer: Android
+[89071.491797] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[89071.508900] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[89071.508987] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[89071.509494] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[89071.509628] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[89071.509661] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[89071.509888] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[89071.509944] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[89071.509985] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[89071.510035] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[89071.510085] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[89071.510133] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[89071.510201] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[89200.056661] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[89200.056688] option 1-1.1:1.0: device disconnected
+[89200.056696] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[89200.088934] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[89200.088954] option 1-1.1:1.3: device disconnected
+[89200.088999] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[89200.089016] option 1-1.1:1.4: device disconnected
+[89200.089056] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[89200.089072] option 1-1.1:1.5: device disconnected
+[89200.089111] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[89200.089126] option 1-1.1:1.6: device disconnected
+[89569.700396] usb 1-1.1: reset high-speed USB device number 20 using xhci_hcd
+[89569.789132] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880091125348
+[89569.789135] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880091125300
+[89569.789136] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800911254c8
+[89569.789146] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880091125480
+[89569.789147] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fadd6490
+[89569.789148] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fadd6448
+[89569.789149] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fadd6f90
+[89569.789150] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fadd6400
+[89569.789151] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fadd6190
+[89569.789152] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fadd6f48
+[89569.789152] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fadd6990
+[89569.789153] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fadd6f00
+[89569.789154] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fadd6090
+[89569.789155] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fadd6148
+[89569.789156] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fadd6100
+[89569.789157] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fadd6948
+[89569.789158] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fadd6900
+[89569.789159] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fadd6048
+[89569.789159] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fadd6000
+[89569.806278] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[89569.806377] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[89569.806944] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[89569.807208] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[89569.807311] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[89569.807452] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[89569.807507] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[89569.807629] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[89569.807647] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[89569.807758] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[89569.807776] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[89569.807876] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[89572.053446] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[89572.053473] option 1-1.1:1.0: device disconnected
+[89572.053482] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[89572.078475] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[89572.078485] option 1-1.1:1.3: device disconnected
+[89572.078557] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[89572.078564] option 1-1.1:1.4: device disconnected
+[89572.079414] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[89572.079422] option 1-1.1:1.5: device disconnected
+[89572.079462] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[89572.079469] option 1-1.1:1.6: device disconnected
+[89582.222192] usb 1-1.1: USB disconnect, device number 20
+[89601.562115] usb 1-1.1: new high-speed USB device number 21 using xhci_hcd
+[89601.651122] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[89601.651124] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[89601.651126] usb 1-1.1: Product: Android
+[89601.651127] usb 1-1.1: Manufacturer: Android
+[89601.651127] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[89601.668427] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[89601.668487] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[89601.669000] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[89601.669113] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[89601.669144] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[89601.669395] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[89601.669478] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[89601.669532] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[89601.669582] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[89601.669631] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[89601.669679] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[89601.669727] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[89606.409023] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[89606.409050] option 1-1.1:1.0: device disconnected
+[89606.409059] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[89606.438489] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[89606.438515] option 1-1.1:1.3: device disconnected
+[89606.439192] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[89606.439215] option 1-1.1:1.4: device disconnected
+[89606.439775] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[89606.439804] option 1-1.1:1.5: device disconnected
+[89606.439855] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[89606.440473] option 1-1.1:1.6: device disconnected
+[89623.151868] usb 1-1.1: reset high-speed USB device number 21 using xhci_hcd
+[89623.241851] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8ac2ac8
+[89623.241854] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8ac2a80
+[89623.241855] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8ac2dc8
+[89623.241856] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8ac2d80
+[89623.241857] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88012b0fc590
+[89623.241858] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88012b0fc548
+[89623.241859] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88012b0fc690
+[89623.241860] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88012b0fc500
+[89623.241861] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88012b0fca90
+[89623.241862] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88012b0fc648
+[89623.241863] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88012b0fc190
+[89623.241864] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88012b0fc600
+[89623.241864] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88012b0fc090
+[89623.241865] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88012b0fca48
+[89623.241866] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88012b0fca00
+[89623.241867] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88012b0fc148
+[89623.241868] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88012b0fc100
+[89623.241869] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88012b0fc048
+[89623.241870] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88012b0fc000
+[89623.258932] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[89623.259025] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[89623.259550] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[89623.259719] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[89623.259838] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[89623.259911] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[89623.259929] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[89623.260189] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[89623.260208] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[89623.260256] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[89623.260273] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[89623.260319] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[89625.199771] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[89625.199805] option 1-1.1:1.0: device disconnected
+[89625.199816] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[89625.226943] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[89625.227000] option 1-1.1:1.3: device disconnected
+[89625.227059] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[89625.227068] option 1-1.1:1.4: device disconnected
+[89625.227152] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[89625.227159] option 1-1.1:1.5: device disconnected
+[89625.227240] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[89625.227247] option 1-1.1:1.6: device disconnected
+[98314.779138] usb 1-1.1: USB disconnect, device number 21
+[98335.299469] usb 1-1.1: new high-speed USB device number 22 using xhci_hcd
+[98335.388485] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[98335.388487] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[98335.388488] usb 1-1.1: Product: Android
+[98335.388489] usb 1-1.1: Manufacturer: Android
+[98335.388490] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[98335.405608] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[98335.405719] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[98335.406269] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[98335.406402] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[98335.406433] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[98335.406638] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[98335.406696] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[98335.406750] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[98335.406800] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[98335.406838] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[98335.406887] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[98335.406932] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[98354.394972] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[98354.394993] option 1-1.1:1.0: device disconnected
+[98354.395002] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[98354.427533] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[98354.427561] option 1-1.1:1.3: device disconnected
+[98354.428552] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[98354.429172] option 1-1.1:1.4: device disconnected
+[98354.429648] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[98354.429856] option 1-1.1:1.5: device disconnected
+[98354.430343] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[98354.430374] option 1-1.1:1.6: device disconnected
+[98499.504327] usb 1-1.1: USB disconnect, device number 22
+[98518.488835] usb 1-1.1: new high-speed USB device number 23 using xhci_hcd
+[98518.577891] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[98518.577893] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[98518.577894] usb 1-1.1: Product: Android
+[98518.577895] usb 1-1.1: Manufacturer: Android
+[98518.577896] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[98518.594959] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[98518.595095] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[98518.595642] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[98518.595791] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[98518.595835] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[98518.596127] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[98518.596196] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[98518.596279] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[98518.596365] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[98518.596409] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[98518.596462] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[98518.596517] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[98524.916841] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[98524.916873] option 1-1.1:1.0: device disconnected
+[98524.916883] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[98524.942511] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[98524.942538] option 1-1.1:1.3: device disconnected
+[98524.942604] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[98524.942623] option 1-1.1:1.4: device disconnected
+[98524.942666] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[98524.942675] option 1-1.1:1.5: device disconnected
+[98524.942723] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[98524.942741] option 1-1.1:1.6: device disconnected
+[98562.929302] usb 1-1.1: reset high-speed USB device number 23 using xhci_hcd
+[98563.018058] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801030b9708
+[98563.018061] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801030b96c0
+[98563.018062] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801030b9b88
+[98563.018063] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801030b9b40
+[98563.018064] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd729690
+[98563.018065] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd729648
+[98563.018066] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd729890
+[98563.018076] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd729600
+[98563.018077] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8124c90
+[98563.018078] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd729848
+[98563.018078] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8124b90
+[98563.018079] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd729800
+[98563.018080] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880084d79d90
+[98563.018081] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8124c48
+[98563.018083] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8124c00
+[98563.018083] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8124b48
+[98563.018084] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800c8124b00
+[98563.018085] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880084d79d48
+[98563.018086] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880084d79d00
+[98563.035207] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[98563.035370] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[98563.035969] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[98563.036228] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[98563.036374] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[98563.036446] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[98563.036465] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[98563.036524] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[98563.036541] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[98563.037669] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[98563.037691] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[98563.038371] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[98691.835085] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[98691.835106] option 1-1.1:1.0: device disconnected
+[98691.835117] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[98691.866608] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[98691.866625] option 1-1.1:1.3: device disconnected
+[98691.867374] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[98691.867396] option 1-1.1:1.4: device disconnected
+[98691.867458] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[98691.867492] option 1-1.1:1.5: device disconnected
+[98691.867551] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[98691.867570] option 1-1.1:1.6: device disconnected
+[99135.666120] usb 1-1.1: USB disconnect, device number 23
+[99154.119160] usb 1-1.1: new high-speed USB device number 24 using xhci_hcd
+[99154.208230] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[99154.208232] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[99154.208233] usb 1-1.1: Product: Android
+[99154.208234] usb 1-1.1: Manufacturer: Android
+[99154.208235] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[99154.225298] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[99154.225359] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[99154.225911] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[99154.226033] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[99154.226065] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[99154.226303] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[99154.226361] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[99154.226415] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[99154.226483] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[99154.226534] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[99154.226583] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[99154.226635] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[99253.360705] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[99253.360734] option 1-1.1:1.0: device disconnected
+[99253.360743] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[99253.392392] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[99253.393006] option 1-1.1:1.3: device disconnected
+[99253.393075] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[99253.393089] option 1-1.1:1.4: device disconnected
+[99253.393137] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[99253.393154] option 1-1.1:1.5: device disconnected
+[99253.393211] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[99253.394555] option 1-1.1:1.6: device disconnected
+[101954.595154] usb 1-1.1: reset high-speed USB device number 24 using xhci_hcd
+[101954.683782] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801ab006948
+[101954.683785] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801ab006900
+[101954.683786] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801ab006a08
+[101954.683787] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801ab0069c0
+[101954.683788] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd7d7490
+[101954.683789] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd7d7448
+[101954.683790] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd7d7190
+[101954.683791] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd7d7400
+[101954.683792] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd7d7a90
+[101954.683793] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd7d7148
+[101954.683794] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd7d7990
+[101954.683795] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd7d7100
+[101954.683796] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd7d7790
+[101954.683797] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd7d7a48
+[101954.683798] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd7d7a00
+[101954.683798] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd7d7948
+[101954.683799] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd7d7900
+[101954.683800] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd7d7748
+[101954.683801] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801fd7d7700
+[101954.700858] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[101954.701104] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[101954.701700] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[101954.701901] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[101954.701930] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[101954.702037] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[101954.702054] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[101954.702145] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[101954.702160] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[101954.702269] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[101954.702286] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[101954.702388] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[108054.630856] kvm: zapping shadow pages for mmio generation wraparound
+[108058.320869] kvm [32618]: vcpu0 disabled perfctr wrmsr: 0xc1 data 0xffff
+[110416.989469] kvm [32618]: vcpu0 disabled perfctr wrmsr: 0xc1 data 0xffff
+[180466.637299] kvm: zapping shadow pages for mmio generation wraparound
+[180470.798268] kvm [2211]: vcpu0 disabled perfctr wrmsr: 0xc1 data 0xffff
+[183041.349920] kvm [2211]: vcpu0 disabled perfctr wrmsr: 0xc1 data 0xffff
+[189686.584456] device eth0 entered promiscuous mode
+[190081.637165] usb 1-1.2: new full-speed USB device number 25 using xhci_hcd
+[190081.731483] usb 1-1.2: New USB device found, idVendor=0403, idProduct=6001
+[190081.731486] usb 1-1.2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[190081.731487] usb 1-1.2: Product: FT232R USB UART
+[190081.731488] usb 1-1.2: Manufacturer: FTDI
+[190081.731489] usb 1-1.2: SerialNumber: A501CN4W
+[190083.331346] usbcore: registered new interface driver ftdi_sio
+[190083.331362] usbserial: USB Serial support registered for FTDI USB Serial Device
+[190083.331435] ftdi_sio 1-1.2:1.0: FTDI USB Serial Device converter detected
+[190083.331462] usb 1-1.2: Detected FT232RL
+[190083.332286] usb 1-1.2: FTDI USB Serial Device converter now attached to ttyUSB5
+[190108.944169] ftdi_sio ttyUSB5: FTDI USB Serial Device converter now disconnected from ttyUSB5
+[190108.944189] ftdi_sio 1-1.2:1.0: device disconnected
+[192586.501755] usb 1-1.2: reset full-speed USB device number 25 using xhci_hcd
+[192586.591978] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88016213d540
+[192586.591981] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88016213d588
+[192586.592367] ftdi_sio 1-1.2:1.0: FTDI USB Serial Device converter detected
+[192586.592562] usb 1-1.2: Detected FT232RL
+[192586.594030] usb 1-1.2: FTDI USB Serial Device converter now attached to ttyUSB5
+[192589.549041] ftdi_sio ttyUSB5: FTDI USB Serial Device converter now disconnected from ttyUSB5
+[192589.549090] ftdi_sio 1-1.2:1.0: device disconnected
+[192635.045262] usb 1-1.2: reset full-speed USB device number 25 using xhci_hcd
+[192635.135547] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88016213d540
+[192635.135550] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88016213d588
+[192635.135938] ftdi_sio 1-1.2:1.0: FTDI USB Serial Device converter detected
+[192635.136096] usb 1-1.2: Detected FT232RL
+[192635.136442] usb 1-1.2: FTDI USB Serial Device converter now attached to ttyUSB5
+[192696.104887] ftdi_sio ttyUSB5: FTDI USB Serial Device converter now disconnected from ttyUSB5
+[192696.104908] ftdi_sio 1-1.2:1.0: device disconnected
+[192829.307463] usb 1-1.2: reset full-speed USB device number 25 using xhci_hcd
+[192829.397612] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88016213d540
+[192829.397615] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88016213d588
+[192829.397979] ftdi_sio 1-1.2:1.0: FTDI USB Serial Device converter detected
+[192829.398128] usb 1-1.2: Detected FT232RL
+[192829.398964] usb 1-1.2: FTDI USB Serial Device converter now attached to ttyUSB5
+[192832.151210] ftdi_sio ttyUSB5: FTDI USB Serial Device converter now disconnected from ttyUSB5
+[192832.151251] ftdi_sio 1-1.2:1.0: device disconnected
+[193835.326232] usb 1-1.2: reset full-speed USB device number 25 using xhci_hcd
+[193835.416573] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88016213d540
+[193835.416585] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88016213d588
+[193835.417037] ftdi_sio 1-1.2:1.0: FTDI USB Serial Device converter detected
+[193835.417105] usb 1-1.2: Detected FT232RL
+[193835.417476] usb 1-1.2: FTDI USB Serial Device converter now attached to ttyUSB5
+[193838.229741] ftdi_sio ttyUSB5: FTDI USB Serial Device converter now disconnected from ttyUSB5
+[193838.229769] ftdi_sio 1-1.2:1.0: device disconnected
+[193885.734977] usb 1-1.2: reset full-speed USB device number 25 using xhci_hcd
+[193885.825272] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88016213d540
+[193885.825275] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88016213d588
+[193885.825638] ftdi_sio 1-1.2:1.0: FTDI USB Serial Device converter detected
+[193885.825791] usb 1-1.2: Detected FT232RL
+[193885.826763] usb 1-1.2: FTDI USB Serial Device converter now attached to ttyUSB5
+[193888.180420] ftdi_sio ttyUSB5: FTDI USB Serial Device converter now disconnected from ttyUSB5
+[193888.180440] ftdi_sio 1-1.2:1.0: device disconnected
+[193938.634829] usb 1-1.1: USB disconnect, device number 24
+[193938.634992] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[193938.635004] option 1-1.1:1.0: device disconnected
+[193938.635096] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[193938.671344] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[193938.671356] option 1-1.1:1.3: device disconnected
+[193938.671752] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[193938.671762] option 1-1.1:1.4: device disconnected
+[193938.672326] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[193938.672337] option 1-1.1:1.5: device disconnected
+[193938.672886] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[193938.672896] option 1-1.1:1.6: device disconnected
+[194139.700338] usb 1-1.1: new high-speed USB device number 26 using xhci_hcd
+[194139.789409] usb 1-1.1: New USB device found, idVendor=1bc7, idProduct=1201
+[194139.789412] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[194139.789413] usb 1-1.1: Product: Android
+[194139.789414] usb 1-1.1: Manufacturer: Android
+[194139.789415] usb 1-1.1: SerialNumber: 0123456789ABCDEF
+[194139.806613] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[194139.806700] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[194139.813698] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[194139.813827] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[194139.813872] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[194139.814102] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[194139.814159] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[194139.814215] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[194139.814264] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[194139.814318] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[194139.814366] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[194139.814592] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[194167.427602] usb 1-1.2: USB disconnect, device number 25
+[194176.462967] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[194176.463022] option 1-1.1:1.0: device disconnected
+[194176.463032] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[194176.495477] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[194176.495507] option 1-1.1:1.3: device disconnected
+[194176.496182] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[194176.496205] option 1-1.1:1.4: device disconnected
+[194176.496263] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[194176.496282] option 1-1.1:1.5: device disconnected
+[194176.496328] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[194176.496346] option 1-1.1:1.6: device disconnected
+[194565.221347] usb 1-1.1: reset high-speed USB device number 26 using xhci_hcd
+[194565.310086] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801307a8348
+[194565.310098] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801307a8300
+[194565.310099] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801d3e66a08
+[194565.310100] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801d3e669c0
+[194565.310101] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5890
+[194565.310102] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5848
+[194565.310103] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5590
+[194565.310104] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5800
+[194565.310105] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5490
+[194565.310106] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5548
+[194565.310107] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88013320a490
+[194565.310108] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5500
+[194565.310109] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010ca06d90
+[194565.310110] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5448
+[194565.310111] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5400
+[194565.310112] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88013320a448
+[194565.310113] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88013320a400
+[194565.310114] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010ca06d48
+[194565.310114] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010ca06d00
+[194565.327224] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[194565.327623] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[194565.328274] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[194565.328406] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[194565.328423] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[194565.328478] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[194565.328493] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[194565.328529] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[194565.328543] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[194565.328580] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[194565.328594] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[194565.328633] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[194759.533404] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[194759.533464] option 1-1.1:1.0: device disconnected
+[194759.533475] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[194759.559133] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[194759.559156] option 1-1.1:1.3: device disconnected
+[194759.559202] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[194759.559222] option 1-1.1:1.4: device disconnected
+[194759.559266] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[194759.559285] option 1-1.1:1.5: device disconnected
+[194759.559328] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[194759.559346] option 1-1.1:1.6: device disconnected
+[194813.078441] usb 1-1.1: reset high-speed USB device number 26 using xhci_hcd
+[194813.167236] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801307a8348
+[194813.167239] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801307a8300
+[194813.167249] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801d3e66a08
+[194813.167250] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801d3e669c0
+[194813.167251] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5890
+[194813.167252] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5848
+[194813.167253] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5590
+[194813.167254] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5800
+[194813.167255] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5490
+[194813.167256] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5548
+[194813.167257] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88013320a490
+[194813.167258] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5500
+[194813.167259] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010ca06d90
+[194813.167260] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5448
+[194813.167261] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5400
+[194813.167262] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88013320a448
+[194813.167262] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88013320a400
+[194813.167263] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010ca06d48
+[194813.167264] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010ca06d00
+[194813.184426] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[194813.184769] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[194813.186252] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[194813.186517] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[194813.186541] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[194813.187203] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[194813.187223] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[194813.187978] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[194813.187998] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[194813.188086] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[194813.188102] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[194813.188149] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[194814.745271] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[194814.745300] option 1-1.1:1.0: device disconnected
+[194814.745309] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[194814.776283] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[194814.776311] option 1-1.1:1.3: device disconnected
+[194814.776431] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[194814.776451] option 1-1.1:1.4: device disconnected
+[194814.776771] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[194814.776781] option 1-1.1:1.5: device disconnected
+[194814.776954] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[194814.776964] option 1-1.1:1.6: device disconnected
+[195630.668352] device eth0 left promiscuous mode
+[195632.211964] usb 1-1.1: reset high-speed USB device number 26 using xhci_hcd
+[195632.300708] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801307a8348
+[195632.300711] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801307a8300
+[195632.300712] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801d3e66a08
+[195632.300714] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8801d3e669c0
+[195632.300715] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5890
+[195632.300716] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5848
+[195632.300717] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5590
+[195632.300718] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5800
+[195632.300727] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5490
+[195632.300728] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5548
+[195632.300729] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88013320a490
+[195632.300730] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5500
+[195632.300731] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010ca06d90
+[195632.300732] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5448
+[195632.300733] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff8800250f5400
+[195632.300734] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88013320a448
+[195632.300735] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88013320a400
+[195632.300736] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010ca06d48
+[195632.300737] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff88010ca06d00
+[195632.317886] option 1-1.1:1.0: GSM modem (1-port) converter detected
+[195632.318048] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB0
+[195632.318703] qmi_wwan 1-1.1:1.2: cdc-wdm0: USB WDM device
+[195632.318911] qmi_wwan 1-1.1:1.2 wwan0: register 'qmi_wwan' at usb-0000:00:14.0-1.1, WWAN/QMI device, 0a:92:34:51:31:a6
+[195632.318929] option 1-1.1:1.3: GSM modem (1-port) converter detected
+[195632.318991] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB1
+[195632.319006] option 1-1.1:1.4: GSM modem (1-port) converter detected
+[195632.319057] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB2
+[195632.319072] option 1-1.1:1.5: GSM modem (1-port) converter detected
+[195632.319120] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB3
+[195632.319134] option 1-1.1:1.6: GSM modem (1-port) converter detected
+[195632.319184] usb 1-1.1: GSM modem (1-port) converter now attached to ttyUSB4
+[195632.572114] vboxnetflt: 9370 out of 182312 packets were not sent (directed to host)
+[251658.118425] device eth0 entered promiscuous mode
+[251817.060988] usb 1-1.1: USB disconnect, device number 26
+[251817.061168] option1 ttyUSB0: GSM modem (1-port) converter now disconnected from ttyUSB0
+[251817.061181] option 1-1.1:1.0: device disconnected
+[251817.061293] qmi_wwan 1-1.1:1.2 wwan0: unregister 'qmi_wwan' usb-0000:00:14.0-1.1, WWAN/QMI device
+[251817.092991] option1 ttyUSB1: GSM modem (1-port) converter now disconnected from ttyUSB1
+[251817.093003] option 1-1.1:1.3: device disconnected
+[251817.093182] option1 ttyUSB2: GSM modem (1-port) converter now disconnected from ttyUSB2
+[251817.093192] option 1-1.1:1.4: device disconnected
+[251817.093320] option1 ttyUSB3: GSM modem (1-port) converter now disconnected from ttyUSB3
+[251817.093329] option 1-1.1:1.5: device disconnected
+[251817.093394] option1 ttyUSB4: GSM modem (1-port) converter now disconnected from ttyUSB4
+[251817.093403] option 1-1.1:1.6: device disconnected
+[251921.063872] SGI XFS with ACLs, security attributes, realtime, no debug enabled
+[251921.104408] JFS: nTxBlock = 8192, nTxLock = 65536
+[251921.154949] ntfs: driver 2.1.31 [Flags: R/O MODULE].
+[251921.249245] QNX4 filesystem 0.2.3 registered.
+[251921.353563] raid6: sse2x1   10732 MB/s
+[251921.421628] raid6: sse2x2   13381 MB/s
+[251921.489670] raid6: sse2x4   15569 MB/s
+[251921.557729] raid6: avx2x1   20578 MB/s
+[251921.625782] raid6: avx2x2   23693 MB/s
+[251921.693838] raid6: avx2x4   28016 MB/s
+[251921.693839] raid6: using algorithm avx2x4 (28016 MB/s)
+[251921.693840] raid6: using avx2x2 recovery algorithm
+[251921.703585] xor: automatically using best checksumming function:
+[251921.741876]    avx       : 32973.000 MB/sec
+[251921.778558] Btrfs loaded
+[251923.838117] EXT4-fs (sda3): unable to read superblock
+[251923.838903] EXT4-fs (sda3): unable to read superblock
+[251923.839655] EXT4-fs (sda3): unable to read superblock
+[251923.840459] FAT-fs (sda3): bogus number of reserved sectors
+[251923.840461] FAT-fs (sda3): Can't find a valid FAT filesystem
+[251923.843285] XFS (sda3): Invalid superblock magic number
+[251923.860781] FAT-fs (sda3): bogus number of reserved sectors
+[251923.860784] FAT-fs (sda3): Can't find a valid FAT filesystem
+[251923.863209] MINIX-fs: unable to read superblock
+[251923.894914] attempt to access beyond end of device
+[251923.894917] sda3: rw=16, want=3, limit=2
+[251923.894918] hfsplus: unable to find HFS+ superblock
+[251923.895947] qnx4: no qnx4 filesystem (no root dir).
+[251923.896730] ufs: You didn't specify the type of your ufs filesystem
+
+mount -t ufs -o ufstype=sun|sunx86|44bsd|ufs2|5xbsd|old|hp|nextstep|nextstep-cd|openstep ...
+
+>>>WARNING<<< Wrong ufstype may corrupt your filesystem, default is ufstype=old
+[251923.898104] hfs: can't find a HFS filesystem on dev sda3
+[251933.303402] EXT4-fs (sda3): unable to read superblock
+[251933.304127] EXT4-fs (sda3): unable to read superblock
+[251933.304816] EXT4-fs (sda3): unable to read superblock
+[251933.305705] FAT-fs (sda3): bogus number of reserved sectors
+[251933.305707] FAT-fs (sda3): Can't find a valid FAT filesystem
+[251933.308347] XFS (sda3): Invalid superblock magic number
+[251933.312401] FAT-fs (sda3): bogus number of reserved sectors
+[251933.312404] FAT-fs (sda3): Can't find a valid FAT filesystem
+[251933.314647] MINIX-fs: unable to read superblock
+[251933.315436] attempt to access beyond end of device
+[251933.315438] sda3: rw=16, want=3, limit=2
+[251933.315440] hfsplus: unable to find HFS+ superblock
+[251933.316233] qnx4: no qnx4 filesystem (no root dir).
+[251933.316923] ufs: You didn't specify the type of your ufs filesystem
+
+mount -t ufs -o ufstype=sun|sunx86|44bsd|ufs2|5xbsd|old|hp|nextstep|nextstep-cd|openstep ...
+
+>>>WARNING<<< Wrong ufstype may corrupt your filesystem, default is ufstype=old
+[251933.318398] hfs: can't find a HFS filesystem on dev sda3
+[252266.798985] usb 1-1.2: new full-speed USB device number 27 using xhci_hcd
+[252266.893107] usb 1-1.2: New USB device found, idVendor=0403, idProduct=6001
+[252266.893109] usb 1-1.2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[252266.893111] usb 1-1.2: Product: FT232R USB UART
+[252266.893111] usb 1-1.2: Manufacturer: FTDI
+[252266.893112] usb 1-1.2: SerialNumber: A501CN4W
+[252266.895860] ftdi_sio 1-1.2:1.0: FTDI USB Serial Device converter detected
+[252266.895902] usb 1-1.2: Detected FT232RL
+[252266.896130] usb 1-1.2: FTDI USB Serial Device converter now attached to ttyUSB0
+[252274.929157] ftdi_sio ttyUSB0: FTDI USB Serial Device converter now disconnected from ttyUSB0
+[252274.929195] ftdi_sio 1-1.2:1.0: device disconnected
+[255091.220790] usb 1-1.2: reset full-speed USB device number 27 using xhci_hcd
+[255091.311078] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880108cb9600
+[255091.311081] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880108cb9648
+[255091.311449] ftdi_sio 1-1.2:1.0: FTDI USB Serial Device converter detected
+[255091.311749] usb 1-1.2: Detected FT232RL
+[255091.313018] usb 1-1.2: FTDI USB Serial Device converter now attached to ttyUSB0
+[255102.711897] ftdi_sio ttyUSB0: FTDI USB Serial Device converter now disconnected from ttyUSB0
+[255102.711926] ftdi_sio 1-1.2:1.0: device disconnected
+[260866.044375] device eth0 left promiscuous mode
+[260868.222497] usb 1-1.2: reset full-speed USB device number 27 using xhci_hcd
+[260868.312812] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880108cb9600
+[260868.312815] xhci_hcd 0000:00:14.0: xHCI xhci_drop_endpoint called with disabled ep ffff880108cb9648
+[260868.313140] ftdi_sio 1-1.2:1.0: FTDI USB Serial Device converter detected
+[260868.313198] usb 1-1.2: Detected FT232RL
+[260868.313526] usb 1-1.2: FTDI USB Serial Device converter now attached to ttyUSB0
+[260869.271334] vboxnetflt: 2683 out of 373878 packets were not sent (directed to host)
