@@ -98,6 +98,18 @@ To **avoid long file paths**, it is possible to put your config files under `<HO
 
 ### Changelog
 
+Version 2.2.0
+
+* Optimized paint speed
+* Colors are now applied in the same order as they are provided
+* New configuration examples
+* Added test suite
+* Bug fixes
+
+Version 2.1.1 and 2.1.2:
+
+* minor configuration fixes to add Raffaello to PyPI repository.
+
 Since version 2.1.0 Raffaello's configuration files support *include* directive in order to extend configuration color codes with the ones already defined in other configuration files.
 
 Since version 1.3.0, Raffaello can be used as python module in a source code.
