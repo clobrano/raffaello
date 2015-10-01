@@ -294,12 +294,12 @@ def get_config_full_path (filepath):
     fullpath = os.path.expanduser (filepath)
 
     if not os.path.exists(fullpath):
-        log.info("Looking for config file '%s' in '%s' folder..." %
+        log.debug("Looking for config file '%s' in '%s' folder..." %
                 (filepath, home))
         fullpath = os.path.join(home, os.path.basename(fullpath))
 
         if os.path.exists(fullpath):
-            log.info("Using '%s'" % fullpath)
+            log.debug("Using '%s'" % fullpath)
         else:
             log.error('Could not find config file "%s"' % filepath)
             fullpath = None
@@ -349,7 +349,7 @@ def parse_color_option(color_options, pattern_dlms='=>'):
         if color in color_filters:
             item = {r'%s' % pattern : color_filters[color]}
             log.debug ('adding "{0}"'.format (item))
-            patterns.insert (-1, item)
+            patterns.append (item)
         else:
             log.error('Color "%s" does not exist' % color)
             sys.exit(1)
@@ -389,7 +389,6 @@ def parse_config_file(path, pattern_dlms='=>'):
             if subconf_fullpath:
                 subdict = parse_config_file (subconf_fullpath, pattern_dlms)
                 patterns.extend (subdict)
-                #patterns.join (subdict)
                 continue
 
         new_pattern = parse_color_option(line)
@@ -420,7 +419,6 @@ def paint(line, patterns):
         if matches:
             log.debug('Match found')
             line = filter.apply(line, matches)
-            break
 
     return line.rstrip()
 
