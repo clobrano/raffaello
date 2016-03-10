@@ -23,7 +23,7 @@ import os
 import re
 import logging
 
-__version__ = '2.2.0'
+__version__ = '2.2.1'
 level = logging.INFO
 logging.basicConfig(level=level, format='    %(levelname)s %(message)s')
 log = logging.getLogger(__name__)
@@ -225,8 +225,8 @@ class Script (object):
                     print(paint(line, patterns))
 
                 except KeyboardInterrupt:
-                    log.info("User iterruption")
-                    pass
+                    log.info("Bye!")
+                    break
 
                 except EOFError:
                     log.info("EOF reached. Nothing to do")
