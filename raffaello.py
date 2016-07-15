@@ -30,7 +30,7 @@ import re
 import logging
 import collections
 
-__version__ = '2.2.1'
+__version__ = '2.2.2'
 level = logging.INFO
 logging.basicConfig(level=level, format='    %(levelname)s %(message)s')
 log = logging.getLogger(__name__)
@@ -38,33 +38,6 @@ log = logging.getLogger(__name__)
 
 # Default directory
 home = os.path.expanduser(os.path.join('~', '.raffaello'))
-
-# [ COLOR CODES]
-color_codes = {
-    'black': chr(27)+'[30m',
-    'red': chr(27)+'[31m',
-    'green': chr(27)+'[32m',
-    'brown': chr(27)+'[33m',
-    'blue': chr(27)+'[34m',
-    'purple': chr(27)+'[35m',
-    'cyan': chr(27)+'[36m',
-    'light_grey': chr(27)+'[37m',
-    'dark_grey': chr(27)+'[30m',
-    'light_red': chr(27)+'[31m',
-    'light_green': chr(27)+'[32m',
-    'yellow': chr(27)+'[33m',
-    'light_blue': chr(27)+'[34m',
-    'light_purple': chr(27)+'[35m',
-    'light_cyan': chr(27)+'[36m',
-    'white': chr(27)+'[37m'
-}
-end_color = chr(27)+'[39m'
-
-# style codes
-style_codes = {
-    'bold': chr(27) + '[1m',
-}
-end_bold = chr(27) + '[22m'
 
 
 class Palette(collections.MutableMapping):
@@ -324,18 +297,6 @@ class Filter(object):
         return self.__name
 
 
-# [ FILTERS ]
-color_filters = {}
-for key, color_code in color_codes.items():
-    color_filter = Filter(key, color_code, end_color)
-    color_filters.update({key: color_filter})
-
-    # bold version
-    color_filter = Filter(key, '%s%s' % (color_code, style_codes['bold']),
-                          end_bold + end_color)
-    color_filters.update({'%s_bold' % key: color_filter})
-
-
 # ======================================================
 # Utilities
 # ======================================================
@@ -395,12 +356,10 @@ def parse_color_option(color_options, pattern_dlms='=>'):
         if matches:
             pattern = pattern[:len(pattern) - 1]
 
-        color_filters = Palette()
+        palette = Palette()
 
-        print(color_filters.items())
-
-        if color in color_filters:
-            item = {r'%s' % pattern: color_filters[color]}
+        if color in palette:
+            item = {r'%s' % pattern: palette[color]}
             log.debug('adding "{0}"'.format(item))
             patterns.append(item)
         else:
