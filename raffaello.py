@@ -31,14 +31,13 @@ import logging
 import collections
 import signal
 
-__version__ = '2.2.2'
+__version__ = '2.2.3'
 
 level = logging.INFO
 logging.basicConfig(level=level, format='    %(levelname)s %(message)s')
 log = logging.getLogger(__name__)
 
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)
-
 
 # Default directory
 home = os.path.expanduser(os.path.join('~', '.raffaello'))
@@ -97,6 +96,52 @@ class Palette(collections.MutableMapping):
 
     def __setitem__(self, key, item):
         pass
+
+
+class Commission(object):
+    '''
+    The requested pattern to color mapping
+    '''
+
+    def __init__(self, requests, pattern_dlms='=>'):
+        self.commission = []
+        for request in requests.split(' '):
+            if len(request) == 0:
+                continue
+
+            if len(re.findall(pattern_dlms, request)) > 1:
+                log.error('[Error] Can not parse request %s.')
+                log.error('    Too many pattern separator symbols (%s) in request'
+                          % (request, pattern_dlms))
+                sys.exit(1)
+
+            try:
+                pattern, color = request.split(pattern_dlms)
+            except ValueError as err:
+                log.error("Could not parse request '%s'. (%s)" % (request, err))
+                log.debug("Color requests: {0}".format(requests))
+                log.debug("pattern_dlms: {0}".format(pattern_dlms))
+                sys.exit(1)
+
+            # Remove initial quote if any
+            matches = re.findall("^'", pattern)
+            if matches:
+                pattern = pattern[1:]
+
+            # Remove final quote if any
+            matches = re.findall("'$", pattern)
+            if matches:
+                pattern = pattern[:len(pattern) - 1]
+
+            palette = Palette()
+
+            if color in palette:
+                item = {r'%s' % pattern: palette[color]}
+                log.debug('adding "{0}"'.format(item))
+                self.commission.append(item)
+            else:
+                log.error('Color "%s" does not exist' % color)
+                sys.exit(1)
 
 
 class Script (object):
@@ -169,7 +214,7 @@ class Script (object):
 
         else:
             # Inline 'pattern=>color' option list
-            self.patterns = parse_color_option(options, self.pattern_dlms)
+            self.patterns = Commission(options, self.pattern_dlms).commission
 
     def __get_cli_options(self, args=[]):
         '''
@@ -323,57 +368,6 @@ def get_config_full_path(filepath):
     return fullpath
 
 
-def parse_color_option(color_options, pattern_dlms='=>'):
-    """
-    A color option is a string in the form
-    pattern=>color. No space is allowed at both sides
-    of the double equal (=>) sign.
-    """
-
-    patterns = []
-
-    for option in color_options.split(' '):
-        if len(option) == 0:
-            continue
-
-        if len(re.findall(pattern_dlms, option)) > 1:
-            log.error('[Error] Can not parse option %s.')
-            log.error('    Too many pattern separator symbols (%s) in option'
-                      % (option, pattern_dlms))
-            sys.exit(1)
-
-        try:
-            pattern, color = option.split(pattern_dlms)
-        except ValueError as err:
-            log.error("Could not parse option '%s'. (%s)" % (option, err))
-            log.debug("Color options: {0}".format(color_options))
-            log.debug("pattern_dlms: {0}".format(pattern_dlms))
-            sys.exit(1)
-
-        # Remove initial quote if any
-        matches = re.findall("^'", pattern)
-        if matches:
-            pattern = pattern[1:]
-
-        # Remove final quote if any
-        matches = re.findall("'$", pattern)
-        if matches:
-            pattern = pattern[:len(pattern) - 1]
-
-        palette = Palette()
-
-        if color in palette:
-            item = {r'%s' % pattern: palette[color]}
-            log.debug('adding "{0}"'.format(item))
-            patterns.append(item)
-        else:
-            log.error('Color "%s" does not exist' % color)
-            sys.exit(1)
-
-    log.debug('returnining {0}'.format(patterns))
-    return patterns
-
-
 def parse_config_file(path, pattern_dlms='=>'):
     """
     Get Pattern/Color pairs from configuration file
@@ -406,7 +400,7 @@ def parse_config_file(path, pattern_dlms='=>'):
                 patterns.extend(subdict)
                 continue
 
-        new_pattern = parse_color_option(line)
+        new_pattern = Commission(line).commission
 
         patterns.extend(new_pattern)
 
