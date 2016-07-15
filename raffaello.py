@@ -3,25 +3,14 @@
 """
 Raffaello is a powerful, yet simple to use, output colorizer. You are now using
 
-Usage:
+Usage: raffaello (-r REQUEST | -f FILE) [options]
 
-    raffaello <arguments> --- command-line-tool [command-line-tool-arguments]
-
-    OR using pipe
-
-    command-line-tool [command-line-tool-arguments] | raffaello <arguments>
-
-    Pattern and color configuration is provided using "inline" patterns or
-     --file parameter:
-
-      $ raffaello "pattern1=>colorA" "pattern2=>colorB" --- command [arguments]
-      $ raffaello --file=/path/to/config/file --- command [arguments]
-
-    Raffaello provides some already backed up color configurations:
-
-        $ raffaello -t make
-        $ raffaello -t nmea
-        ...
+-r REQUEST --request=REQUEST            The requested text/color mapping. E.g. "error=>red warning=>yellow_bold". Regex supported.
+-f FILE --file=FILE                     Path to the text/color configuration file
+-c COMMAND --command=COMMAND            The command-line tool to be executed. E.g. -c "dmesg -w".
+-d DELIMITER --delimiter=DELIMITER      If you don't like "=>" as delimiter, use this flag to change it. [default: =>]
+-t, --themes                            Prebuild themes for coloring known tools (dmesg, gcc/g++, ModemManager, logcat...)
+-l, --list                              List available themes and colors
 """
 
 import sys
@@ -30,6 +19,7 @@ import re
 import logging
 import collections
 import signal
+from docopt import docopt
 
 __version__ = '2.2.3'
 
@@ -73,14 +63,14 @@ class Palette(collections.MutableMapping):
         end_bold = chr(27) + '[22m'
 
         for key, color_code in color_codes.items():
-            filter = Filter(key, color_code, end_color)
-            self._palette.update({key: filter})
+            brush = BrushStroke(key, color_code, end_color)
+            self._palette.update({key: brush})
 
             # bold version
-            filter = Filter(key,
-                            '%s%s' % (color_code, style_bold),
-                            end_bold + end_color)
-            self._palette.update({'%s_bold' % key: filter})
+            brush = BrushStroke(key,
+                                '%s%s' % (color_code, style_bold),
+                                end_bold + end_color)
+            self._palette.update({'%s_bold' % key: brush})
 
     def __getitem__(self, key=''):
         return self._palette[key.lower()]
@@ -144,108 +134,32 @@ class Commission(object):
                 sys.exit(1)
 
 
-class Script (object):
+class Raffaello (object):
     '''
     Wrapper class for methods that Raffaello
     uses when running as command-line utility
     '''
 
-    # Separator between Raffaello's options and CLI tool command
-    cli_dlms = '---'
-    # Separator between pattern and desired color
-    pattern_dlms = '=>'
-    command = None
-    patterns = {}
-    use_pipe = False
-
-    def __check_cmd_line_format(self, cmd_line):
-        if ('-h' in cmd_line) or ('--help' in cmd_line):
-            self.help()
-            sys.exit(0)
-
-        if ('--version' in cmd_line) or ('-v' in cmd_line):
-            print (__version__)
-            sys.exit(0)
-
-        if self.cli_dlms not in cmd_line:
-            log.debug("No command separator found. Are we using pipes?")
-            self.use_pipe = True
-
-        if (self.pattern_dlms not in cmd_line) and\
-                ('file' not in cmd_line):
-            log.debug('pattern_dlms: {0}'.format(self.pattern_dlms))
-            log.error("Ill-formatted raffaello's options")
-            self.usage()
-            sys.exit(1)
-
-    def __update_pattern_dlms(self, options):
-        '''Manage custom pattern_dlms'''
-        custom_dlms = None
-        if ('--sep' in options) or ('-s' in options):
-            custom_dlms = re.findall('-s=.', options)
-            if not custom_dlms:
-                custom_dlms = re.findall('--sep=.', options)
-
-        if custom_dlms:
-            self.pattern_dlms = custom_dlms[0].split('=')[1]
-            log.debug('Changed pattern delimiters in "%s"' % self.pattern_dlms)
-            options = options.split(' ')[1:]
-            log.debug('Remaining options: {0}'.format(options))
-
-        return options
-
-    def __init__(self, args=[]):
+    def __init__(self):
         '''Parse command line options'''
 
-        (options, self.command) = self.__get_cli_options(args)
+        self.config = docopt(__doc__, version=__version__)
 
-        # options = self.__update_pattern_dlms (options)
+        self.command = config['--command']
 
-        if ('--file' in options) or ('-f' in options):
-            path = options.split('=')[1].rstrip()
-
+        if config['--file'] is None:
+            # Inline 'pattern=>color' option list
+            self.patterns = Commission(config['--request'], config['--delimiter']).commission
+        else:
+            path = config['--file']
             fullpath = get_config_full_path(path)
 
             if fullpath is None:
                 log.error("Could not find configuration file %s", path)
                 sys.exit(1)
 
-            self.patterns = parse_config_file(fullpath, self.pattern_dlms)
+            self.patterns = parse_config_file(fullpath, config['--delimiter'])
 
-        else:
-            # Inline 'pattern=>color' option list
-            self.patterns = Commission(options, self.pattern_dlms).commission
-
-    def __get_cli_options(self, args=[]):
-        '''
-        Parses command line options and returns a tuple made of two elements:
-        1. Raffaello's options.
-        2. CLI tool whose output is to be colorized if provided, None otherwise.
-        '''
-        cmd_line = ' '.join(args)
-        self.__check_cmd_line_format(cmd_line)
-
-        opts_and_cmd = cmd_line.split(self.cli_dlms)
-        options = opts_and_cmd[0]
-
-        if 1 == len(opts_and_cmd):
-            command = None
-        else:
-            command = opts_and_cmd[1]
-
-        return (options, command)
-
-    def usage(self):
-        '''
-        Print doc information
-        '''
-        print (__doc__)
-
-    def help(self):
-        self.usage()
-        log.info('Available color list.')
-        print(sorted(color_filters.keys()))
-        log.info('NOTE that some colors could be unsupported on your terminal.')
 
     def run(self):
         '''
@@ -322,9 +236,9 @@ class Script (object):
         return 0
 
 
-class Filter(object):
+class BrushStroke(object):
     """
-    Encapsulate open and close tag codes for each color
+    BrushStroke knows how to apply colors to the SHELL
     """
 
     def __init__(self, name, open_code, close_code):
@@ -334,7 +248,7 @@ class Filter(object):
 
     def apply(self, line, matches):
         '''
-        Apply filter to all matches in line
+        Apply brush to all matches in line
         '''
         for match in matches:
             replacement = '%s%s%s' % (self.open, match, self.close)
@@ -415,9 +329,9 @@ def paint(line, patterns):
     log.debug('paint line "%s"' % line)
     for item in patterns:
         pattern = item.keys()[0]
-        filter = item[pattern]
+        brush = item[pattern]
         log.debug('considering {0} => key:"{1}", pattern:"{2}"'
-                  .format(item, pattern, filter))
+                  .format(item, pattern, brush))
         try:
             matches = re.findall(pattern, line)
         except Exception as err:
@@ -427,13 +341,13 @@ def paint(line, patterns):
 
         if matches:
             log.debug('Match found')
-            line = filter.apply(line, matches)
+            line = brush.apply(line, matches)
 
     return line.rstrip()
 
 
 def main():
-    script = Script(sys.argv[1:])
+    script = Raffaello(sys.argv[1:])
     sys.exit(script.run())
 
 
