@@ -16,12 +16,19 @@ Usage:
 
       $ raffaello "pattern1=>colorA" "pattern2=>colorB" --- command [arguments]
       $ raffaello --file=/path/to/config/file --- command [arguments]
+
+    Raffaello provides some already backed up color configurations:
+
+        $ raffaello -t make
+        $ raffaello -t nmea
+        ...
 """
 
 import sys
 import os
 import re
 import logging
+import collections
 
 __version__ = '2.2.1'
 level = logging.INFO
@@ -58,6 +65,61 @@ style_codes = {
     'bold': chr(27) + '[1m',
 }
 end_bold = chr(27) + '[22m'
+
+
+class Palette(collections.MutableMapping):
+    '''
+    Container of all available colors and styles.
+    '''
+
+    def __init__(self):
+        self._palette = dict()
+        color_codes = {
+            'black': chr(27)+'[30m',
+            'red': chr(27)+'[31m',
+            'green': chr(27)+'[32m',
+            'brown': chr(27)+'[33m',
+            'blue': chr(27)+'[34m',
+            'purple': chr(27)+'[35m',
+            'cyan': chr(27)+'[36m',
+            'light_grey': chr(27)+'[37m',
+            'dark_grey': chr(27)+'[30m',
+            'light_red': chr(27)+'[31m',
+            'light_green': chr(27)+'[32m',
+            'yellow': chr(27)+'[33m',
+            'light_blue': chr(27)+'[34m',
+            'light_purple': chr(27)+'[35m',
+            'light_cyan': chr(27)+'[36m',
+            'white': chr(27)+'[37m'
+        }
+        end_color = chr(27)+'[39m'
+        style_bold = chr(27) + '[1m'
+        end_bold = chr(27) + '[22m'
+
+        for key, color_code in color_codes.items():
+            filter = Filter(key, color_code, end_color)
+            self._palette.update({key: filter})
+
+            # bold version
+            filter = Filter(key,
+                            '%s%s' % (color_code, style_bold),
+                            end_bold + end_color)
+            self._palette.update({'%s_bold' % key: filter})
+
+    def __getitem__(self, key=''):
+        return self._palette[key.lower()]
+
+    def __iter__(self):
+        return iter(self._palette)
+
+    def __len__(self):
+        return len(self._palette)
+
+    def __delitem__(self, key):
+        pass
+
+    def __setitem__(self, key, item):
+        pass
 
 
 class Script (object):
@@ -332,6 +394,10 @@ def parse_color_option(color_options, pattern_dlms='=>'):
         matches = re.findall("'$", pattern)
         if matches:
             pattern = pattern[:len(pattern) - 1]
+
+        color_filters = Palette()
+
+        print(color_filters.items())
 
         if color in color_filters:
             item = {r'%s' % pattern: color_filters[color]}
