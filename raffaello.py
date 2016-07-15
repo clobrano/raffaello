@@ -29,11 +29,15 @@ import os
 import re
 import logging
 import collections
+import signal
 
 __version__ = '2.2.2'
+
 level = logging.INFO
 logging.basicConfig(level=level, format='    %(levelname)s %(message)s')
 log = logging.getLogger(__name__)
+
+signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
 
 # Default directory
