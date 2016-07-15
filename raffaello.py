@@ -140,10 +140,10 @@ class Raffaello (object):
     uses when running as command-line utility
     '''
 
-    def __init__(self):
+    def __init__(self, args=[]):
         '''Parse command line options'''
 
-        self.config = docopt(__doc__, version=__version__)
+        config = docopt(__doc__, version=__version__)
 
         self.command = config['--command']
 
@@ -160,8 +160,31 @@ class Raffaello (object):
 
             self.patterns = parse_config_file(fullpath, config['--delimiter'])
 
+    def paint(self, line, patterns):
+        """
+        Highlight line according to the given
+        pattern/color dictionary
+        """
+        log.debug('paint line "%s"' % line)
+        for item in patterns:
+            pattern = item.keys()[0]
+            brush = item[pattern]
+            log.debug('considering {0} => key:"{1}", pattern:"{2}"'
+                      .format(item, pattern, brush))
+            try:
+                matches = re.findall(pattern, line)
+            except Exception as err:
+                log.error('%s' % err)
+                log.debug('line: %s' % line)
+                sys.exit(1)
 
-    def run(self):
+            if matches:
+                log.debug('Match found')
+                line = brush.apply(line, matches)
+
+        return line.rstrip()
+
+    def start(self):
         '''
         Run raffaello as a command-line utility
         '''
@@ -220,7 +243,7 @@ class Raffaello (object):
                         endofstream = False
 
                     # And here is the magic
-                    print(paint(line, patterns))
+                    print(self.paint(line, patterns))
 
                 except KeyboardInterrupt:
                     log.info("Bye!")
@@ -321,34 +344,9 @@ def parse_config_file(path, pattern_dlms='=>'):
     return patterns
 
 
-def paint(line, patterns):
-    """
-    Highlight line according to the given
-    pattern/color dictionary
-    """
-    log.debug('paint line "%s"' % line)
-    for item in patterns:
-        pattern = item.keys()[0]
-        brush = item[pattern]
-        log.debug('considering {0} => key:"{1}", pattern:"{2}"'
-                  .format(item, pattern, brush))
-        try:
-            matches = re.findall(pattern, line)
-        except Exception as err:
-            log.error('%s' % err)
-            log.debug('line: %s' % line)
-            sys.exit(1)
-
-        if matches:
-            log.debug('Match found')
-            line = brush.apply(line, matches)
-
-    return line.rstrip()
-
-
 def main():
-    script = Raffaello(sys.argv[1:])
-    sys.exit(script.run())
+    raffaello = Raffaello(sys.argv[1:])
+    sys.exit(raffaello.start())
 
 
 if __name__ == '__main__':
