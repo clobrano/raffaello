@@ -4,12 +4,13 @@ Raffaello is a powerful, yet simple to use, output colorizer. You are now using
 
 Usage: raffaello (-r REQUEST | -f FILE) [options]
 
--r REQUEST --request=REQUEST            The requested text/color mapping. E.g. "error=>red warning=>yellow_bold". Regex supported.
--f FILE --file=FILE                     Path to the text/color configuration file
--c COMMAND --command=COMMAND            The command-line tool to be executed. E.g. -c "dmesg -w".
--d DELIMITER --delimiter=DELIMITER      If you don't like "=>" as delimiter, use this flag to change it. [default: =>]
--t, --themes                            Prebuild themes for coloring known tools (dmesg, gcc/g++, ModemManager, logcat...)
--l, --list                              List available themes and colors
+    -r REQUEST --request=REQUEST            The requested text/color mapping. E.g. "error=>red warning=>yellow_bold". Regex supported.
+    -f FILE --file=FILE                     Path to the text/color configuration file
+    -c COMMAND --command=COMMAND            The command-line tool to be executed. E.g. -c "dmesg -w".
+    -d DELIMITER --delimiter=DELIMITER      If you don't like "=>" as delimiter, use this flag to change it. [default: =>]
+    -t, --themes                            Prebuild themes for coloring known tools (dmesg, gcc/g++, ModemManager, logcat...)
+    -l, --list                              List available themes and colors
+    -v, --verbose                           Enable debug logging
 """
 
 import sys
@@ -20,7 +21,11 @@ import collections
 import signal
 from docopt import docopt
 
-level = logging.INFO
+docopt_dict = docopt(__doc__)
+if docopt_dict['--verbose']:
+        level = logging.DEBUG
+else:
+    level = logging.INFO
 logging.basicConfig(level=level, format='    %(levelname)s %(message)s')
 log = logging.getLogger(__name__)
 
@@ -40,9 +45,9 @@ class Palette(collections.MutableMapping):
 
     def __init__(self):
         self._palette = dict()
-        self._generate()
+        self._set_colors()
 
-    def _get_basic_colors(self):
+    def _set_colors(self):
         ESC = Palette.ESC
         END = Palette.END
 
@@ -65,9 +70,7 @@ class Palette(collections.MutableMapping):
             # underline style
             brush = BrushStroke(key, color_code + style_underline, END)
             self._palette.update({key + '_underlined': brush})
-
-    def _generate(self):
-        self._get_basic_colors()
+        return color_codes
 
     def __getitem__(self, key=''):
         return self._palette[key.lower()]
@@ -86,14 +89,16 @@ class Palette(collections.MutableMapping):
 
 
 class Terminal256Palette(Palette):
-    def _generate(self):
+    def _set_colors(self):
+        color_codes = Palette._set_colors(self)
+        ESC = Palette.ESC
+        END = Palette.END
         bg_color = 'color%03d'
         fg_color = 'fgcolor%03d'
-        end_color = chr(27)+'[0m'
-        bg_code = Palette.ESC + '[38;5;%dm'
-        fg_code = Palette.ESC + '[48;5;%dm'
+        bg_code = ESC + '[38;5;%dm'
+        fg_code = ESC + '[48;5;%dm'
 
-        color_codes = {bg_color % num: bg_code % num for num in xrange(256)}
+        color_codes.update({bg_color % num: bg_code % num for num in xrange(256)})
         color_codes.update({fg_color % num: fg_code % num for num in xrange(256)})
 
         for key, color_code in color_codes.items():
@@ -289,8 +294,8 @@ class BrushStroke(object):
 
 class Configuration(object):
 
-    def __init__(self):
-        config = docopt(__doc__)
+    def __init__(self, docopt_dict):
+        config = docopt_dict
 
         self.command = config['--command']
 
@@ -369,7 +374,7 @@ class Configuration(object):
 
 
 def main():
-    config = Configuration()
+    config = Configuration(docopt_dict)
     commission = Commission(config.request).commission
     raffaello = Raffaello(commission)
     sys.exit(raffaello.start())
