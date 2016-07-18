@@ -2,14 +2,14 @@
 """
 Raffaello is a powerful, yet simple to use, output colorizer. You are now using
 
-Usage: raffaello (-r REQUEST | -f FILE) [options]
+Usage: raffaello (-p PRESET | -r REQUEST | -f FILE) [options]
 
     -r REQUEST --request=REQUEST            The requested text/color mapping. E.g. "error=>red warning=>yellow_bold". Regex supported.
     -f FILE --file=FILE                     Path to the text/color configuration file
     -c COMMAND --command=COMMAND            The command-line tool to be executed. E.g. -c "dmesg -w".
     -d DELIMITER --delimiter=DELIMITER      If you don't like "=>" as delimiter, use this flag to change it. [default: =>]
-    -t, --themes                            Prebuild themes for coloring known tools (dmesg, gcc/g++, ModemManager, logcat...)
-    -l, --list                              List available themes and colors
+    -p PRESET, --preset=PRESET              Prebuild config files for coloring known tools (dmesg, gcc/g++, ModemManager, logcat...)
+    -l, --list                              List available colors and presets
     -v, --verbose                           Enable debug logging
 """
 
@@ -21,6 +21,7 @@ import collections
 import signal
 from docopt import docopt
 
+# Parse command line arguments
 docopt_dict = docopt(__doc__)
 if docopt_dict['--verbose']:
         level = logging.DEBUG
@@ -29,6 +30,7 @@ else:
 logging.basicConfig(level=level, format='    %(levelname)s %(message)s')
 log = logging.getLogger(__name__)
 
+# Catch CTRL_C to let the program quit smoothly
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
 # Default directory
@@ -92,7 +94,6 @@ class Terminal256Palette(Palette):
     def _set_colors(self):
         color_codes = Palette._set_colors(self)
         ESC = Palette.ESC
-        END = Palette.END
         bg_color = 'color%03d'
         fg_color = 'fgcolor%03d'
         bg_code = ESC + '[38;5;%dm'
@@ -118,8 +119,7 @@ class Commission(object):
                 continue
 
             if len(re.findall(delimiter, r)) > 1:
-                log.error('[Error] Can not parse request %s.')
-                log.error('    Too many pattern separator symbols (%s) in request'
+                log.error('[Error] Can not parse request %s. Too many pattern separator symbols (%s) in request'
                           % (r, delimiter))
                 sys.exit(1)
 
@@ -127,7 +127,6 @@ class Commission(object):
                 pattern, color = r.split(delimiter)
             except ValueError as err:
                 log.error("Could not parse request '%s'. (%s)" % (r, err))
-                log.debug("Color requests: {0}".format(rs))
                 log.debug("delimiter: {0}".format(delimiter))
                 sys.exit(1)
 
@@ -151,8 +150,8 @@ class Commission(object):
                 log.error('Color "%s" does not exist' % color)
                 sys.exit(1)
 
-        log.info('Commission is')
-        log.info(self.commission)
+        print('Commission is ')
+        print(self.commission)
 
 
 class Raffaello (object):
@@ -174,12 +173,9 @@ class Raffaello (object):
         Highlight line according to the given
         pattern/color dictionary
         """
-        log.debug('paint line "%s"' % line)
         for item in patterns:
             pattern = item.keys()[0]
             brush = item[pattern]
-            log.debug('considering {0} => key:"{1}", pattern:"{2}"'
-                      .format(item, pattern, brush))
             try:
                 matches = re.findall(pattern, line)
             except Exception as err:
@@ -188,7 +184,7 @@ class Raffaello (object):
                 sys.exit(1)
 
             if matches:
-                log.debug('Match found')
+                log.debug('Match found {0} => key:"{1}", pattern:"{2}"'.format(item, pattern, brush))
                 line = brush.apply(line, matches)
 
         return line.rstrip()
@@ -283,7 +279,7 @@ class BrushStroke(object):
         Apply brush to all matches in line
         '''
         for match in matches:
-            replacement = '%s%s%s' % (self.open, match, self.close)
+            replacement = self.open + match + self.close
             line = line.replace(match, replacement)
 
         return line
@@ -296,6 +292,9 @@ class Configuration(object):
 
     def __init__(self, docopt_dict):
         config = docopt_dict
+        _ROOT = os.path.abspath(os.path.dirname(__file__))
+        self.presets = os.path.join(_ROOT, 'presets')
+        self.custom_presets = home
 
         self.command = config['--command']
 
@@ -308,6 +307,10 @@ class Configuration(object):
                 sys.exit(1)
 
             self.request = self.read_commission_from_file(fullpath, config['--delimiter'])
+        elif config['--preset']:
+            path = os.path.join(self.presets, config['--preset'])
+            log.info('Looking for preset "%s" in path "%s"' % (config['--preset'], path))
+            self.request = self.read_commission_from_file(path, config['--delimiter'])
         else:
             self.request = config['--request']
 
@@ -315,22 +318,28 @@ class Configuration(object):
 
     def _get_full_path(self, filepath):
         '''Build the fullpath to config file'''
-        log.debug('Building full path for "%s"' % filepath)
+        log.debug('Building full path for "%s"...' % filepath)
         fullpath = os.path.expanduser(filepath)
 
         if not os.path.exists(fullpath):
-            log.debug("Looking for config file '%s' in '%s' folder..." %
-                      (filepath, home))
-            fullpath = os.path.join(home, os.path.basename(fullpath))
+            # Is it a relative paths? Check in presets root
+            fullpath = os.path.join(self.presets, os.path.basename(fullpath))
 
             if os.path.exists(fullpath):
                 log.debug("Using '%s'" % fullpath)
-            else:
-                log.error('Could not find config file "%s"' % filepath)
-                fullpath = None
+                return fullpath
+
+            # Check in custom presets folder
+            fullpath = os.path.join(self.custom_presets, home, os.path.basename(fullpath))
+
+            if os.path.exists(fullpath):
+                log.debug("Using '%s'" % fullpath)
+                return fullpath
+
+            log.error('Could not find config file "%s"' % filepath)
+            fullpath = None
 
         return fullpath
-
 
     def read_commission_from_file(self, path, delimiter='=>'):
         """
@@ -339,7 +348,6 @@ class Configuration(object):
         log.debug('Reading config file %s' % path)
         config = open(path).readlines()
         request = ''
-        patterns = []
         include_pattern = re.compile('^include (.*)')
         for line in config:
             line = line.rstrip()
@@ -356,19 +364,17 @@ class Configuration(object):
             includes = include_pattern.match(line)
             if includes:
                 subconfig = includes.group(1)
-                log.debug('got subconfig %s' % subconfig)
+                log.debug('including preset "%s"' % subconfig)
 
                 subconf_fullpath = self._get_full_path(subconfig)
 
                 if subconf_fullpath:
                     inner_request = self.read_commission_from_file(subconf_fullpath, delimiter)
-                    request.join(' ' + inner_request)
-                    #patterns.extend(inner_request)
+                    log.debug('included request "%s"' % inner_request)
+                    request = request + ' ' + inner_request
                     continue
 
-            #new_pattern = Commission(line).commission
-            #patterns.extend(new_pattern)
-            request = request + '%s ' % line
+            request = request + line + ' '
 
         return request
 
