@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 """
 Raffaello is a powerful, yet simple to use, output colorizer. You are now using
 
@@ -21,8 +20,6 @@ import collections
 import signal
 from docopt import docopt
 
-__version__ = '2.2.3'
-
 level = logging.INFO
 logging.basicConfig(level=level, format='    %(levelname)s %(message)s')
 log = logging.getLogger(__name__)
@@ -38,29 +35,20 @@ class Palette(collections.MutableMapping):
     Container of all available colors and styles.
     '''
 
+    ESC = chr(27)
+    END = ESC + '[0m'
     def __init__(self):
         self._palette = dict()
-        color_codes = {
-            'black': chr(27)+'[30m',
-            'red': chr(27)+'[31m',
-            'green': chr(27)+'[32m',
-            'brown': chr(27)+'[33m',
-            'blue': chr(27)+'[34m',
-            'purple': chr(27)+'[35m',
-            'cyan': chr(27)+'[36m',
-            'light_grey': chr(27)+'[37m',
-            'dark_grey': chr(27)+'[30m',
-            'light_red': chr(27)+'[31m',
-            'light_green': chr(27)+'[32m',
-            'yellow': chr(27)+'[33m',
-            'light_blue': chr(27)+'[34m',
-            'light_purple': chr(27)+'[35m',
-            'light_cyan': chr(27)+'[36m',
-            'white': chr(27)+'[37m'
-        }
-        end_color = chr(27)+'[39m'
-        style_bold = chr(27) + '[1m'
-        end_bold = chr(27) + '[22m'
+        self._generate()
+
+    def _generate(self):
+        foreground_color_offset = 30
+        names = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'light_gray']
+        base_code = Palette.ESC + '[%dm'
+        color_codes = {names[num]: base_code % (num + foreground_color_offset) for num in range(8)}
+        end_color = Palette.ESC +'[39m'
+        style_bold = Palette.ESC + '[1m'
+        end_bold = Palette.ESC + '[22m'
 
         for key, color_code in color_codes.items():
             brush = BrushStroke(key, color_code, end_color)
@@ -86,6 +74,22 @@ class Palette(collections.MutableMapping):
 
     def __setitem__(self, key, item):
         pass
+
+
+class Terminal256Palette(Palette):
+    def _generate(self):
+        bg_color = 'color%03d'
+        fg_color = 'fgcolor%03d'
+        end_color = chr(27)+'[0m'
+        bg_code = Palette.ESC + '[38;5;%dm'
+        fg_code = Palette.ESC + '[48;5;%dm'
+
+        color_codes = {bg_color % num: bg_code % num for num in xrange(256)}
+        color_codes.update({fg_color % num: fg_code % num for num in xrange(256)})
+
+        for key, color_code in color_codes.items():
+            brush = BrushStroke(key, color_code, Palette.END)
+            self._palette.update({key: brush})
 
 
 class Commission(object):
@@ -123,7 +127,7 @@ class Commission(object):
             if matches:
                 pattern = pattern[:len(pattern) - 1]
 
-            palette = Palette()
+            palette = Terminal256Palette()
 
             if color in palette:
                 item = {r'%s' % pattern: palette[color]}
@@ -143,7 +147,7 @@ class Raffaello (object):
     def __init__(self, args=[]):
         '''Parse command line options'''
 
-        config = docopt(__doc__, version=__version__)
+        config = docopt(__doc__)
 
         self.command = config['--command']
 
@@ -345,7 +349,7 @@ def parse_config_file(path, pattern_dlms='=>'):
 
 
 def main():
-    raffaello = Raffaello(sys.argv[1:])
+    script = Raffaello()
     sys.exit(raffaello.start())
 
 
