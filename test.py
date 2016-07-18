@@ -12,6 +12,4 @@ keys = p.keys()
 keys.sort()
 
 for color in keys:
-    print('%s: %s' % (color, p[color].apply('test', 'test')))
-
-
+    print('%s: %s' % (color, p[color].apply('This is a test string', ['test'])))

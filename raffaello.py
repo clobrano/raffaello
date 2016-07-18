@@ -37,28 +37,37 @@ class Palette(collections.MutableMapping):
 
     ESC = chr(27)
     END = ESC + '[0m'
+
     def __init__(self):
         self._palette = dict()
         self._generate()
 
-    def _generate(self):
-        foreground_color_offset = 30
+    def _get_basic_colors(self):
+        ESC = Palette.ESC
+        END = Palette.END
+
+        fg_8color_offset = 30
         names = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'light_gray']
-        base_code = Palette.ESC + '[%dm'
-        color_codes = {names[num]: base_code % (num + foreground_color_offset) for num in range(8)}
-        end_color = Palette.ESC +'[39m'
-        style_bold = Palette.ESC + '[1m'
-        end_bold = Palette.ESC + '[22m'
+        base_code = ESC + '[%dm'
+
+        color_codes = {names[num]: base_code % (num + fg_8color_offset) for num in range(8)}
+        style_bold = ESC + '[1m'
+        style_underline = ESC + '[4m'
 
         for key, color_code in color_codes.items():
-            brush = BrushStroke(key, color_code, end_color)
+            brush = BrushStroke(key, color_code, END)
             self._palette.update({key: brush})
 
-            # bold version
-            brush = BrushStroke(key,
-                                '%s%s' % (color_code, style_bold),
-                                end_bold + end_color)
-            self._palette.update({'%s_bold' % key: brush})
+            # bold style
+            brush = BrushStroke(key, color_code + style_bold, END)
+            self._palette.update({key + '_bold': brush})
+
+            # underline style
+            brush = BrushStroke(key, color_code + style_underline, END)
+            self._palette.update({key + '_underlined': brush})
+
+    def _generate(self):
+        self._get_basic_colors()
 
     def __getitem__(self, key=''):
         return self._palette[key.lower()]
@@ -154,19 +163,6 @@ class Raffaello (object):
 
         self.command = config['--command']
         self.commission = commission
-
-        #if config['--file'] is None:
-        #    # Inline 'pattern=>color' option list
-        #    self.patterns = Commission(config['--request'], config['--delimiter']).commission
-        #else:
-        #    path = config['--file']
-        #    fullpath = get_config_full_path(path)
-
-        #    if fullpath is None:
-        #        log.error("Could not find configuration file %s", path)
-        #        sys.exit(1)
-
-        #    self.patterns = parse_config_file(fullpath, config['--delimiter'])
 
     def paint(self, line, patterns):
         """
@@ -294,7 +290,7 @@ class BrushStroke(object):
 class Configuration(object):
 
     def __init__(self):
-        config = docopt(__doc__, version=__version__)
+        config = docopt(__doc__)
 
         self.command = config['--command']
 
