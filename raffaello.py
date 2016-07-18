@@ -97,24 +97,24 @@ class Commission(object):
     The requested pattern to color mapping
     '''
 
-    def __init__(self, requests, pattern_dlms='=>'):
+    def __init__(self, request, delimiter='=>'):
         self.commission = []
-        for request in requests.split(' '):
-            if len(request) == 0:
+        for r in request.split(' '):
+            if len(r) == 0:
                 continue
 
-            if len(re.findall(pattern_dlms, request)) > 1:
+            if len(re.findall(delimiter, r)) > 1:
                 log.error('[Error] Can not parse request %s.')
                 log.error('    Too many pattern separator symbols (%s) in request'
-                          % (request, pattern_dlms))
+                          % (r, delimiter))
                 sys.exit(1)
 
             try:
-                pattern, color = request.split(pattern_dlms)
+                pattern, color = r.split(delimiter)
             except ValueError as err:
-                log.error("Could not parse request '%s'. (%s)" % (request, err))
-                log.debug("Color requests: {0}".format(requests))
-                log.debug("pattern_dlms: {0}".format(pattern_dlms))
+                log.error("Could not parse request '%s'. (%s)" % (r, err))
+                log.debug("Color requests: {0}".format(rs))
+                log.debug("delimiter: {0}".format(delimiter))
                 sys.exit(1)
 
             # Remove initial quote if any
@@ -137,6 +137,9 @@ class Commission(object):
                 log.error('Color "%s" does not exist' % color)
                 sys.exit(1)
 
+        log.info('Commission is')
+        log.info(self.commission)
+
 
 class Raffaello (object):
     '''
@@ -144,25 +147,26 @@ class Raffaello (object):
     uses when running as command-line utility
     '''
 
-    def __init__(self, args=[]):
+    def __init__(self, commission):
         '''Parse command line options'''
 
         config = docopt(__doc__)
 
         self.command = config['--command']
+        self.commission = commission
 
-        if config['--file'] is None:
-            # Inline 'pattern=>color' option list
-            self.patterns = Commission(config['--request'], config['--delimiter']).commission
-        else:
-            path = config['--file']
-            fullpath = get_config_full_path(path)
+        #if config['--file'] is None:
+        #    # Inline 'pattern=>color' option list
+        #    self.patterns = Commission(config['--request'], config['--delimiter']).commission
+        #else:
+        #    path = config['--file']
+        #    fullpath = get_config_full_path(path)
 
-            if fullpath is None:
-                log.error("Could not find configuration file %s", path)
-                sys.exit(1)
+        #    if fullpath is None:
+        #        log.error("Could not find configuration file %s", path)
+        #        sys.exit(1)
 
-            self.patterns = parse_config_file(fullpath, config['--delimiter'])
+        #    self.patterns = parse_config_file(fullpath, config['--delimiter'])
 
     def paint(self, line, patterns):
         """
@@ -193,7 +197,7 @@ class Raffaello (object):
         Run raffaello as a command-line utility
         '''
         command = self.command
-        patterns = self.patterns
+        patterns = self.commission
 
         # Raffaello encapsulates the command line command whose ouput
         #  is to be colorized
@@ -287,69 +291,91 @@ class BrushStroke(object):
         return self.__name
 
 
-# ======================================================
-# Utilities
-# ======================================================
-def get_config_full_path(filepath):
-    '''Build the fullpath to config file'''
-    log.debug('Building full path for "%s"' % filepath)
-    fullpath = os.path.expanduser(filepath)
+class Configuration(object):
 
-    if not os.path.exists(fullpath):
-        log.debug("Looking for config file '%s' in '%s' folder..." %
-                  (filepath, home))
-        fullpath = os.path.join(home, os.path.basename(fullpath))
+    def __init__(self):
+        config = docopt(__doc__, version=__version__)
 
-        if os.path.exists(fullpath):
-            log.debug("Using '%s'" % fullpath)
+        self.command = config['--command']
+
+        if config['--file']:
+            path = config['--file']
+            fullpath = self._get_full_path(path)
+
+            if fullpath is None:
+                log.error("Could not find configuration file %s", path)
+                sys.exit(1)
+
+            self.request = self.read_commission_from_file(fullpath, config['--delimiter'])
         else:
-            log.error('Could not find config file "%s"' % filepath)
-            fullpath = None
+            self.request = config['--request']
 
-    return fullpath
+        log.info('Got request: \"%s\"' % self.request)
+
+    def _get_full_path(self, filepath):
+        '''Build the fullpath to config file'''
+        log.debug('Building full path for "%s"' % filepath)
+        fullpath = os.path.expanduser(filepath)
+
+        if not os.path.exists(fullpath):
+            log.debug("Looking for config file '%s' in '%s' folder..." %
+                      (filepath, home))
+            fullpath = os.path.join(home, os.path.basename(fullpath))
+
+            if os.path.exists(fullpath):
+                log.debug("Using '%s'" % fullpath)
+            else:
+                log.error('Could not find config file "%s"' % filepath)
+                fullpath = None
+
+        return fullpath
 
 
-def parse_config_file(path, pattern_dlms='=>'):
-    """
-    Get Pattern/Color pairs from configuration file
-    """
-    log.debug('Reading config file %s' % path)
-    config = open(path).readlines()
-    patterns = []
-    include_pattern = re.compile('^include (.*)')
-    for line in config:
-        line = line.rstrip()
+    def read_commission_from_file(self, path, delimiter='=>'):
+        """
+        Get Pattern/Color pairs from configuration file
+        """
+        log.debug('Reading config file %s' % path)
+        config = open(path).readlines()
+        request = ''
+        patterns = []
+        include_pattern = re.compile('^include (.*)')
+        for line in config:
+            line = line.rstrip()
 
-        # Skip empty lines
-        if 0 == len(line):
-            continue
-
-        # Skip comments
-        if '#' == line[0]:
-            continue
-
-        # Check inner config files
-        includes = include_pattern.match(line)
-        if includes:
-            subconfig = includes.group(1)
-            log.debug('got subconfig %s' % subconfig)
-
-            subconf_fullpath = get_config_full_path(subconfig)
-
-            if subconf_fullpath:
-                subdict = parse_config_file(subconf_fullpath, pattern_dlms)
-                patterns.extend(subdict)
+            # Skip empty lines
+            if 0 == len(line):
                 continue
 
-        new_pattern = Commission(line).commission
+            # Skip comments
+            if '#' == line[0]:
+                continue
 
-        patterns.extend(new_pattern)
+            # Check inner config files
+            includes = include_pattern.match(line)
+            if includes:
+                subconfig = includes.group(1)
+                log.debug('got subconfig %s' % subconfig)
 
-    return patterns
+                subconf_fullpath = self._get_full_path(subconfig)
+
+                if subconf_fullpath:
+                    inner_request = self.read_commission_from_file(subconf_fullpath, delimiter)
+                    request.join(' ' + inner_request)
+                    #patterns.extend(inner_request)
+                    continue
+
+            #new_pattern = Commission(line).commission
+            #patterns.extend(new_pattern)
+            request = request + '%s ' % line
+
+        return request
 
 
 def main():
-    script = Raffaello()
+    config = Configuration()
+    commission = Commission(config.request).commission
+    raffaello = Raffaello(commission)
     sys.exit(raffaello.start())
 
 
