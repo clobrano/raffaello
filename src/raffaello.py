@@ -4,13 +4,13 @@ Raffaello is a powerful, yet simple to use, output colorizer. You are now using
 
 Usage: raffaello (-p PRESET | -r REQUEST | -f FILE) [options]
 
-    -r REQUEST --request=REQUEST            The requested text/color mapping. E.g. "error=>red warning=>yellow_bold". Regex supported.
-    -f FILE --file=FILE                     Path to the text/color configuration file
     -c COMMAND --command=COMMAND            The command-line tool to be executed. E.g. -c "dmesg -w".
     -d DELIMITER --delimiter=DELIMITER      If you don't like "=>" as delimiter, use this flag to change it. [default: =>]
-    -p PRESET, --preset=PRESET              Prebuild config files for coloring known tools (dmesg, gcc/g++, ModemManager, logcat...)
+    -f FILE --file=FILE                     Path to the text/color configuration file
     -l, --list                              List available colors and presets
-    -v, --verbose                           Enable debug logging
+    -p PRESET, --preset=PRESET              Prebuilt config files for coloring known output streams (gcc/g++, cmake, dmesg, gcc/g++, ModemManager, logcat...)
+    -r REQUEST --request=REQUEST            The requested text/color mapping. E.g. "error=>red warning=>yellow_bold". Regex supported.
+    -v --verbose                            Enable debug logging
 """
 
 import sys
