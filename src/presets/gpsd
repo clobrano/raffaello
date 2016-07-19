@@ -1,0 +1,44 @@
+# Raffaello color configuration for GPSd
+# see GPSd at http://www.catb.org/gpsd/
+include errors
+
+INFO=>cyan
+PROG=>white_bold
+CLIENT=>blue
+
+Version\s\d+.\d+=>green
+stashing\sdevice\s\.*=>yellow
+running\swith\seffective\sgroup\sID\s\d+=>yellow
+running\swith\seffective\suser\sID\s\d+=>yellow
+speed\s\d+.*=>green_bold
+mode\s\d=>green_bold
+
+\d+\.\d+=>yellow
+
+# JSON values
+#[{}]=>cyan
+#"\w+"=>cyan
+#"DEVICE"=>green_bold
+#"TPV"=>green_bold
+#GP\w+=>yellow_bold
+
+# Flags
+ONLINE=>cyan
+MODE=>green
+PPSTIME=>purple
+LATLON=>yellow
+ALTITUDE=>cyan
+SPEED=>green
+STATUS=>purple
+PACKET=>yellow
+REPORT=>cyan
+TRACK=>green
+TIME=>purple
+DOP=>yellow
+USED=>cyan
+CLEAR=>green
+
+\{("PRN":\d+)=>cyan
+\{("PRN":\d+)=>cyan
+"ss":\d+,("used":false)\}=>red
+"ss":\d+,("used":true)\}=>green

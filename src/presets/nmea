@@ -1,0 +1,10 @@
+# Lat and Long
+GGA,\d+.\d+,(\d+.\d+,N,\d+.\d+,E)=>green
+GGA=>green
+# PRNs of satellites used for fix
+GSA,[A|M],\d+,(.*),\d.\d=>blue
+GSA=>blue
+
+# Number of Satellites in view
+GSV,\d+,\d+,(\d+)=>magenta
+GSV=>magenta
