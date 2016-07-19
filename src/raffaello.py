@@ -21,15 +21,6 @@ import collections
 import signal
 from docopt import docopt
 
-# Parse command line arguments
-docopt_dict = docopt(__doc__)
-if docopt_dict['--verbose']:
-        level = logging.DEBUG
-else:
-    level = logging.INFO
-logging.basicConfig(level=level, format='    %(levelname)s %(message)s')
-log = logging.getLogger(__name__)
-
 # Catch CTRL_C to let the program quit smoothly
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
@@ -51,12 +42,12 @@ class Raffaello (object):
         self.command = config['--command']
         self.commission = commission
 
-    def paint(self, line, patterns):
+    def paint(self, line, commission):
         """
         Highlight line according to the given
         pattern/color dictionary
         """
-        for item in patterns:
+        for item in commission:
             pattern = item.keys()[0]
             brush = item[pattern]
             try:
@@ -386,15 +377,19 @@ class Configuration(object):
 
 
 def main():
+    # Parse command line arguments
+    docopt_dict = docopt(__doc__)
+    if docopt_dict['--verbose']:
+            level = logging.DEBUG
+    else:
+        level = logging.INFO
+    logging.basicConfig(level=level, format='    %(levelname)s %(message)s')
+    log = logging.getLogger(__name__)
+
     config = Configuration(docopt_dict)
     commission = Commission(config.request, config.delimiter).commission
     raffaello = Raffaello(commission)
     sys.exit(raffaello.start())
 
-
 if __name__ == '__main__':
-    '''
-    This will permit to use raffaello without installing it
-    into the filesystem (which is the suggested usage, though).
-    '''
     main()
