@@ -37,6 +37,120 @@ signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 home = os.path.expanduser(os.path.join('~', '.raffaello'))
 
 
+class Raffaello (object):
+    '''
+    Wrapper class for methods that Raffaello
+    uses when running as command-line utility
+    '''
+
+    def __init__(self, commission):
+        '''Parse command line options'''
+
+        config = docopt(__doc__)
+
+        self.command = config['--command']
+        self.commission = commission
+
+    def paint(self, line, patterns):
+        """
+        Highlight line according to the given
+        pattern/color dictionary
+        """
+        for item in patterns:
+            pattern = item.keys()[0]
+            brush = item[pattern]
+            try:
+                matches = re.findall(pattern, line)
+            except Exception as err:
+                log.error('%s' % err)
+                log.debug('line: %s' % line)
+                sys.exit(1)
+
+            if matches:
+                log.debug('Match found {0} => key:"{1}", pattern:"{2}"'.format(item, pattern, brush))
+                line = brush.apply(line, matches)
+
+        return line.rstrip()
+
+    def start(self):
+        '''
+        Run raffaello as a command-line utility
+        '''
+        command = self.command
+        pipe_read = None
+        pipe_write = None
+
+        # Raffaello encapsulates the command line command whose ouput
+        #  is to be colorized
+        if command:
+            # Get output file's descriptors
+            pipe_read, pipe_write = os.pipe()
+            proc_id = os.fork()
+
+        # Child process executes the given command,
+        #  parent process (Raffaello) parses its output
+        if command and proc_id:
+            self._manage_child(pipe_read, pipe_write)
+        else:
+            # Parent
+            self._manage_parent(pipe_read, pipe_write)
+
+        return 0
+
+    def _manage_parent(self, pipe_read, pipe_write):
+        command = self.command
+        if command:
+            # read child's output
+            os.close(pipe_write)
+            fd_read = os.fdopen(pipe_read)
+
+            endofstream = False
+
+        while True:
+            try:
+                if not command:
+                    # we are in a pipe, just read from output
+                    line = raw_input()
+                else:
+                    # we are not in a pipe, read from file's descriptors
+                    line = fd_read.readline().rstrip()
+
+                    if not line:
+                        # Not using pipe, we need to understand when the
+                        # program ends. Two empty lines will be considered
+                        # as the end of the stream
+                        if endofstream:
+                            break
+                        else:
+                            endofstream = True
+                    else:
+                        endofstream = False
+
+                # And here is the magic
+                print(self.paint(line, self.commission))
+
+            except KeyboardInterrupt:
+                break
+
+            except EOFError:
+                log.info("EOF reached. Nothing else to do")
+                break
+
+        log.debug("End of stream")
+        os._exit(os.EX_OK)
+
+    def _manage_child(self, pipe_read, pipe_write):
+        os.close(pipe_read)
+
+        # redirect stdout to pipe in order to let
+        #  parent process read
+        os.dup2(pipe_write, sys.stdout.fileno())
+        os.dup2(pipe_write, sys.stderr.fileno())
+
+        # execute the command
+        os.system(self.command)
+
+
 class Palette(collections.MutableMapping):
     '''
     Container of all available colors and styles.
@@ -72,6 +186,7 @@ class Palette(collections.MutableMapping):
             # underline style
             brush = BrushStroke(key, color_code + style_underline, END)
             self._palette.update({key + '_underlined': brush})
+
         return color_codes
 
     def __getitem__(self, key=''):
@@ -152,116 +267,6 @@ class Commission(object):
 
         print('Commission is ')
         print(self.commission)
-
-
-class Raffaello (object):
-    '''
-    Wrapper class for methods that Raffaello
-    uses when running as command-line utility
-    '''
-
-    def __init__(self, commission):
-        '''Parse command line options'''
-
-        config = docopt(__doc__)
-
-        self.command = config['--command']
-        self.commission = commission
-
-    def paint(self, line, patterns):
-        """
-        Highlight line according to the given
-        pattern/color dictionary
-        """
-        for item in patterns:
-            pattern = item.keys()[0]
-            brush = item[pattern]
-            try:
-                matches = re.findall(pattern, line)
-            except Exception as err:
-                log.error('%s' % err)
-                log.debug('line: %s' % line)
-                sys.exit(1)
-
-            if matches:
-                log.debug('Match found {0} => key:"{1}", pattern:"{2}"'.format(item, pattern, brush))
-                line = brush.apply(line, matches)
-
-        return line.rstrip()
-
-    def start(self):
-        '''
-        Run raffaello as a command-line utility
-        '''
-        command = self.command
-        patterns = self.commission
-
-        # Raffaello encapsulates the command line command whose ouput
-        #  is to be colorized
-        if command:
-            # Get output file's descriptors
-            pipe_read, pipe_write = os.pipe()
-            proc_id = os.fork()
-
-        # Child process executes the given command,
-        #  parent process (Raffaello) parses its output
-        if command and proc_id:
-            # Child
-            os.close(pipe_read)
-
-            # redirect stdout to pipe in order to let
-            #  parent process read
-            os.dup2(pipe_write, sys.stdout.fileno())
-            os.dup2(pipe_write, sys.stderr.fileno())
-
-            # execute the command
-            os.system(command)
-
-        else:
-            # Parent
-            if command:
-                # read child's output
-                os.close(pipe_write)
-                fd_read = os.fdopen(pipe_read)
-
-            endofstream = False
-
-            while True:
-                try:
-                    if not command:
-                        # we are in a pipe, just read from output
-                        line = raw_input()
-                    else:
-                        # we are not in a pipe, run from file's descriptors
-                        line = fd_read.readline().rstrip()
-
-                    if command and not line:
-                        # Not using pipe, we need to understand when the
-                        # program ends. Two empty lines will be considered
-                        # as the end of the stream
-                        log.debug('Is the end of the stream?')
-                        if endofstream:
-                            break
-                        else:
-                            endofstream = True
-                    else:
-                        endofstream = False
-
-                    # And here is the magic
-                    print(self.paint(line, patterns))
-
-                except KeyboardInterrupt:
-                    log.info("Bye!")
-                    break
-
-                except EOFError:
-                    log.info("EOF reached. Nothing to do")
-                    break
-
-            log.debug("End of stream")
-            os._exit(os.EX_OK)
-
-        return 0
 
 
 class BrushStroke(object):
