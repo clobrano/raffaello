@@ -4,12 +4,12 @@ Raffaello is a powerful, yet simple to use, output colorizer. You are now using
 
 Usage: raffaello (-p PRESET | -r REQUEST | -f FILE) [options]
 
-    -c COMMAND --command=COMMAND            The command-line tool to be executed. E.g. -c "dmesg -w".
-    -d DELIMITER --delimiter=DELIMITER      If you don't like "=>" as delimiter, use this flag to change it. [default: =>]
-    -f FILE --file=FILE                     Path to the text/color configuration file
-    -l, --list                              List available colors and presets
     -p PRESET, --preset=PRESET              Prebuilt config files for coloring known output streams (gcc/g++, cmake, dmesg, gcc/g++, ModemManager, logcat...)
-    -r REQUEST --request=REQUEST            The requested text/color mapping. E.g. "error=>red warning=>yellow_bold". Regex supported.
+    -r REQUEST --request=REQUEST            The requested text/color mapping string. Multipe requests are separated by a space. Regular expression are supported. E.g. "error=>red [Ww]arning=>yellow_bold".
+    -f FILE --file=FILE                     Path to the custom text=>color configuration file.
+    -c COMMAND --command=COMMAND            Instead of using raffaello with pipes, set the command-line tool to be executed by raffaello directly. E.g. -c "dmesg -w".
+    -d DELIMITER --delimiter=DELIMITER      If you don't like "=>" as delimiter between text and color, use this flag to change it. E.g. -d & [default: =>]
+    -l, --list                              List all the available colors and presets
     -v --verbose                            Enable debug logging
 """
 
@@ -302,6 +302,7 @@ class Configuration(object):
         self.custom_presets = home
 
         self.command = config['--command']
+        self.delimiter = config['--delimiter']
 
         if config['--file']:
             path = config['--file']
@@ -311,11 +312,11 @@ class Configuration(object):
                 log.error("Could not find configuration file %s", path)
                 sys.exit(1)
 
-            self.request = self.read_commission_from_file(fullpath, config['--delimiter'])
+            self.request = self.read_commission_from_file(fullpath)
         elif config['--preset']:
             path = os.path.join(self.presets, config['--preset'])
             log.info('Looking for preset "%s" in path "%s"' % (config['--preset'], path))
-            self.request = self.read_commission_from_file(path, config['--delimiter'])
+            self.request = self.read_commission_from_file(path)
         else:
             self.request = config['--request']
 
@@ -346,7 +347,7 @@ class Configuration(object):
 
         return fullpath
 
-    def read_commission_from_file(self, path, delimiter='=>'):
+    def read_commission_from_file(self, path):
         """
         Get Pattern/Color pairs from configuration file
         """
@@ -374,7 +375,7 @@ class Configuration(object):
                 subconf_fullpath = self._get_full_path(subconfig)
 
                 if subconf_fullpath:
-                    inner_request = self.read_commission_from_file(subconf_fullpath, delimiter)
+                    inner_request = self.read_commission_from_file(subconf_fullpath)
                     log.debug('included request "%s"' % inner_request)
                     request = request + ' ' + inner_request
                     continue
@@ -386,7 +387,7 @@ class Configuration(object):
 
 def main():
     config = Configuration(docopt_dict)
-    commission = Commission(config.request).commission
+    commission = Commission(config.request, config.delimiter).commission
     raffaello = Raffaello(commission)
     sys.exit(raffaello.start())
 
