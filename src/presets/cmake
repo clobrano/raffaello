@@ -1,5 +1,5 @@
 # Raffaello config file for cmake's output highlightning
-include code
+include cpp
 
 # Error row
 ^\s*\^\s*$=>red_bold
@@ -18,12 +18,12 @@ include code
 warning:(.*$)=>yellow
 warning=>yellow_bold
 
-error:(.*$)=>red
-error=>red_bold
+error:(.*$)=>color196_bold
+error=>color196_bold
 
-fatal:(.*$)=>red
-fatal=>red_bold
+fatal:(.*$)=>color196_bold
+fatal=>color196_bold
 
 # File paths
-\/[\w-]+\.[hc]=>color085
+\/[\w-]+\.[hc]=>color029
 
