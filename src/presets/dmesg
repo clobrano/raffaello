@@ -1,0 +1,10 @@
+# Raffaello config file for DMESG utility
+# ver: 1.0.0
+include syslog
+include errors
+
+# Source of the message
+^\[.*?\].*?\s(.*?)\:\s=>yellow
+
+# Time
+^\[.*?\]\s=>green

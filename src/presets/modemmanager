@@ -1,0 +1,42 @@
+include errors
+include at
+
+ModemManager=>magenta
+# date
+\w{3}\s\d+\s\d{2}:\d{2}:\d{2}=>cyan
+
+ttyACM[0-9]+=>cyan_bold
+ttyUSB[0-9]+=>cyan_bold
+
+<debug>=>green_bold
+<info>=>cyan_bold
+<error>=>red_bold
+<warn>=>yellow_bold
+
+\s([\w_]+\(\))=>blue
+[\w\-]+.c:\d+=>magenta
+
+Creating\smodem\swith\splugin\s'(\w+)'=>yellow_bold
+Telit=>yellow_bold
+initializing\s\w+\sinterface=>cyan_bold
+state\schanged.*=>yellow
+Flashing\sprimary\sAT\sport\sbefore\senabling=>yellow
+
+# MBIM
+Sent\smessage\s\(translated\)=>yellow_bold
+Received\smessage\s\(translated\)=>yellow
+type\s*=\s[\w_]+\s=>green_bold
+service\s*=\s'[\w-]+'\s=>magenta_bold
+cid\s*=\s'.*'\s=>cyan_bold
+
+# PPPD
+pppd.*Exit=>red_bold
+
+# Crashed
+Main\sprocess\sexited=>red_bold
+
+
+# QSS
+[Ss]wap=>yellow_bold
+Main\sprocess\sexited=>red_bold
+Releasing\ssim\shot\sswap\sports\scontext=>red_bold

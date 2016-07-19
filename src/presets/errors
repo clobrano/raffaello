@@ -1,0 +1,19 @@
+# Raffaello's configuration for basic error/warning highlight
+
+(Warning|warning|WARNING)=>yellow_bold
+(Error|error|ERROR)=>red_bold
+(not\sable\sto\s\w+|unable\sto\s\w+)=>yellow
+[Nn]ot[\w\s]found=>red_bold
+[Ss]egfault.*$=>red_bold
+(Exception|exception|EXCEPTION)=>red_bold
+(Failed|failed|Fail|fail)=>red_bold
+broken=>red_bold
+No\ssuch\sfile\sor\sdirectory=>red_bold
+
+[Ii]nvalid\s\w+=>yellow
+[Cc]annot\s\w+=>yellow
+[Cc]ould\snot\s\w+=>yellow
+[Cc]ouldn't\s\w+=>yellow
+
+
+

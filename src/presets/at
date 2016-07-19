@@ -1,0 +1,9 @@
+AT>.*=>yellow
+AT<.*=>green
+\+CME\sERROR.*=>red_bold
+\+\W=>yellow
+<CR>=>light_gray
+<LF>=>light_gray
+\-\->\s.*=>yellow_bold
+<\-\-\s.*=>green_bold
+OK=>green_bold

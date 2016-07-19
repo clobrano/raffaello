@@ -1,0 +1,8 @@
+include errors
+
+style=>purple_bold
+performance=>cyan_bold
+portability=>green_bold
+inconclusive=>yellow
+
+Checking.*=>green
