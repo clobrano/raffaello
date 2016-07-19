@@ -1,3 +1,4 @@
+# Raffaello config file for cmake's output highlightning
 include code
 
 # Error row

@@ -289,7 +289,6 @@ class BrushStroke(object):
         Apply brush to all matches in line
         '''
         for match in matches:
-            log.debug('pattern is "%s", match is "%s"' % (pattern, match))
             replacement = self.open + match + self.close
             line = line.replace(match, replacement)
 
