@@ -21,6 +21,7 @@ import collections
 import signal
 from docopt import docopt
 
+log = None
 # Catch CTRL_C to let the program quit smoothly
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
@@ -47,6 +48,7 @@ class Raffaello (object):
         Highlight line according to the given
         pattern/color dictionary
         """
+        copy = line
         for item in commission:
             pattern = item.keys()[0]
             brush = item[pattern]
@@ -58,10 +60,11 @@ class Raffaello (object):
                 sys.exit(1)
 
             if matches:
-                log.debug('Match found {0} => key:"{1}", pattern:"{2}"'.format(item, pattern, brush))
-                line = brush.apply(line, matches)
+                log.debug('Match found "{3}": {0} => key:"{1}", pattern:"{2}"'.format(item, pattern, brush, matches))
+                log.debug(r'pre brush: %s' % repr(copy))
+                copy = brush.apply(copy, pattern, matches)
 
-        return line.rstrip()
+        return copy.rstrip()
 
     def start(self):
         '''
@@ -200,17 +203,28 @@ class Terminal256Palette(Palette):
     def _set_colors(self):
         color_codes = Palette._set_colors(self)
         ESC = Palette.ESC
+        END = Palette.END
         bg_color = 'color%03d'
         fg_color = 'fgcolor%03d'
         bg_code = ESC + '[38;5;%dm'
         fg_code = ESC + '[48;5;%dm'
+        style_bold = ESC + '[1m'
+        style_underline = ESC + '[4m'
 
         color_codes.update({bg_color % num: bg_code % num for num in xrange(256)})
         color_codes.update({fg_color % num: fg_code % num for num in xrange(256)})
 
         for key, color_code in color_codes.items():
-            brush = BrushStroke(key, color_code, Palette.END)
+            brush = BrushStroke(key, color_code, END)
             self._palette.update({key: brush})
+
+            # bold style
+            brush = BrushStroke(key, color_code + style_bold, END)
+            self._palette.update({key + '_bold': brush})
+
+            # underline style
+            brush = BrushStroke(key, color_code + style_underline, END)
+            self._palette.update({key + '_underlined': brush})
 
 
 class Commission(object):
@@ -270,11 +284,12 @@ class BrushStroke(object):
         self.open = open_code
         self.close = close_code
 
-    def apply(self, line, matches):
+    def apply(self, line, pattern, matches):
         '''
         Apply brush to all matches in line
         '''
         for match in matches:
+            log.debug('pattern is "%s", match is "%s"' % (pattern, match))
             replacement = self.open + match + self.close
             line = line.replace(match, replacement)
 
@@ -384,6 +399,7 @@ def main():
     else:
         level = logging.INFO
     logging.basicConfig(level=level, format='    %(levelname)s %(message)s')
+    global log
     log = logging.getLogger(__name__)
 
     config = Configuration(docopt_dict)
