@@ -1,0 +1,21 @@
+# Raffaello config file for cmake
+
+# Type qualifiers
+\s*(static|const|final)\s=>color197
+
+# Compiler directives
+^\s*#\w+=>color197
+
+# Strings
+".*"=>color118
+
+# Control statements
+\s+(if|else|for|while)\s+\(=>color197
+
+# Fundamental types
+[\s|\t|\(]+(size_t|void|int|char|double|float)\s=>color186
+[\s|\t|\(]+(unsigned|int32_t|int16_t|int8_t)\s=>color186
+
+
+# Function name
+\s*([\w_]+)\s*\(=>color045
