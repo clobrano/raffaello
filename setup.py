@@ -13,8 +13,8 @@ setup(name='raffaello',
       keywords=['formatter', 'console', 'colorizer'],
       classifiers=[
            "Development Status :: 5 - Production/Stable",
-           "Topic :: Utilities"
-           "Topic :: System :: Logging"
+           "Topic :: Utilities",
+           "Topic :: System :: Logging",
       ],
       packages=find_packages('src'),
       package_dir={'': 'src'},
