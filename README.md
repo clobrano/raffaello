@@ -3,13 +3,6 @@ Raffaello - output colorizer
 
 Raffaello colorizes the output stream of any command-line tool (gcc/g++, cmake, dmesg, syslog, etc.), making it easier to read.
 
-Since *a picture is worth a thousand words* here is the a gcc compilation with and without Raffaello
-
-### GCC/G++
-
-![gcc](./examples/make.gif)
-
-
 ## Usage
 
 The raffaello's command line interface let you use two call modes: **pipes** and **command**.
