@@ -98,7 +98,8 @@ Using fullpath is annoying, tough, so Raffaello has a special path under $HOME/.
     \d+\.\d+\.\d+\.\d+=>green_bold
 
 
-Raffaello provides some built-in colorfiles, called **presets**, for known tools like cmake, gcc/g++, dmesg, etc. The presets can be included in custom colorfile.
+Raffaello provides some built-in colorfiles, called **presets**, for known tools like cmake, gcc/g++, dmesg, etc.
+The presets can be used alone using `--preset` flag or even included in custom colorfile in order to extend their colormaps.
 
     # Include a preset colorfile
     include errors
