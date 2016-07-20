@@ -3,7 +3,7 @@ Raffaello - output colorizer
 
 Raffaello colorizes the output stream of any command-line tool (gcc/g++, cmake, dmesg, syslog, etc.), making it easier to read.
 
-Since *a picture is worth a thousand words* and more pictures are even better, here are some examples.
+Since *a picture is worth a thousand words* here is the a gcc compilation with and without Raffaello
 
 ### GCC/G++
 
@@ -25,17 +25,17 @@ In command mode raffaello will call your stream source in your behalf
 
 To highlight the output stream, Raffaello has 2 color modes and 2 styles modes:
 
-**8 colors** mode let you use the following names: black, red, green, yellow, blue, magenta, cyan, light_gray
+**8 colors** mode let you use the following names: *black, red, green, yellow, blue, magenta, cyan, light_gray*
 
 **256 colors** mode let you use other 248 colors and choose between foreground or background colors (you can mix 8 colors mode names with 256 color mode names):
 
-* Foreground color names are in the form 'colorNUM'. E.g. foreground red is color001
-* Background color names are in the form 'bgcolorNUM'. E.g. background red is bgcolor001
+* Foreground color names are in the form `colorNUM`. E.g. foreground red is *color001*
+* Background color names are in the form `bgcolorNUM`. E.g. background red is *bgcolor001*
 
 With the styles you can blend colors in **bold** and **underlined**
 
-* foreground red bold is color001_bold
-* foreground red underlined is color001_underlined
+* foreground red bold is *color001_bold*
+* foreground red underlined is *color001_underlined*
 
 Call `raffaello -l` to see the complete list of available colors.
 
@@ -55,7 +55,7 @@ raffaello (-p PRESET | -r REQUEST | -f FILE | -l) [options]
 
 ## Examples
 
-The simpler usage is using the `request` flag. The `request` flag requires a string in the form "text=>color", where text can be a constant string or a [Regular expression](https://docs.python.org/2/library/re.html), while color is the name of the color to use (see [Usage](#Usage) section)
+The simpler usage is using the `request` flag. The `request` flag requires a string in the form "text=>color anothertext=>anothercolor", where text can be a constant string or a [Regular expression](https://docs.python.org/2/library/re.html), while color is the name of the color to use (see [Usage](#Usage) section)
 
 * Simple constant text highlight
 
@@ -63,7 +63,7 @@ The simpler usage is using the `request` flag. The `request` flag requires a str
 
 ![example001](./examples/raffaello001.png)
 
-* Highlight of multiple texts. Here you can see that spaces in the text are not allowed. Use \s instead.
+* Highlight of multiple texts. Here you can see that spaces in the "text part" are not allowed. Use \s instead.
 
         $ ifconfig eno1 | raffaello --request="RX\spackets=>green TX\spackets=>red"
 
@@ -76,7 +76,7 @@ The simpler usage is using the `request` flag. The `request` flag requires a str
 ![example003](./examples/raffaello003.png)
 
 
-For more complex color mapping you can write a file with a line for each text=>color entry, like the following
+For more complex color mapping you can write a file with a line for each *text=>color* entry, like the following
 
     collisions=>blue
     RX\spackets=>green
@@ -93,9 +93,36 @@ Color files can be reused in other color files using the `include` directive fol
 
 Using fullpath is annoying, tough, so Raffaello has a special path under $HOME/.raffaello. All the colorfiles inside this folder can be passed using simply their filename, without the path.
 
-Raffaello provides some built-in colorfiles, called **presets**, for known tools like cmake, gcc/g++, dmesg, etc.
+    # include custom colorfile in $HOME/.raffaello
+    include some_custom_colorfile
+    
+    # include custom color outside $HOME/.raffaello
+    include $HOME/path/to/some_other_custom_color
 
-Presets can be included in a custom files in order to extend them. For a full list of presets, call `raffaello --list`
+    collisions=>blue
+    RX\spackets=>green
+    TX\spackets=>red
+    \d+\.\d+\.\d+\.\d+=>green_bold
+
+
+Raffaello provides some built-in colorfiles, called **presets**, for known tools like cmake, gcc/g++, dmesg, etc. The presets can be included in custom colorfile.
+
+    # Include a preset colorfile
+    include errors
+    
+    # include custom colorfile in $HOME/.raffaello
+    include some_custom_colorfile
+    
+    # include custom color outside $HOME/.raffaello
+    include $HOME/path/to/some_other_custom_color
+
+    collisions=>blue
+    RX\spackets=>green
+    TX\spackets=>red
+    \d+\.\d+\.\d+\.\d+=>green_bold
+
+For a full list of presets, call `raffaello --list`.
+
 
 ## Raffaello is a python module
 
