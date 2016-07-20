@@ -1,4 +1,4 @@
-# Raffaello config file for DMESG utility
+# dmesg output color configuration
 # ver: 1.0.0
 include syslog
 include errors

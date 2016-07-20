@@ -1,3 +1,4 @@
+# ModemManager output color configuration (see https://www.freedesktop.org/wiki/Software/ModemManager/)
 include errors
 include at
 

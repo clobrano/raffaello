@@ -1,3 +1,4 @@
+# cppcheck output color configuration
 include errors
 
 style=>purple_bold

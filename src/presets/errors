@@ -1,4 +1,4 @@
-# Raffaello's configuration for basic error/warning highlight
+# Configuration for basic error|warning highlightning
 
 (Warning|warning|WARNING)=>yellow_bold
 (Error|error|ERROR)=>red_bold

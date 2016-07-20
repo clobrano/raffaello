@@ -1,3 +1,4 @@
+# AT modem commands color configuration
 AT>.*=>yellow
 AT<.*=>green
 \+CME\sERROR.*=>red_bold

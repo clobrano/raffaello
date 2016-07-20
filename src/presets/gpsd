@@ -1,5 +1,4 @@
-# Raffaello color configuration for GPSd
-# see GPSd at http://www.catb.org/gpsd/
+# GPSd output color configuration (see GPSd at http://www.catb.org/gpsd/)
 include errors
 
 INFO=>cyan

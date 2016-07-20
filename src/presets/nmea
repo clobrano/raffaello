@@ -1,4 +1,4 @@
-# Lat and Long
+# NMEA GPS sentences color configuration
 GGA,\d+.\d+,(\d+.\d+,N,\d+.\d+,E)=>green
 GGA=>green
 # PRNs of satellites used for fix
