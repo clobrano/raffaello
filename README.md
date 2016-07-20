@@ -1,9 +1,9 @@
 Raffaello - output colorizer
 ============================
 
-Raffaello colorizes the output stream of any command-line tool (gcc/g++, cmake, dmesg, syslog, etc.), and make it easier to read.
+Raffaello colorizes the output stream of any command-line tool (gcc/g++, cmake, dmesg, syslog, etc.), making it easier to read.
 
-Starting from version 1.3.0, Raffaello can be used as python module in another source code (see pynicom) and since *a picture is worth a thousand words* and more pictures are even better, here are some examples.
+Since *a picture is worth a thousand words* and more pictures are even better, here are some examples.
 
 ### GCC/G++
 
@@ -27,19 +27,19 @@ In command mode raffaello will call your stream source in your behalf
     raffaello [options] -c <output stream source>
 
 
-Raffaello can use 2 color modes, 2 styles modes
+To highlight the output stream, Raffaello has 2 color modes and 2 styles modes:
 
 **8 colors** mode let you use the following names: black, red, green, yellow, blue, magenta, cyan, light_gray
 
 **256 colors** mode let you use other 248 colors and choose between foreground or background colors (you can mix 8 colors mode names with 256 color mode names):
 
-    * Foreground color names are in the form 'colorNUM'. E.g. foreground red is color001
-    * Background color names are in the form 'bgcolorNUM'. E.g. background red is bgcolor001
+* Foreground color names are in the form 'colorNUM'. E.g. foreground red is color001
+* Background color names are in the form 'bgcolorNUM'. E.g. background red is bgcolor001
 
-With styles you can blend colors in **bold** and **underlined**
+With the styles you can blend colors in **bold** and **underlined**
 
-    * foreground red bold is color001_bold
-    * foreground red underlined is color001_underlined
+* foreground red bold is color001_bold
+* foreground red underlined is color001_underlined
 
 Call `raffaello -l` to see the complete list of available colors.
 
@@ -63,19 +63,19 @@ The simpler usage is using the `request` flag. The `request` flag requires a str
 
 * Simple constant text highlight
 
-    $ ifconfig eno1 | raffaello --request="collisions=>blue"
-    
+        $ ifconfig eno1 | raffaello --request="collisions=>blue"
+
 ![example001](./examples/raffaello001.png)
 
 * Highlight of multiple texts. Here you can see that spaces in the text are not allowed. Use \s instead.
 
-    $ ifconfig eno1 | raffaello --request="RX\spackets=>green TX\spackets=>red"
+        $ ifconfig eno1 | raffaello --request="RX\spackets=>green TX\spackets=>red"
 
 ![example002](./examples/raffaello002.png)
 
 * Highlight with regular expressions
 
-    $ ifconfig eno1 | raffaello --request="\d+\.\d+\.\d+\.\d+=>green_bold"
+        $ ifconfig eno1 | raffaello --request="\d+\.\d+\.\d+\.\d+=>green_bold"
 
 ![example003](./examples/raffaello003.png)
 
@@ -97,13 +97,15 @@ Color files can be reused in other color files using the `include` directive fol
 
 Using fullpath is annoying, tough, so Raffaello has a special path under $HOME/.raffaello. All the colorfiles inside this folder can be passed using simply their filename, without the path.
 
-Raffaello provides some built-in colorfiles called **presets**. Presets can be included in a custom files, for a full list of presets, call `raffaello --list`
+Raffaello provides some built-in colorfiles, called **presets**, for known tools like cmake, gcc/g++, dmesg, etc.
+
+Presets can be included in a custom files in order to extend them. For a full list of presets, call `raffaello --list`
 
 ## Raffaello is a python module
 
 Raffaello can be used as a python module inside other source codes
 
-{% highlight python %}
+```python
 from raffaello import Raffaello, Commission
 
 request = '''
@@ -116,7 +118,7 @@ c = Commission(request)
 r = Raffaello(c.commission)
 
 print(r.paint('Sample message with error, warning and a bluish text.'))
-{% endhighlight %}
+```
 
 ## Install
 
