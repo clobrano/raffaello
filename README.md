@@ -9,10 +9,6 @@ Since *a picture is worth a thousand words* and more pictures are even better, h
 
 ![gcc](./examples/make.gif)
 
-### DMSG
-
-![dmesg](./examples/dmesg.gif)
-
 
 ## Usage
 
