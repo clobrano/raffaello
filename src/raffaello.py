@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Raffaello is a powerful, yet simple to use, output colorizer. You are now using
+Raffaello is a powerful, yet simple to use, output colorizer.
 
 Usage: raffaello (-p PRESET | -r REQUEST | -f FILE | -l) [options]
 
@@ -22,7 +22,10 @@ import re
 import signal
 import sys
 
-log = None
+level = logging.ERROR
+logging.basicConfig(level=level, format='    %(levelname)s %(message)s')
+log = logging.getLogger(__name__)
+
 # Catch CTRL_C to let the program quit smoothly
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
@@ -36,21 +39,17 @@ class Raffaello (object):
     uses when running as command-line utility
     '''
 
-    def __init__(self, commission):
-        '''Parse command line options'''
-
-        config = docopt(__doc__)
-
-        self.command = config['--command']
+    def __init__(self, commission, command=None):
+        self.command = command
         self.commission = commission
 
-    def paint(self, line, commission):
+    def paint(self, line):
         """
         Highlight line according to the given
         pattern/color dictionary
         """
         copy = line
-        for item in commission:
+        for item in self.commission:
             pattern = item.keys()[0]
             brush = item[pattern]
             try:
@@ -122,7 +121,7 @@ class Raffaello (object):
                         endofstream = False
 
                 # And here is the magic
-                print(self.paint(line, self.commission))
+                print(self.paint(line))
 
             except KeyboardInterrupt:
                 break
@@ -235,13 +234,21 @@ class Commission(object):
 
     def __init__(self, request, delimiter='=>'):
         self.commission = []
-        for r in request.split(' '):
+
+        # Support multiline request
+        entries = request.splitlines()
+        if len(entries) == 1:
+            # Check whether there are multiple requests in a single line
+            entries = request.split(' ')
+
+        for r in entries:
+            # empty line
             if len(r) == 0:
                 continue
 
             if len(re.findall(delimiter, r)) > 1:
-                log.error('[Error] Can not parse request %s. Too many pattern separator symbols (%s) in request'
-                          % (r, delimiter))
+                print(re.findall(delimiter, r))
+                log.error('[Error] Can not parse request %s. Too many delimiters (%s) in request' % (r, delimiter))
                 sys.exit(os.EX_DATAERR)
 
             try:
@@ -250,16 +257,6 @@ class Commission(object):
                 log.error("Could not parse request '%s'. (%s)" % (r, err))
                 log.debug("delimiter: {0}".format(delimiter))
                 sys.exit(os.EX_DATAERR)
-
-            # Remove initial quote if any
-            matches = re.findall("^'", pattern)
-            if matches:
-                pattern = pattern[1:]
-
-            # Remove final quote if any
-            matches = re.findall("'$", pattern)
-            if matches:
-                pattern = pattern[:len(pattern) - 1]
 
             palette = Terminal256Palette()
 

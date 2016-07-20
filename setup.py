@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
 
-__version__ = '3.0.1'
+__version__ = '3.0.0'
 
 setup(name='raffaello',
       version=__version__,

@@ -1,15 +1,9 @@
-Raffaello
-=========
+Raffaello - output colorizer
+============================
 
-What is it?
------------
+Raffaello colorizes the output stream of any command-line tool (gcc/g++, cmake, dmesg, syslog, etc.), and make it easier to read.
 
-Raffaello is a powerful, yet simple to use, output colorizer.
-
-What does that mean?
-Let say you have a CLI tool that prints out lot of information you have to read carefully (gcc, g++, dmesg, etc.), how hard is that? And how easier would it be if some keywords were highlighted with meaningful colors? Well, Raffaello does just that.
-
-Since *a picture is worth a thousand words* and more pictures are even better, here are some examples.
+Starting from version 1.3.0, Raffaello can be used as python module in another source code (see pynicom) and since *a picture is worth a thousand words* and more pictures are even better, here are some examples.
 
 ### GCC/G++
 
@@ -19,108 +13,122 @@ Since *a picture is worth a thousand words* and more pictures are even better, h
 
 ![dmesg](./examples/dmesg.gif)
 
-### IFCONFIG
-
-
-The following is an example of **conditional hightlightning** make it possible by regular expressions.
-
-`ifconfig` reports the number of errors in packets RX and TX and I wanted to highlight the word "errors" only when actual errors have occurred.
-
-This is the pattern
-
-    (errors):[1-9]=>red_bold
-
-this way, strings like `*errors:0"` are not highlighted and I do not get false warnings.
-
-![ifconfig](./examples/ifconfig.gif)
-
-
-## Installation
-
-`Raffaello` is simple to install using `setuptools`. Just type the following command
-
-    # python setup.py install
-
 
 ## Usage
 
-### Command line
+The raffaello's command line interface let you use two call modes: **pipes** and **command**.
 
-`Raffaello` is simple to use. It just needs to know which **keywords** you want to colorize ([regular expressions](https://docs.python.org/2/library/re.html) using Python syntax are possible) and which **colors**.
+In pipe mode you call raffaello like:
 
-The basic syntax is the following:
+    <output stream source> | raffaello [options]
 
-    raffaello <arguments> --- command-line-tool [command-line-tool-arguments]
+In command mode raffaello will call your stream source in your behalf
 
-OR using **pipe**
-
-    command-line-tool [command-line-tool-arguments] | raffaello <arguments>
+    raffaello [options] -c <output stream source>
 
 
-Color **configuration** can be provided **direclty through command line** with arguments:
+Raffaello can use 2 color modes, 2 styles modes
 
-    $ raffaello "pattern1=>colorA" "pattern2=>colorB" "pattern3=>colorA" ... --- command [arguments]
+**8 colors** mode let you use the following names: black, red, green, yellow, blue, magenta, cyan, light_gray
 
-    e.g.
+**256 colors** mode let you use other 248 colors and choose between foreground or background colors (you can mix 8 colors mode names with 256 color mode names):
 
-        $ raffaello "error=>red" "Error=>red" --- dmesg     # this will highlight the word error in a messages in red
-        $ raffaello '[Ee]rror=>red' --- dmesg               # this does the same highlight but with regex
+    * Foreground color names are in the form 'colorNUM'. E.g. foreground red is color001
+    * Background color names are in the form 'bgcolorNUM'. E.g. background red is bgcolor001
 
-**Configuration** can also be provided **through a config file** like the following
+With styles you can blend colors in **bold** and **underlined**
 
-    $ raffaello --file=dmesg.cfg --- dmesg
-    $ dmesg | raffaello --file=dmesg.cfg
+    * foreground red bold is color001_bold
+    * foreground red underlined is color001_underlined
 
-where configuration file is
-
-    $ cat dmesg.cfg
-
-    # Dmesg config file example. Comment lines will be ignored
-    .*[Ee]rror.*=>red_bold
-    .*ERROR.*=>red_bold
-    timed\sout=>red
-    .*[Ww]arning.*=>yellow
+Call `raffaello -l` to see the complete list of available colors.
 
 
-Note that:
+### Full interface description
 
-    1. no spaces are allowed at both sides of `=>` sign
-        error => red            WRONG
-        error=> red             WRONG
-        error =>red             WRONG
-        error=>red              OK
-    2. if a pattern contains spaces, they must be defined using "\s" symbol, for example:
-        could not=>red_bold     WRONG
-        could\snot=>red_bold    OK
+raffaello (-p PRESET | -r REQUEST | -f FILE | -l) [options]
 
-To **avoid long file paths**, it is possible to put your config files under `<HOME>/.raffaello` hidden directory.
+    -p PRESET, --preset=PRESET              Prebuilt config files for coloring known output streams (cmake, gcc/g++, dmesg, cppcheck, at command, nmea, etc.)
+    -r REQUEST --request=REQUEST            The requested text=>color mapping string. Multipe requests are separated by a space. Regular expression are supported. E.g. "error=>red [Ww]arning=>yellow_bold".
+    -f FILE --file=FILE                     Path to a custom text=>color configuration file. Custom configuration files can include other custom files as well as built-in presets.
+    -c COMMAND --command=COMMAND            Instead of using raffaello with pipes, set the command-line tool to be executed by raffaello directly. E.g. -c "dmesg -w".
+    -d DELIMITER --delimiter=DELIMITER      If you don't like "=>" as delimiter between text and color, use this flag to change it. E.g. -d & [default: =>]
+    -l, --list                              List all the available colors and presets
+    -v --verbose                            Enable debug logging
 
 
-### Changelog
+## Examples
 
-Version 2.2.0
+The simpler usage is using the `request` flag. The `request` flag requires a string in the form "text=>color", where text can be a constant string or a [Regular expression](https://docs.python.org/2/library/re.html), while color is the name of the color to use (see [Usage](#Usage) section)
 
-* Optimized paint speed
-* Colors are now applied in the same order as they are provided
-* New configuration examples
-* Added test suite
-* Bug fixes
+* Simple constant text highlight
 
-Version 2.1.1 and 2.1.2:
+    $ ifconfig eno1 | raffaello --request="collisions=>blue"
+    
+![example001](./examples/raffaello001.png)
 
-* minor configuration fixes to add Raffaello to PyPI repository.
+* Highlight of multiple texts. Here you can see that spaces in the text are not allowed. Use \s instead.
 
-Since version 2.1.0 Raffaello's configuration files support *include* directive in order to extend configuration color codes with the ones already defined in other configuration files.
+    $ ifconfig eno1 | raffaello --request="RX\spackets=>green TX\spackets=>red"
 
-Since version 1.3.0, Raffaello can be used as python module in a source code.
+![example002](./examples/raffaello002.png)
 
-Once imported the module, use `raffaello.parse_color_option` or `raffallo.parse_config_file` to get the color configuration, and then use `raffaello.paint (<string>, configuration)` to apply the color codes to your text.
+* Highlight with regular expressions
 
-e.g.
+    $ ifconfig eno1 | raffaello --request="\d+\.\d+\.\d+\.\d+=>green_bold"
 
-    import raffaello
-    configuration = raffaello.parse_color_option ('this=>red')
-    print (raffaello.paint ('I want to highlight this in red', configuration))
+![example003](./examples/raffaello003.png)
 
-![module](./examples/raffaello-as-a-python-module.png)
 
+For more complex color mapping you can write a file with a line for each text=>color entry, like the following
+
+    collisions=>blue
+    RX\spackets=>green
+    TX\spackets=>red
+    \d+\.\d+\.\d+\.\d+=>green_bold
+
+save the file and provide it to raffaello using its fullpath
+
+    $ ifconfig eno1 | raffaello --file=$HOME/colorfile
+
+![example004](./examples/raffaello004.png)
+
+Color files can be reused in other color files using the `include` directive followed by the fullpath to the file.
+
+Using fullpath is annoying, tough, so Raffaello has a special path under $HOME/.raffaello. All the colorfiles inside this folder can be passed using simply their filename, without the path.
+
+Raffaello provides some built-in colorfiles called **presets**. Presets can be included in a custom files, for a full list of presets, call `raffaello --list`
+
+## Raffaello is a python module
+
+Raffaello can be used as a python module inside other source codes
+
+{% highlight python %}
+from raffaello import Raffaello, Commission
+
+request = '''
+error=>red
+warning=>yellow_bold
+bluish\stext=>color026
+'''
+
+c = Commission(request)
+r = Raffaello(c.commission)
+
+print(r.paint('Sample message with error, warning and a bluish text.'))
+{% endhighlight %}
+
+## Install
+
+Install from source using setuptools. Just type the following command
+
+    # python setup.py install
+
+Install from [PyPI - the Python Package Index](https://pypi.python.org/pypi)
+
+    # pip install raffaello
+
+
+## Dependencies
+
+* `docopt` language for description of command-line interfaces
