@@ -1,3 +1,5 @@
+[![PyPI version](https://badge.fury.io/py/raffaello.svg)](https://badge.fury.io/py/raffaello)
+
 Raffaello - output colorizer
 ============================
 
