@@ -22,8 +22,8 @@ import re
 import signal
 import sys
 
-level = logging.ERROR
-logging.basicConfig(level=level, format='    %(levelname)s %(message)s')
+level = logging.INFO
+logging.basicConfig(level=level, format='%(message)s')
 log = logging.getLogger(__name__)
 
 # Catch CTRL_C to let the program quit smoothly
@@ -127,7 +127,7 @@ class Raffaello (object):
                 break
 
             except EOFError:
-                log.info("EOF reached. Nothing else to do")
+                log.debug("EOF reached. Nothing else to do")
                 break
 
         log.debug("End of stream")
@@ -319,12 +319,18 @@ class Configuration(object):
             self.request = self.read_commission_from_file(fullpath)
         elif config['--preset']:
             path = os.path.join(self.presets, config['--preset'])
-            log.info('Looking for preset "%s" in path "%s"' % (config['--preset'], path))
-            self.request = self.read_commission_from_file(path)
+            if os.path.exists(path):
+                log.debug('Looking for preset "%s" in path "%s"' % (config['--preset'], path))
+                self.request = self.read_commission_from_file(path)
+            else:
+                log.fatal('Could not find any preset with name \'%s\'' % config['--preset'])
+                log.info('If you wanted to use a custom color file, you need the --file flag')
+                sys.exit(1)
         else:
             self.request = config['--request']
 
-        log.info('Got request: \"%s\"' % self.request)
+        if self.request:
+            log.debug('Got request: \"%s\"' % self.request)
 
     def _show_colors(self):
         palette = Terminal256Palette()
@@ -477,7 +483,7 @@ def main():
     if docopt_dict['--verbose']:
             level = logging.DEBUG
     else:
-        level = logging.INFO
+        level = logging.DEBUG
     logging.basicConfig(level=level, format='    %(levelname)s %(message)s')
     global log
     log = logging.getLogger(__name__)
