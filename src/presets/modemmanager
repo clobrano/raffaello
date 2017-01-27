@@ -6,8 +6,11 @@ ModemManager=>magenta
 # date
 \w{3}\s\d+\s\d{2}:\d{2}:\d{2}=>cyan
 
+# Devices
 ttyACM[0-9]+=>cyan_bold
 ttyUSB[0-9]+=>cyan_bold
+cdc-wdm[0-9]+=>cyan_bold
+
 
 <debug>=>green_bold
 <info>=>cyan_bold
