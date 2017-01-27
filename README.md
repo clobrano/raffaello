@@ -1,4 +1,5 @@
 [![PyPI version](https://badge.fury.io/py/raffaello.svg)](https://badge.fury.io/py/raffaello)
+[![Build Status](https://travis-ci.org/clobrano/raffaello.svg?branch=master)](https://travis-ci.org/clobrano/raffaello)
 
 Raffaello - output colorizer
 ============================
