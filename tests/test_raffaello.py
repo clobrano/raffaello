@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import unittest
-from raffaello import Raffaello
-from raffaello import Commission
+from raffaello.src.raffaello import Raffaello
+from raffaello.src.raffaello import Commission
 
 class RaffaelloTest(unittest.TestCase):
 
