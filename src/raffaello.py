@@ -8,6 +8,7 @@ Usage: raffaello (-p PRESET | -r REQUEST | -f FILE | -l) [options]
     -r REQUEST --request=REQUEST            The requested text/color mapping string. Multipe requests are separated by a space. Regular expression are supported. E.g. "error=>red [Ww]arning=>yellow_bold".
     -f FILE --file=FILE                     Path to the custom text=>color configuration file.
     -c COMMAND --command=COMMAND            Instead of using raffaello with pipes, set the command-line tool to be executed by raffaello directly. E.g. -c "dmesg -w".
+    -m, --match-only                        Print only the lines that match against some defined pattern.
     -d DELIMITER --delimiter=DELIMITER      If you don't like "=>" as delimiter between text and color, use this flag to change it. E.g. -d & [default: =>]
     -l, --list                              List all the available colors and presets
     -v --verbose                            Enable debug logging
@@ -39,9 +40,10 @@ class Raffaello (object):
     uses when running as command-line utility
     '''
 
-    def __init__(self, commission, command=None):
+    def __init__(self, commission, command=None, match_only=False):
         self.command = command
         self.commission = commission
+        self.match_only = match_only
 
     def paint(self, line):
         """
@@ -49,6 +51,7 @@ class Raffaello (object):
         pattern/color dictionary
         """
         copy = line
+        has_matches = False
         for item in self.commission:
             pattern = item.keys()[0]
             brush = item[pattern]
@@ -60,14 +63,17 @@ class Raffaello (object):
                 sys.exit(os.EX_DATAERR)
 
             if matches:
+                has_matches = True
                 log.debug('Match found "{3}": {0} => key:"{1}", pattern:"{2}"'.format(item, pattern, brush, matches))
                 log.debug(r'pre brush: %s' % repr(copy))
                 if brush.open is not None:
                     copy = brush.apply(copy, matches)
                     copy = copy.rstrip()
                 else:
-                    copy = None
-                    break
+                    return None
+        if self.match_only and not has_matches:
+            log.debug('Skipping {line} because there is no match'.format(line=copy))
+            return None
 
         return copy
 
@@ -314,6 +320,7 @@ class Configuration(object):
         self.custom_presets = home
 
         self.command = config['--command']
+        self.match_only = config['--match-only']
         self.delimiter = config['--delimiter']
 
         if config['--list']:
@@ -503,7 +510,7 @@ def main():
 
     config = Configuration(docopt_dict)
     commission = Commission(config.request, config.delimiter).commission
-    raffaello = Raffaello(commission)
+    raffaello = Raffaello(commission=commission, match_only=config.match_only)
     sys.exit(raffaello.start())
 
 if __name__ == '__main__':
