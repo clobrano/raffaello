@@ -62,9 +62,14 @@ class Raffaello (object):
             if matches:
                 log.debug('Match found "{3}": {0} => key:"{1}", pattern:"{2}"'.format(item, pattern, brush, matches))
                 log.debug(r'pre brush: %s' % repr(copy))
-                copy = brush.apply(copy, matches)
+                if brush.open is not None:
+                    copy = brush.apply(copy, matches)
+                    copy = copy.rstrip()
+                else:
+                    copy = None
+                    break
 
-        return copy.rstrip()
+        return copy
 
     def start(self):
         '''
@@ -121,7 +126,9 @@ class Raffaello (object):
                         endofstream = False
 
                 # And here is the magic
-                print(self.paint(line))
+                line = self.paint(line)
+                if line:
+                    print(line)
 
             except KeyboardInterrupt:
                 break
@@ -180,6 +187,10 @@ class Palette(collections.MutableMapping):
             # underline style
             brush = BrushStroke(key, color_code + style_underline, END)
             self._palette.update({key + '_underlined': brush})
+
+        # blind code
+        brush = BrushStroke('blind', None, None)
+        self._palette.update({'blind' : brush})
 
         return color_codes
 
@@ -284,6 +295,8 @@ class BrushStroke(object):
         Apply brush to all matches in line
         '''
         for match in matches:
+            if self.open is None:
+                return None
             replacement = self.open + match + self.close
             line = line.replace(match, replacement)
 
