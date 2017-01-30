@@ -5,7 +5,7 @@
 Raffaello - output colorizer
 ============================
 
-Raffaello colorizes the output stream of any command-line tool (gcc/g++, cmake, dmesg, syslog, etc.), making it easier to read.
+Raffaello colorizes the output stream of any command-line tool (e.g. gcc/g++, cmake, dmesg, syslog and custom), making it easier to read.
 
 ## Usage
 
@@ -20,35 +20,44 @@ In command mode raffaello will call your stream source in your behalf
     raffaello [options] -c <output stream source>
 
 
-To highlight the output stream, Raffaello has 2 color modes and 2 styles modes:
+To highlight the output stream, Raffaello has **2 color modes** and **2 styles modes**:
 
-**8 colors** mode let you use the following names: *black, red, green, yellow, blue, magenta, cyan, light_gray*
+Color modes:
 
-**256 colors** mode let you use other 248 colors and choose between foreground or background colors (you can mix 8 colors mode names with 256 color mode names):
+- **8 colors** mode let you use the following names: *black, red, green, yellow, blue, magenta, cyan, light_gray*. **NEW** Starting from version 3.0.3 Raffaello introduces a *blind* color: *lines matching the pattern with color "blind" will be REMOVED from the stream*. This will improve readability of dense stream output.
 
-* Foreground color names are in the form `colorNUM`. E.g. foreground red is *color001*
-* Background color names are in the form `bgcolorNUM`. E.g. background red is *bgcolor001*
+- **256 colors** mode let you use other 248 colors and choose between foreground or background colors (you can mix 8 colors mode names with 256 color mode names):
+
+Color styles:
+
+- Foreground color names are in the form `colorNUM`. E.g. foreground red is *color001*
+- Background color names are in the form `bgcolorNUM`. E.g. background red is *bgcolor001*
 
 With the styles you can blend colors in **bold** and **underlined**
 
-* foreground red bold is *color001_bold*
-* foreground red underlined is *color001_underlined*
+- foreground red bold is *color001_bold*
+- foreground red underlined is *color001_underlined*
 
 Call `raffaello -l` to see the complete list of available colors.
 
 
 ### Full interface description
 
-raffaello (-p PRESET | -r REQUEST | -f FILE | -l) [options]
+```
+Usage: raffaello (-p PRESET | -r REQUEST | -f FILE | -l) [options]
 
-    -p PRESET, --preset=PRESET              Prebuilt config files for coloring known output streams (cmake, gcc/g++, dmesg, cppcheck, at command, nmea, etc.)
-    -r REQUEST --request=REQUEST            The requested text=>color mapping string. Multipe requests are separated by a space. Regular expression are supported. E.g. "error=>red [Ww]arning=>yellow_bold".
-    -f FILE --file=FILE                     Path to a custom text=>color configuration file. Custom configuration files can include other custom files as well as built-in presets.
+    -p PRESET, --preset=PRESET              Prebuilt config files for coloring known output streams (gcc/g++, cmake, dmesg, gcc/g++, ModemManager, logcat...)
+    -r REQUEST --request=REQUEST            The requested text/color mapping string. Multipe requests are separated by a space. Regular expression are supported. E.g. "error=>red [Ww]arning=>yellow_bold".
+    -f FILE --file=FILE                     Path to the custom text=>color configuration file.
     -c COMMAND --command=COMMAND            Instead of using raffaello with pipes, set the command-line tool to be executed by raffaello directly. E.g. -c "dmesg -w".
+    -m, --match-only                        Print only the lines that match against some defined pattern.
     -d DELIMITER --delimiter=DELIMITER      If you don't like "=>" as delimiter between text and color, use this flag to change it. E.g. -d & [default: =>]
     -l, --list                              List all the available colors and presets
     -v --verbose                            Enable debug logging
+```
 
+**NEWS**
+- version 3.0.3 --match-only flag Print only the lines that match against any defined pattern.
 
 ## Examples
 
