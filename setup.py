@@ -11,13 +11,19 @@ __version__ = '3.0.2'
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
+if os.path.exists('README.rst'):
+    print("file exists")
+    long_description=read('README.rst')
+else:
+    long_description=read('README.md')
+
 setup(name='raffaello',
       version=__version__,
       description='Raffaello command-line output colorizer',
       author='Carlo Lobrano',
       author_email='c.lobrano@gmail.com',
       license="MIT",
-      long_description = read('README.rst'),
+      long_description = long_description,
       url='https://github.com/clobrano/raffaello',
       keywords=['formatter', 'console', 'colorizer'],
       classifiers=[
