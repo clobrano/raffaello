@@ -35,7 +35,7 @@ setup(name='raffaello',
       package_dir={'': 'src'},
       install_requires=['docopt', ],
 
-      py_modules=['raffaello'],
+      py_modules=['raffaello', 'paint'],
       entry_points={
           'console_scripts': ['raffaello=raffaello:main'],
       },
