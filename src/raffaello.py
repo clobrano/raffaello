@@ -14,14 +14,13 @@ Usage: raffaello (-p PRESET | -r REQUEST | -f FILE | -l) [options]
     -v --verbose                            Enable debug logging
 """
 
-import glob
 import logging
 import os
 import re
 import signal
 import sys
 from docopt import docopt
-from paint import Terminal256Palette
+from paint import Terminal256Palette, brush_stroke
 
 LEVEL = logging.INFO
 logging.basicConfig(level=LEVEL, format='%(message)s')
@@ -52,9 +51,9 @@ class Raffaello(object):
         """
         copy = line
         has_matches = False
-        for item in self.commission:
-            pattern = item.keys()[0]
-            brush = item[pattern]
+        for step in self.commission:
+            pattern, brush = step
+
             try:
                 matches = re.findall(pattern, line)
             except re.error as error:
@@ -64,10 +63,10 @@ class Raffaello(object):
             if matches:
                 has_matches = True
                 LOG.debug('Match found: %s => key:"%s", pattern:"%s"',
-                          item, pattern, brush)
+                          step, pattern, brush)
                 LOG.debug(r'pre brush: %s', repr(copy))
-                if brush.open is not None:
-                    copy = brush.apply(copy, matches)
+                if brush['open_color_tag'] is not None:
+                    copy = brush_stroke(copy, matches, brush)
                     copy = copy.rstrip()
                 else:
                     return None
@@ -115,7 +114,7 @@ class Raffaello(object):
             try:
                 if not command:
                     # we are in a pipe, just read from output
-                    line = raw_input()
+                    line = input()
                 else:
                     # we are not in a pipe, read from file's descriptors
                     line = fd_read.readline().rstrip()
@@ -158,47 +157,42 @@ class Raffaello(object):
         os.system(self.command)
 
 
-class Commission(object):
-    '''
-    The requested pattern-to-color mapping
-    '''
+def parse_request(request, delimiter='=>'):
+    '''Parse request string and return a list of pattern-to-color maps'''
+    commission = []
+    # Support multiline request
+    requests = request.splitlines()
+    if len(requests) == 1:
+        # Check whether there are multiple requests in a single line
+        requests = request.split(' ')
 
-    def __init__(self, request, delimiter='=>'):
-        self.commission = []
+    for req in requests:
+        # empty line
+        if not req:
+            continue
 
-        # Support multiline request
-        requests = request.splitlines()
-        if len(requests) == 1:
-            # Check whether there are multiple requests in a single line
-            requests = request.split(' ')
-
-        for req in requests:
-            # empty line
-            if not req:
-                continue
-
+        try:
+            pattern, color = req.split(delimiter)
+        except ValueError as err:
             if len(re.findall(delimiter, req)) > 1:
-                print(re.findall(delimiter, req))
-                LOG.error('[Error] Can not parse request %s. Too many '
-                          'delimiters (%s) in request', req, delimiter)
-                sys.exit(os.EX_DATAERR)
-
-            try:
-                pattern, color = req.split(delimiter)
-            except ValueError as err:
-                LOG.error("Could not parse request '%s'. %s)", req, err)
-                LOG.debug("delimiter: %s", delimiter)
-                sys.exit(os.EX_DATAERR)
-
-            palette = Terminal256Palette()
-
-            if color in palette:
-                item = {r'%s' % pattern: palette[color]}
-                LOG.debug('adding "%s"', item)
-                self.commission.append(item)
+                LOG.error('could not parse request "%s": Too many '
+                          'delimiters symbols (%s) in request', req, delimiter)
             else:
-                LOG.error('Color "%s" does not exist', color)
-                sys.exit(os.EX_DATAERR)
+                LOG.error("could not parse request '%s'. %s)", req, err)
+
+            sys.exit(os.EX_DATAERR)
+
+        palette = Terminal256Palette()
+
+        if color in palette:
+            item = [r'%s' % pattern, palette[color]]
+            LOG.debug('adding "%s"', item)
+            commission.append(item)
+        else:
+            LOG.error('Color "%s" does not exist', color)
+            sys.exit(os.EX_DATAERR)
+
+    return commission
 
 
 class Configuration(object):
@@ -249,6 +243,7 @@ class Configuration(object):
             LOG.debug('Got request: \"%s\"', self.request)
 
     def _show_colors(self):
+        '''Show available colors and usage'''
         palette = Terminal256Palette()
         print('''
         8 bit color palette
@@ -267,12 +262,18 @@ class Configuration(object):
 
         Following the full list of color NUMs
         ''' % (
-            palette['color001'].apply('color001', ['color001']),
-            palette['bgcolor001'].apply('bgcolor001', ['bgcolor001']),
-            palette['color001_bold'].apply('color001_bold', ['color001_bold']),
-            palette['color001_underlined'].apply('color001_underlined', ['color001_underlined']),
+            brush_stroke('color001', ['color001'], palette['color001']),
+            brush_stroke('bgcolor001', ['bgcolor001'], palette['bgcolor001']),
+            brush_stroke('color001_bold', ['color001_bold'], palette['color001_bold']),
+            brush_stroke('color001_underlined', ['color001_underlined'], palette['color001_underlined'])
         ))
-        color_names = palette.keys()
+        # palette['color001'].apply('color001', ['color001']),
+        # palette['bgcolor001'].apply('bgcolor001', ['bgcolor001']),
+        # palette['color001_bold'].apply('color001_bold', ['color001_bold']),
+        # palette['color001_underlined'].apply('color001_underlined', ['color001_underlined']),
+        # ))
+
+        color_names = list(palette.keys())
         color_names.sort()
         col = 10
         for color in color_names:
@@ -284,7 +285,7 @@ class Configuration(object):
             if color.startswith('bg'):
                 color_num = re.match(r'bgcolor(\d+)', color).group(1)
                 string = '   '
-                sys.stdout.write(' ' + color_num + ': ' + palette[color].apply(string, [string]))
+                sys.stdout.write(' ' + color_num + ': ' + brush_stroke(string, [string], palette[color]))
                 sys.stdout.flush()
 
                 col -= 1
@@ -313,22 +314,7 @@ class Configuration(object):
                 include errors
                 include custom-preset
                 ...
-
-              List of the available presets
-              -----------------------------
               ''')
-        presets = glob.glob(os.path.join(self.presets, '*'))
-        presets.sort()
-        for preset in presets:
-            name = os.path.basename(preset)
-            if '__init__' in name:
-                continue
-            LOG.debug('Reading preset ' + preset)
-            description = file(preset, mode='r').readlines()[0].strip()
-            if description[0] == '#':
-                print('%15s: %s', name, description.replace('#', '').lstrip())
-            else:
-                print('%15s:', name)
 
     def _get_full_path(self, filepath):
         '''Build the fullpath to config file'''
@@ -404,7 +390,7 @@ def main():
     LOG = logging.getLogger(__name__)
 
     config = Configuration(docopt_dict)
-    commission = Commission(config.request, config.delimiter).commission
+    commission = parse_request(config.request, config.delimiter)
     raffaello = Raffaello(commission=commission, match_only=config.match_only)
     sys.exit(raffaello.start())
 

@@ -4,30 +4,15 @@ Paint toolkit
 import collections
 
 
-class BrushStroke(object):
-    """
-    BrushStroke knows how to apply colors to the SHELL
-    """
+def brush_stroke(string, matches, brush):
+    '''Apply color to matching words in string'''
+    for match in matches:
+        if brush['open_color_tag'] is None:
+            return None
+        replacement = brush['open_color_tag'] + match + brush['close_color_tag']
+        string = string.replace(match, replacement)
 
-    def __init__(self, name, open_code, close_code):
-        self.name = name
-        self.open = open_code
-        self.close = close_code
-
-    def apply(self, line, matches):
-        '''
-        Apply brush to all matches in line
-        '''
-        for match in matches:
-            if self.open is None:
-                return None
-            replacement = self.open + match + self.close
-            line = line.replace(match, replacement)
-
-        return line
-
-    def __repr__(self):
-        return self.name
+    return string
 
 
 class Palette(collections.MutableMapping):
@@ -58,19 +43,31 @@ class Palette(collections.MutableMapping):
         style_underline = esc + '[4m'
 
         for key, color_code in color_codes.items():
-            brush = BrushStroke(key, color_code, end)
+            # brush = Brush(key, color_code, end)
+            brush = {'name': key,
+                     'open_color_tag': color_code,
+                     'close_color_tag': end}
             self._palette.update({key: brush})
 
             # bold style
-            brush = BrushStroke(key, color_code + style_bold, end)
+            # brush = Brush(key, color_code + style_bold, end)
+            brush = {'name': key,
+                     'open_color_tag': color_code + style_bold,
+                     'close_color_tag': end}
             self._palette.update({key + '_bold': brush})
 
             # underline style
-            brush = BrushStroke(key, color_code + style_underline, end)
+            # brush = Brush(key, color_code + style_underline, end)
+            brush = {'name': key,
+                     'open_color_tag': color_code + style_underline,
+                     'close_color_tag': end}
             self._palette.update({key + '_underlined': brush})
 
         # blind code
-        brush = BrushStroke('blind', None, None)
+        # brush = Brush('blind', None, None)
+        brush = {'name': 'blind',
+                 'open_color_tag': None,
+                 'close_color_tag': None}
         self._palette.update({'blind': brush})
 
         return color_codes
@@ -105,21 +102,27 @@ class Terminal256Palette(Palette):
         style_underline = esc + '[4m'
 
         color_codes.update({bg_color % num: bg_code % num
-                            for num in xrange(256)})
+                            for num in range(256)})
         color_codes.update({fg_color % num: fg_code % num
-                            for num in xrange(256)})
+                            for num in range(256)})
 
         for key, color_code in color_codes.items():
-            brush = BrushStroke(key, color_code, end)
+            # brush = BrushStroke(key, color_code, end)
+            brush = {'name': key,
+                     'open_color_tag': color_code,
+                     'close_color_tag': end}
             self._palette.update({key: brush})
 
             # bold style
-            brush = BrushStroke(key, color_code + style_bold, end)
+            # brush = BrushStroke(key, color_code + style_bold, end)
+            brush = {'name': key,
+                     'open_color_tag': color_code + style_bold,
+                     'close_color_tag': end}
             self._palette.update({key + '_bold': brush})
 
             # underline style
-            brush = BrushStroke(key, color_code + style_underline, end)
+            # brush = BrushStroke(key, color_code + style_underline, end)
+            brush = {'name': key,
+                     'open_color_tag': color_code + style_underline,
+                     'close_color_tag': end}
             self._palette.update({key + '_underlined': brush})
-
-
-
