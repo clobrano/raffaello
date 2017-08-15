@@ -14,7 +14,6 @@ Usage: raffaello (-p PRESET | -r REQUEST | -f FILE | -l) [options]
     -v --verbose                            Enable debug logging
 """
 
-from docopt import docopt
 import collections
 import glob
 import logging
@@ -22,19 +21,20 @@ import os
 import re
 import signal
 import sys
+from docopt import docopt
 
-level = logging.INFO
-logging.basicConfig(level=level, format='%(message)s')
-log = logging.getLogger(__name__)
+LEVEL = logging.INFO
+logging.basicConfig(level=LEVEL, format='%(message)s')
+LOG = logging.getLogger(__name__)
 
 # Catch CTRL_C to let the program quit smoothly
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
 # Default directory
-home = os.path.expanduser(os.path.join('~', '.raffaello'))
+HOME = os.path.expanduser(os.path.join('~', '.raffaello'))
 
 
-class Raffaello (object):
+class Raffaello(object):
     '''
     Wrapper class for methods that Raffaello
     uses when running as command-line utility
@@ -57,22 +57,22 @@ class Raffaello (object):
             brush = item[pattern]
             try:
                 matches = re.findall(pattern, line)
-            except Exception as err:
-                log.error('%s' % err)
-                log.debug('line: %s' % line)
-                sys.exit(os.EX_DATAERR)
+            except re.error as error:
+                LOG.error('Error in line %s: %s', line, error)
+                return None
 
             if matches:
                 has_matches = True
-                log.debug('Match found "{3}": {0} => key:"{1}", pattern:"{2}"'.format(item, pattern, brush, matches))
-                log.debug(r'pre brush: %s' % repr(copy))
+                LOG.debug('Match found: %s => key:"%s", pattern:"%s"',
+                          item, pattern, brush)
+                LOG.debug(r'pre brush: %s', repr(copy))
                 if brush.open is not None:
                     copy = brush.apply(copy, matches)
                     copy = copy.rstrip()
                 else:
                     return None
         if self.match_only and not has_matches:
-            log.debug('Skipping {line} because there is no match'.format(line=copy))
+            LOG.debug('Skipping %s because there is no match', copy)
             return None
 
         return copy
@@ -140,11 +140,11 @@ class Raffaello (object):
                 break
 
             except EOFError:
-                log.debug("EOF reached. Nothing else to do")
+                LOG.debug("EOF reached. Nothing else to do")
                 break
 
-        log.debug("End of stream")
-        os._exit(os.EX_OK)
+        LOG.debug("End of stream")
+        sys.exit(os.EX_OK)
 
     def _manage_child(self, pipe_read, pipe_write):
         os.close(pipe_read)
@@ -163,40 +163,43 @@ class Palette(collections.MutableMapping):
     Container of all available colors and styles.
     '''
 
-    ESC = chr(27)
-    END = ESC + '[0m'
+    esc = chr(27)
+    end = esc + '[0m'
 
     def __init__(self):
+        collections.MutableMapping.__init__(self)
         self._palette = dict()
         self._set_colors()
 
     def _set_colors(self):
-        ESC = Palette.ESC
-        END = Palette.END
+        esc = Palette.esc
+        end = Palette.end
 
         fg_8color_offset = 30
-        names = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'light_gray']
-        base_code = ESC + '[%dm'
+        names = ['black', 'red', 'green', 'yellow', 'blue',
+                 'magenta', 'cyan', 'light_gray']
+        base_code = esc + '[%dm'
 
-        color_codes = {names[num]: base_code % (num + fg_8color_offset) for num in range(8)}
-        style_bold = ESC + '[1m'
-        style_underline = ESC + '[4m'
+        color_codes = {names[num]: base_code % (num + fg_8color_offset)
+                       for num in range(8)}
+        style_bold = esc + '[1m'
+        style_underline = esc + '[4m'
 
         for key, color_code in color_codes.items():
-            brush = BrushStroke(key, color_code, END)
+            brush = BrushStroke(key, color_code, end)
             self._palette.update({key: brush})
 
             # bold style
-            brush = BrushStroke(key, color_code + style_bold, END)
+            brush = BrushStroke(key, color_code + style_bold, end)
             self._palette.update({key + '_bold': brush})
 
             # underline style
-            brush = BrushStroke(key, color_code + style_underline, END)
+            brush = BrushStroke(key, color_code + style_underline, end)
             self._palette.update({key + '_underlined': brush})
 
         # blind code
         brush = BrushStroke('blind', None, None)
-        self._palette.update({'blind' : brush})
+        self._palette.update({'blind': brush})
 
         return color_codes
 
@@ -217,72 +220,76 @@ class Palette(collections.MutableMapping):
 
 
 class Terminal256Palette(Palette):
+    '''Color palette for Terminal with 256 colors'''
     def _set_colors(self):
         color_codes = Palette._set_colors(self)
-        ESC = Palette.ESC
-        END = Palette.END
+        esc = Palette.esc
+        end = Palette.end
         bg_color = 'bgcolor%03d'
         fg_color = 'color%03d'
-        fg_code = ESC + '[38;5;%dm'
-        bg_code = ESC + '[48;5;%dm'
-        style_bold = ESC + '[1m'
-        style_underline = ESC + '[4m'
+        fg_code = esc + '[38;5;%dm'
+        bg_code = esc + '[48;5;%dm'
+        style_bold = esc + '[1m'
+        style_underline = esc + '[4m'
 
-        color_codes.update({bg_color % num: bg_code % num for num in xrange(256)})
-        color_codes.update({fg_color % num: fg_code % num for num in xrange(256)})
+        color_codes.update({bg_color % num: bg_code % num
+                            for num in xrange(256)})
+        color_codes.update({fg_color % num: fg_code % num
+                            for num in xrange(256)})
 
         for key, color_code in color_codes.items():
-            brush = BrushStroke(key, color_code, END)
+            brush = BrushStroke(key, color_code, end)
             self._palette.update({key: brush})
 
             # bold style
-            brush = BrushStroke(key, color_code + style_bold, END)
+            brush = BrushStroke(key, color_code + style_bold, end)
             self._palette.update({key + '_bold': brush})
 
             # underline style
-            brush = BrushStroke(key, color_code + style_underline, END)
+            brush = BrushStroke(key, color_code + style_underline, end)
             self._palette.update({key + '_underlined': brush})
 
 
 class Commission(object):
     '''
-    The requested pattern to color mapping
+    The requested pattern-to-color mapping
     '''
 
     def __init__(self, request, delimiter='=>'):
         self.commission = []
 
         # Support multiline request
-        entries = request.splitlines()
-        if len(entries) == 1:
+        requests = request.splitlines()
+        if len(requests) == 1:
             # Check whether there are multiple requests in a single line
-            entries = request.split(' ')
+            requests = request.split(' ')
 
-        for r in entries:
+        for req in requests:
             # empty line
-            if len(r) == 0:
+            if not req:
                 continue
 
-            if len(re.findall(delimiter, r)) > 1:
-                print(re.findall(delimiter, r))
-                log.error('[Error] Can not parse request %s. Too many delimiters (%s) in request' % (r, delimiter))
+            if len(re.findall(delimiter, req)) > 1:
+                print(re.findall(delimiter, req))
+                LOG.error('[Error] Can not parse request %s. Too many '
+                          'delimiters (%s) in request', req, delimiter)
                 sys.exit(os.EX_DATAERR)
 
             try:
-                pattern, color = r.split(delimiter)
+                pattern, color = req.split(delimiter)
             except ValueError as err:
-                log.error("Could not parse request '%s'. (%s)" % (r, err))
-                log.debug("delimiter: {0}".format(delimiter))
+                LOG.error("Could not parse request '%s'. %s)", req, err)
+                LOG.debug("delimiter: %s", delimiter)
                 sys.exit(os.EX_DATAERR)
 
             palette = Terminal256Palette()
 
             if color in palette:
                 item = {r'%s' % pattern: palette[color]}
-                log.debug('adding "{0}"'.format(item))
+                LOG.debug('adding "%s"', item)
                 self.commission.append(item)
             else:
-                log.error('Color "%s" does not exist' % color)
+                LOG.error('Color "%s" does not exist', color)
                 sys.exit(os.EX_DATAERR)
 
 
@@ -313,11 +320,13 @@ class BrushStroke(object):
 
 
 class Configuration(object):
+    '''Manages Raffaello's configuration'''
+
     def __init__(self, docopt_dict):
         config = docopt_dict
-        _ROOT = os.path.abspath(os.path.dirname(__file__))
-        self.presets = os.path.join(_ROOT, 'presets')
-        self.custom_presets = home
+        root = os.path.abspath(os.path.dirname(__file__))
+        self.presets = os.path.join(root, 'presets')
+        self.custom_presets = HOME
 
         self.command = config['--command']
         self.match_only = config['--match-only']
@@ -328,29 +337,34 @@ class Configuration(object):
             self._show_styles()
             self._show_presets()
             sys.exit(os.EX_OK)
+
         elif config['--file']:
             path = config['--file']
             fullpath = self._get_full_path(path)
 
             if fullpath is None:
-                log.error("Could not find configuration file %s", path)
+                LOG.error("Could not find configuration file %s", path)
                 sys.exit(os.EX_CONFIG)
 
             self.request = self.read_commission_from_file(fullpath)
+
         elif config['--preset']:
             path = os.path.join(self.presets, config['--preset'])
             if os.path.exists(path):
-                log.debug('Looking for preset "%s" in path "%s"' % (config['--preset'], path))
+                LOG.debug('Looking for preset "%s" in path %s"',
+                          config['--preset'], path)
                 self.request = self.read_commission_from_file(path)
             else:
-                log.fatal('Could not find any preset with name \'%s\'' % config['--preset'])
-                log.info('If you wanted to use a custom color file, you need the --file flag')
-                sys.exit(1)
+                LOG.fatal('Could not find any preset with name \'%s\'',
+                          config['--preset'])
+                LOG.info('If you wanted to use a custom color file,'
+                         ' you need the --file flag')
+                sys.exit(os.EX_UNAVAILABLE)
         else:
             self.request = config['--request']
 
         if self.request:
-            log.debug('Got request: \"%s\"' % self.request)
+            LOG.debug('Got request: \"%s\"', self.request)
 
     def _show_colors(self):
         palette = Terminal256Palette()
@@ -386,7 +400,7 @@ class Configuration(object):
 
             # Foreground color is easy to see
             if color.startswith('bg'):
-                color_num = re.match('bgcolor(\d+)', color).group(1)
+                color_num = re.match(r'bgcolor(\d+)', color).group(1)
                 string = '   '
                 sys.stdout.write(' ' + color_num + ': ' + palette[color].apply(string, [string]))
                 sys.stdout.flush()
@@ -427,16 +441,16 @@ class Configuration(object):
             name = os.path.basename(preset)
             if '__init__' in name:
                 continue
-            log.debug('Reading preset ' + preset)
+            LOG.debug('Reading preset ' + preset)
             description = file(preset, mode='r').readlines()[0].strip()
             if description[0] == '#':
-                print('%15s: %s' % (name, description.replace('#', '').lstrip()))
+                print('%15s: %s', name, description.replace('#', '').lstrip())
             else:
-                print('%15s:' % name)
+                print('%15s:', name)
 
     def _get_full_path(self, filepath):
         '''Build the fullpath to config file'''
-        log.debug('Building full path for "%s"...' % filepath)
+        LOG.debug('Building full path for "%s"...', filepath)
         fullpath = os.path.expanduser(filepath)
 
         if not os.path.exists(fullpath):
@@ -444,17 +458,17 @@ class Configuration(object):
             fullpath = os.path.join(self.presets, os.path.basename(fullpath))
 
             if os.path.exists(fullpath):
-                log.debug("Using '%s'" % fullpath)
+                LOG.debug("Using '%s'", fullpath)
                 return fullpath
 
             # Check in custom presets folder
-            fullpath = os.path.join(self.custom_presets, home, os.path.basename(fullpath))
+            fullpath = os.path.join(self.custom_presets, HOME, os.path.basename(fullpath))
 
             if os.path.exists(fullpath):
-                log.debug("Using '%s'" % fullpath)
+                LOG.debug("Using '%s'", fullpath)
                 return fullpath
 
-            log.error('Could not find config file "%s"' % filepath)
+            LOG.error('Could not find config file "%s"', filepath)
             fullpath = None
 
         return fullpath
@@ -463,32 +477,28 @@ class Configuration(object):
         """
         Get Pattern/Color pairs from configuration file
         """
-        log.debug('Reading config file %s' % path)
+        LOG.debug('Reading config file %s', path)
         config = open(path).readlines()
         request = ''
-        include_pattern = re.compile('^include (.*)')
+        include_pattern = re.compile(r'^include (.*)')
         for line in config:
             line = line.rstrip()
 
-            # Skip empty lines
-            if 0 == len(line):
-                continue
-
-            # Skip comments
-            if '#' == line[0]:
+            # Skip empty lines and commends
+            if not line or line[0] == '#':
                 continue
 
             # Check inner config files
             includes = include_pattern.match(line)
             if includes:
                 subconfig = includes.group(1)
-                log.debug('including preset "%s"' % subconfig)
+                LOG.debug('including preset "%s"', subconfig)
 
                 subconf_fullpath = self._get_full_path(subconfig)
 
                 if subconf_fullpath:
                     inner_request = self.read_commission_from_file(subconf_fullpath)
-                    log.debug('included request "%s"' % inner_request)
+                    LOG.debug('included request "%s"', inner_request)
                     request = request + ' ' + inner_request
                     continue
 
@@ -498,20 +508,24 @@ class Configuration(object):
 
 
 def main():
+    '''Entry point'''
     # Parse command line arguments
     docopt_dict = docopt(__doc__)
+    global LEVEL
     if docopt_dict['--verbose']:
-            level = logging.DEBUG
+        LEVEL = logging.DEBUG
     else:
-        level = logging.DEBUG
-    logging.basicConfig(level=level, format='    %(levelname)s %(message)s')
-    global log
-    log = logging.getLogger(__name__)
+        LEVEL = logging.DEBUG
+    logging.basicConfig(level=LEVEL, format='    %(levelname)s,(message)s')
+
+    global LOG
+    LOG = logging.getLogger(__name__)
 
     config = Configuration(docopt_dict)
     commission = Commission(config.request, config.delimiter).commission
     raffaello = Raffaello(commission=commission, match_only=config.match_only)
     sys.exit(raffaello.start())
+
 
 if __name__ == '__main__':
     main()
