@@ -1,0 +1,7 @@
+*.pyc
+build/
+dist/
+venv*
+tags
+*.egg*
+.cache
