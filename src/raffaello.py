@@ -2,9 +2,8 @@
 '''
 Raffaello is a powerful, yet simple to use, output colorizer.
 
-Usage: raffaello (-p PRESET | -r REQUEST | -f FILE | -l) [options]
+Usage: raffaello (-r REQUEST | -f FILE | -l) [options]
 
-    -p PRESET, --preset=PRESET              Prebuilt config files for coloring known output streams (gcc/g++, cmake, dmesg, gcc/g++, ModemManager, logcat...)
     -r REQUEST --request=REQUEST            The requested text/color mapping string. Multipe requests are separated by a space. Regular expression are supported. E.g. "error=>red [Ww]arning=>yellow_bold".
     -f FILE --file=FILE                     Path to the custom text=>color configuration file.
     -c COMMAND --command=COMMAND            Instead of using raffaello with pipes, set the command-line tool to be executed by raffaello directly. E.g. -c "dmesg -w".
@@ -195,123 +194,32 @@ def parse_request(request, delimiter='=>'):
 class Configuration(object):
     '''Manages Raffaello's configuration'''
 
-    def __init__(self, docopt_dict):
-        config = docopt_dict
+    def __init__(self,
+                 request=None,
+                 command=None,
+                 color_file=None,
+                 match_only=False,
+                 delimiter='=>'):
         root = os.path.abspath(os.path.dirname(__file__))
         self.presets = os.path.join(root, 'presets')
         self.custom_presets = HOME
 
-        self.command = config['--command']
-        self.match_only = config['--match-only']
-        self.delimiter = config['--delimiter']
+        self.command = command
+        self.match_only = match_only
+        self.delimiter = delimiter
 
-        if config['--list']:
-            self._show_colors()
-            self._show_styles()
-            self._show_presets()
-            sys.exit(os.EX_OK)
+        if request:
+            self.request = request
+        elif color_file:
+            fullpath = self._get_full_path(color_file)
 
-        elif config['--file']:
-            path = config['--file']
-            fullpath = self._get_full_path(path)
-
-            if fullpath is None:
-                LOG.error("Could not find configuration file %s", path)
+            if not fullpath:
+                LOG.error("Could not find configuration file %s", color_file)
                 sys.exit(os.EX_CONFIG)
 
             self.request = self.read_commission_from_file(fullpath)
-
-        elif config['--preset']:
-            path = os.path.join(self.presets, config['--preset'])
-            if os.path.exists(path):
-                LOG.debug('Looking for preset "%s" in path %s"',
-                          config['--preset'], path)
-                self.request = self.read_commission_from_file(path)
-            else:
-                LOG.fatal('Could not find any preset with name \'%s\'',
-                          config['--preset'])
-                LOG.info('If you wanted to use a custom color file,'
-                         ' you need the --file flag')
-                sys.exit(os.EX_UNAVAILABLE)
         else:
-            self.request = config['--request']
-
-        if self.request:
-            LOG.debug('Got request: \"%s\"', self.request)
-
-    def _show_colors(self):
-        '''Show available colors and usage'''
-        palette = Terminal256Palette()
-        print('''
-        8 bit color palette
-        -------------------
-
-            * Foreground color names are in the form 'colorNUM'. E.g. foreground red is %s
-            * Background color names are in the form 'bgcolorNUM'. E.g. background red is %s
-
-        For terminals that support 8 colors only, you can still use the following names:
-            black, red, green, yellow, blue, magenta, cyan, light_gray
-
-        Colors might have 2 styles (when supported by the terminal) and the name
-        is in the form 'colorNUM_<style>':
-            * Bold style: foreground red bold is %s
-            * Underlined style: foreground red underlined is %s
-
-        Following the full list of color NUMs
-        ''' % (
-            brush_stroke('color001', ['color001'], palette['color001']),
-            brush_stroke('bgcolor001', ['bgcolor001'], palette['bgcolor001']),
-            brush_stroke('color001_bold', ['color001_bold'], palette['color001_bold']),
-            brush_stroke('color001_underlined', ['color001_underlined'], palette['color001_underlined'])
-        ))
-        # palette['color001'].apply('color001', ['color001']),
-        # palette['bgcolor001'].apply('bgcolor001', ['bgcolor001']),
-        # palette['color001_bold'].apply('color001_bold', ['color001_bold']),
-        # palette['color001_underlined'].apply('color001_underlined', ['color001_underlined']),
-        # ))
-
-        color_names = list(palette.keys())
-        color_names.sort()
-        col = 10
-        for color in color_names:
-            # skip styled colors
-            if '_' in color:
-                continue
-
-            # Foreground color is easy to see
-            if color.startswith('bg'):
-                color_num = re.match(r'bgcolor(\d+)', color).group(1)
-                string = '   '
-                sys.stdout.write(' ' + color_num + ': ' + brush_stroke(string, [string], palette[color]))
-                sys.stdout.flush()
-
-                col -= 1
-                if col == 0:
-                    col = 10
-                    print('')
-        print('')
-
-    def _show_styles(self):
-        pass
-
-    def _show_presets(self):
-        print('''
-              Presets
-              -------
-
-              A preset is a file containing a list of text=>color pairs for
-              a specific output stream.
-              Custom presets can be used using the --file directive providing
-              the full path to the file or ony the relative path of it if it is
-              stored in $HOME/.raffaello folder.
-              Custom presets can reuse the built-in presets using the "include"
-              directive
-              E.g.
-
-                include errors
-                include custom-preset
-                ...
-              ''')
+            LOG.error('no request found')
 
     def _get_full_path(self, filepath):
         '''Build the fullpath to config file'''
@@ -372,6 +280,78 @@ class Configuration(object):
         return request
 
 
+def show_colors():
+    '''Show available colors and usage'''
+    palette = Terminal256Palette()
+    print('''
+    8 bit color palette
+    -------------------
+
+        * Foreground color names are in the form 'colorNUM'. E.g. foreground red is %s
+        * Background color names are in the form 'bgcolorNUM'. E.g. background red is %s
+
+    For terminals that support 8 colors only, you can still use the following names:
+        black, red, green, yellow, blue, magenta, cyan, light_gray
+
+    Colors might have 2 styles (when supported by the terminal) and the name
+    is in the form 'colorNUM_<style>':
+        * Bold style: foreground red bold is %s
+        * Underlined style: foreground red underlined is %s
+
+    Following the full list of color NUMs
+    ''' % (
+        brush_stroke('color001', ['color001'], palette['color001']),
+        brush_stroke('bgcolor001', ['bgcolor001'], palette['bgcolor001']),
+        brush_stroke('color001_bold', ['color001_bold'], palette['color001_bold']),
+        brush_stroke('color001_underlined', ['color001_underlined'], palette['color001_underlined'])
+    ))
+    # palette['color001'].apply('color001', ['color001']),
+    # palette['bgcolor001'].apply('bgcolor001', ['bgcolor001']),
+    # palette['color001_bold'].apply('color001_bold', ['color001_bold']),
+    # palette['color001_underlined'].apply('color001_underlined', ['color001_underlined']),
+    # ))
+
+    color_names = list(palette.keys())
+    color_names.sort()
+    col = 10
+    for color in color_names:
+        # skip styled colors
+        if '_' in color:
+            continue
+
+        # Foreground color is easy to see
+        if color.startswith('bg'):
+            color_num = re.match(r'bgcolor(\d+)', color).group(1)
+            string = '   '
+            sys.stdout.write(' ' + color_num + ': ' + brush_stroke(string, [string], palette[color]))
+            sys.stdout.flush()
+
+            col -= 1
+            if col == 0:
+                col = 10
+                print('')
+    print('')
+
+def show_presets():
+    print('''
+          Presets
+          -------
+
+          A preset is a file containing a list of text=>color pairs for
+          a specific output stream.
+          Custom presets can be used using the --file directive providing
+          the full path to the file or ony the relative path of it if it is
+          stored in $HOME/.raffaello folder.
+          Custom presets can reuse the built-in presets using the "include"
+          directive
+          E.g.
+
+            include errors
+            include custom-preset
+            ...
+          ''')
+
+
 def main():
     '''Entry point'''
 
@@ -379,18 +359,23 @@ def main():
     signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
     # Parse command line arguments
-    docopt_dict = docopt(__doc__)
-    global LEVEL
-    if docopt_dict['--verbose']:
-        LEVEL = logging.DEBUG
-    else:
-        LEVEL = logging.DEBUG
-    logging.basicConfig(level=LEVEL, format='    %(levelname)s,(message)s')
+    conf = docopt(__doc__)
 
-    global LOG
-    LOG = logging.getLogger(__name__)
+    if conf['--list']:
+        show_colors()
+        show_presets()
+        return
 
-    config = Configuration(docopt_dict)
+    if conf['--verbose']:
+        LOG.setLevel(logging.DEBUG)
+
+    config = Configuration(
+        request=conf['--request'],
+        command=conf['--command'],
+        color_file=conf['--file'],
+        match_only=conf['--match-only'],
+        delimiter=conf['--delimiter'])
+
     commission = parse_request(config.request, config.delimiter)
     raffaello = Raffaello(commission=commission, match_only=config.match_only)
     sys.exit(raffaello.start())
