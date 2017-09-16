@@ -26,7 +26,6 @@ logging.basicConfig(level=LEVEL, format='%(message)s')
 LOG = logging.getLogger(__name__)
 
 # Default directory
-HOME = os.path.expanduser(os.path.join('~', '.raffaello'))
 
 
 class Raffaello(object):
@@ -191,6 +190,25 @@ def parse_request(request, delimiter='=>'):
     return commission
 
 
+def get_color_file_path(filepath):
+    '''Returns the full path of the color file'''
+
+    root = os.path.abspath(os.path.dirname(__file__))
+    home = os.path.expanduser(os.path.join('~', '.raffaello'))
+
+    locations = [
+        os.path.expanduser(filepath),
+        os.path.join(root, 'presets', filepath),
+        os.path.join(home, filepath)]
+
+    for location in locations:
+        if os.path.exists(location):
+            return location
+
+    LOG.fatal('could not find color file "%s"', filepath)
+    sys.exit()
+
+
 class Configuration(object):
     '''Manages Raffaello's configuration'''
 
@@ -200,10 +218,6 @@ class Configuration(object):
                  color_file=None,
                  match_only=False,
                  delimiter='=>'):
-        root = os.path.abspath(os.path.dirname(__file__))
-        self.presets = os.path.join(root, 'presets')
-        self.custom_presets = HOME
-
         self.command = command
         self.match_only = match_only
         self.delimiter = delimiter
@@ -211,8 +225,7 @@ class Configuration(object):
         if request:
             self.request = request
         elif color_file:
-            fullpath = self._get_full_path(color_file)
-
+            fullpath = get_color_file_path(color_file)
             if not fullpath:
                 LOG.error("Could not find configuration file %s", color_file)
                 sys.exit(os.EX_CONFIG)
@@ -221,35 +234,9 @@ class Configuration(object):
         else:
             LOG.error('no request found')
 
-    def _get_full_path(self, filepath):
-        '''Build the fullpath to config file'''
-        LOG.debug('Building full path for "%s"...', filepath)
-        fullpath = os.path.expanduser(filepath)
-
-        if not os.path.exists(fullpath):
-            # Is it a relative paths? Check in presets root
-            fullpath = os.path.join(self.presets, os.path.basename(fullpath))
-
-            if os.path.exists(fullpath):
-                LOG.debug("Using '%s'", fullpath)
-                return fullpath
-
-            # Check in custom presets folder
-            fullpath = os.path.join(self.custom_presets, HOME, os.path.basename(fullpath))
-
-            if os.path.exists(fullpath):
-                LOG.debug("Using '%s'", fullpath)
-                return fullpath
-
-            LOG.error('Could not find config file "%s"', filepath)
-            fullpath = None
-
-        return fullpath
-
     def read_commission_from_file(self, path):
-        """
-        Get Pattern/Color pairs from configuration file
-        """
+        ''' Get Pattern/Color pairs from configuration file '''
+
         LOG.debug('Reading config file %s', path)
         config = open(path).readlines()
         request = ''
@@ -267,7 +254,7 @@ class Configuration(object):
                 subconfig = includes.group(1)
                 LOG.debug('including preset "%s"', subconfig)
 
-                subconf_fullpath = self._get_full_path(subconfig)
+                subconf_fullpath = get_color_file_path(subconfig)
 
                 if subconf_fullpath:
                     inner_request = self.read_commission_from_file(subconf_fullpath)
