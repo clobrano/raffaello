@@ -103,13 +103,10 @@ def read_request_from_file(path):
     ''' Get Pattern/Color pairs from configuration file '''
 
     LOG.debug('Reading config file %s', path)
-    config = open(path).readlines()
+    config = map(lambda x: x.strip(), open(path).readlines())
     request = list()
 
-    for line in map(lambda x: x.rstrip(), config):
-        if not line or line[0] == '#':
-            continue
-
+    for line in filter(lambda x: x and x[0] != '#', config):
         if line.startswith('include '):
             nested_config_file = line.split()[1]
             LOG.debug('including color file "%s"', nested_config_file)
@@ -144,39 +141,28 @@ def parse_string_request(request, delimiter='=>'):
 def parse_request(requests, delimiter='=>'):
     '''Parse requests list and return a list of pattern-to-color maps'''
     commission = list()
-    # Support multiline request
-    # requests = request.splitlines()
-
-    # if len(requests) == 1:
-    #    # Check whether there are multiple requests in a single line
-    #    requests = request.split(' ')
 
     for req in requests:
-        print(req)
-
-        if not req:
-            continue
-
         try:
             pattern, color = req.split(delimiter)
         except ValueError as err:
             if len(re.findall(delimiter, req)) > 1:
                 LOG.error('could not parse request "%s": Too many '
-                          'delimiters symbols (%s) in request', req, delimiter)
+                          'delimiters (%s) in request', req, delimiter)
             else:
-                LOG.error("could not parse request '%s'. %s)", req, err)
+                LOG.error("could not parse request '%s'. %s", req, err)
 
             sys.exit(os.EX_DATAERR)
 
         palette = Terminal256Palette()
 
-        if color in palette:
-            item = [r'%s' % pattern, palette[color]]
-            LOG.debug('adding "%s"', item)
-            commission.append(item)
-        else:
+        if color not in palette:
             LOG.error('Color "%s" does not exist', color)
             sys.exit(os.EX_DATAERR)
+
+        item = [r'%s' % pattern, palette[color]]
+        LOG.debug('adding "%s"', item)
+        commission.append(item)
 
     LOG.debug('commission is %s', commission)
     return commission
@@ -207,11 +193,6 @@ def show_colors():
         brush_stroke('color001_bold', ['color001_bold'], palette['color001_bold']),
         brush_stroke('color001_underlined', ['color001_underlined'], palette['color001_underlined'])
     ))
-    # palette['color001'].apply('color001', ['color001']),
-    # palette['bgcolor001'].apply('bgcolor001', ['bgcolor001']),
-    # palette['color001_bold'].apply('color001_bold', ['color001_bold']),
-    # palette['color001_underlined'].apply('color001_underlined', ['color001_underlined']),
-    # ))
 
     color_names = list(palette.keys())
     color_names.sort()
@@ -227,8 +208,8 @@ def show_colors():
 
         if color.startswith('bg'):
             color_num = re.match(r'bgcolor(\d+)', color).group(1)
-            string = '   '
-            sys.stdout.write(' ' + color_num + ': ' + brush_stroke(string, [string], palette[color]))
+            out = ' %s: %s' % (color_num, brush_stroke('   ', ['   '], palette[color]))
+            sys.stdout.write(out)
             sys.stdout.flush()
 
             col -= 1
@@ -240,6 +221,7 @@ def show_colors():
 
 
 def show_presets():
+    '''Preset help message'''
     print('''
           Presets
           -------
