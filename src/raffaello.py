@@ -38,10 +38,10 @@ class Raffaello(object):
         self.match_only = match_only
 
     def paint(self, line):
-        """
-        Highlight line according to the given
-        pattern/color dictionary
-        """
+        '''
+        Highlight patterns in line according to the given
+        pattern-to-color dictionary
+        '''
         copy = line
         has_matches = False
         for step in self.commission:
