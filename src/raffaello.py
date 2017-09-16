@@ -6,7 +6,6 @@ Usage: raffaello (-r REQUEST | -f FILE | -l) [options]
 
     -r REQUEST --request=REQUEST            The requested text/color mapping string. Multipe requests are separated by a space. Regular expression are supported. E.g. "error=>red [Ww]arning=>yellow_bold".
     -f FILE --file=FILE                     Path to the custom text=>color configuration file.
-    -c COMMAND --command=COMMAND            Instead of using raffaello with pipes, set the command-line tool to be executed by raffaello directly. E.g. -c "dmesg -w".
     -m, --match-only                        Print only the lines that match against some defined pattern.
     -d DELIMITER --delimiter=DELIMITER      If you don't like "=>" as delimiter between text and color, use this flag to change it. E.g. -d & [default: =>]
     -l, --list                              List all the available colors and presets
@@ -34,8 +33,7 @@ class Raffaello(object):
     uses when running as command-line utility
     '''
 
-    def __init__(self, commission, command=None, match_only=False):
-        self.command = command
+    def __init__(self, commission, match_only=False):
         self.commission = commission
         self.match_only = match_only
 
@@ -72,61 +70,11 @@ class Raffaello(object):
         return copy
 
     def start(self):
-        '''
-        Run raffaello as a command-line utility
-        '''
-        command = self.command
-        pipe_read = None
-        pipe_write = None
-
-        # Raffaello encapsulates the command line command whose ouput
-        #  is to be colorized
-        if command:
-            # Get output file's descriptors
-            pipe_read, pipe_write = os.pipe()
-            proc_id = os.fork()
-
-        # Child process executes the given command,
-        #  parent process (Raffaello) parses its output
-        if command and proc_id:
-            self._manage_child(pipe_read, pipe_write)
-        else:
-            # Parent
-            self._manage_parent(pipe_read, pipe_write)
-
-        return 0
-
-    def _manage_parent(self, pipe_read, pipe_write):
-        command = self.command
-        if command:
-            # read child's output
-            os.close(pipe_write)
-            fd_read = os.fdopen(pipe_read)
-
-            endofstream = False
+        ''' Run raffaello as a command-line utility '''
 
         while True:
             try:
-                if not command:
-                    # we are in a pipe, just read from output
-                    line = input()
-                else:
-                    # we are not in a pipe, read from file's descriptors
-                    line = fd_read.readline().rstrip()
-
-                    if not line:
-                        # Not using pipe, we need to understand when the
-                        # program ends. Two empty lines will be considered
-                        # as the end of the stream
-                        if endofstream:
-                            break
-                        else:
-                            endofstream = True
-                    else:
-                        endofstream = False
-
-                # And here is the magic
-                line = self.paint(line)
+                line = self.paint(input())
                 if line:
                     print(line)
 
@@ -139,17 +87,6 @@ class Raffaello(object):
 
         LOG.debug("End of stream")
         sys.exit(os.EX_OK)
-
-    def _manage_child(self, pipe_read, pipe_write):
-        os.close(pipe_read)
-
-        # redirect stdout to pipe in order to let
-        #  parent process read
-        os.dup2(pipe_write, sys.stdout.fileno())
-        os.dup2(pipe_write, sys.stderr.fileno())
-
-        # execute the command
-        os.system(self.command)
 
 
 def parse_request(request, delimiter='=>'):
@@ -214,11 +151,9 @@ class Configuration(object):
 
     def __init__(self,
                  request=None,
-                 command=None,
                  color_file=None,
                  match_only=False,
                  delimiter='=>'):
-        self.command = command
         self.match_only = match_only
         self.delimiter = delimiter
 
@@ -358,7 +293,6 @@ def main():
 
     config = Configuration(
         request=conf['--request'],
-        command=conf['--command'],
         color_file=conf['--file'],
         match_only=conf['--match-only'],
         delimiter=conf['--delimiter'])
