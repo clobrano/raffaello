@@ -25,10 +25,7 @@ LOG = logging.getLogger(__name__)
 
 
 class Raffaello(object):
-    '''
-    Wrapper class for methods that Raffaello
-    uses when running as command-line utility
-    '''
+    '''Highlight words in text according to given request'''
 
     def __init__(self, commission, match_only=False):
         self.commission = commission
