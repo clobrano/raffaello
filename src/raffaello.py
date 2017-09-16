@@ -12,19 +12,16 @@ Usage: raffaello (-r REQUEST | -f FILE | -l) [options]
     -v --verbose                            Enable debug logging
 '''
 
-import logging
 import os
+import sys
 import re
 import signal
-import sys
+import logging
 from docopt import docopt
 from paint import Terminal256Palette, brush_stroke
 
-LEVEL = logging.INFO
-logging.basicConfig(level=LEVEL, format='%(message)s')
+logging.basicConfig(level=logging.INFO, format='%(message)s')
 LOG = logging.getLogger(__name__)
-
-# Default directory
 
 
 class Raffaello(object):
@@ -96,6 +93,62 @@ class Raffaello(object):
         sys.exit(os.EX_OK)
 
 
+def get_color_file_path(filepath):
+    '''Returns the full path of the color file'''
+
+    root = os.path.abspath(os.path.dirname(__file__))
+    home = os.path.expanduser(os.path.join('~', '.raffaello'))
+
+    locations = [
+        os.path.expanduser(filepath),
+        os.path.join(root, 'presets', filepath),
+        os.path.join(home, filepath)]
+
+    for location in locations:
+        if os.path.exists(location):
+            return location
+
+    LOG.fatal('could not find color file "%s"', filepath)
+    sys.exit()
+
+
+def read_commission_from_file(path):
+    ''' Get Pattern/Color pairs from configuration file '''
+
+    LOG.debug('Reading config file %s', path)
+    config = open(path).readlines()
+    request = ''
+    include_pattern = re.compile(r'^include (.*)')
+
+    for line in config:
+        line = line.rstrip()
+
+        # Skip empty lines and commends
+
+        if not line or line[0] == '#':
+            continue
+
+        # Check inner config files
+        includes = include_pattern.match(line)
+
+        if includes:
+            subconfig = includes.group(1)
+            LOG.debug('including preset "%s"', subconfig)
+
+            subconf_fullpath = get_color_file_path(subconfig)
+
+            if subconf_fullpath:
+                inner_request = read_commission_from_file(subconf_fullpath)
+                LOG.debug('included request "%s"', inner_request)
+                request = request + ' ' + inner_request
+
+                continue
+
+        request = request + line + ' '
+
+    return request
+
+
 def parse_request(request, delimiter='=>'):
     '''Parse request string and return a list of pattern-to-color maps'''
     commission = []
@@ -134,86 +187,6 @@ def parse_request(request, delimiter='=>'):
             sys.exit(os.EX_DATAERR)
 
     return commission
-
-
-def get_color_file_path(filepath):
-    '''Returns the full path of the color file'''
-
-    root = os.path.abspath(os.path.dirname(__file__))
-    home = os.path.expanduser(os.path.join('~', '.raffaello'))
-
-    locations = [
-        os.path.expanduser(filepath),
-        os.path.join(root, 'presets', filepath),
-        os.path.join(home, filepath)]
-
-    for location in locations:
-        if os.path.exists(location):
-            return location
-
-    LOG.fatal('could not find color file "%s"', filepath)
-    sys.exit()
-
-
-class Configuration(object):
-    '''Manages Raffaello's configuration'''
-
-    def __init__(self,
-                 request=None,
-                 color_file=None,
-                 match_only=False,
-                 delimiter='=>'):
-        self.match_only = match_only
-        self.delimiter = delimiter
-
-        if request:
-            self.request = request
-        elif color_file:
-            fullpath = get_color_file_path(color_file)
-
-            if not fullpath:
-                LOG.error("Could not find configuration file %s", color_file)
-                sys.exit(os.EX_CONFIG)
-
-            self.request = self.read_commission_from_file(fullpath)
-        else:
-            LOG.error('no request found')
-
-    def read_commission_from_file(self, path):
-        ''' Get Pattern/Color pairs from configuration file '''
-
-        LOG.debug('Reading config file %s', path)
-        config = open(path).readlines()
-        request = ''
-        include_pattern = re.compile(r'^include (.*)')
-
-        for line in config:
-            line = line.rstrip()
-
-            # Skip empty lines and commends
-
-            if not line or line[0] == '#':
-                continue
-
-            # Check inner config files
-            includes = include_pattern.match(line)
-
-            if includes:
-                subconfig = includes.group(1)
-                LOG.debug('including preset "%s"', subconfig)
-
-                subconf_fullpath = get_color_file_path(subconfig)
-
-                if subconf_fullpath:
-                    inner_request = self.read_commission_from_file(subconf_fullpath)
-                    LOG.debug('included request "%s"', inner_request)
-                    request = request + ' ' + inner_request
-
-                    continue
-
-            request = request + line + ' '
-
-        return request
 
 
 def show_colors():
@@ -311,14 +284,23 @@ def main():
     if conf['--verbose']:
         LOG.setLevel(logging.DEBUG)
 
-    config = Configuration(
-        request=conf['--request'],
-        color_file=conf['--file'],
-        match_only=conf['--match-only'],
-        delimiter=conf['--delimiter'])
+    request = conf['--request']
+    color_file = conf['--file']
 
-    commission = parse_request(config.request, config.delimiter)
-    raffaello = Raffaello(commission=commission, match_only=config.match_only)
+    if not request:
+        if not color_file:
+            LOG.fatal('You are expected to give a color request')
+            sys.exit(os.EX_CONFIG)
+
+        fullpath = get_color_file_path(color_file)
+        if not fullpath:
+            LOG.fatal('%s file not found', color_file)
+            sys.exit(os.EX_CONFIG)
+
+        request = read_commission_from_file(fullpath)
+
+    commission = parse_request(request, conf['--delimiter'])
+    raffaello = Raffaello(commission=commission, match_only=conf['--match-only'])
     sys.exit(raffaello.start())
 
 
