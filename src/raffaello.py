@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""
+'''
 Raffaello is a powerful, yet simple to use, output colorizer.
 
 Usage: raffaello (-p PRESET | -r REQUEST | -f FILE | -l) [options]
@@ -12,7 +12,7 @@ Usage: raffaello (-p PRESET | -r REQUEST | -f FILE | -l) [options]
     -d DELIMITER --delimiter=DELIMITER      If you don't like "=>" as delimiter between text and color, use this flag to change it. E.g. -d & [default: =>]
     -l, --list                              List all the available colors and presets
     -v --verbose                            Enable debug logging
-"""
+'''
 
 import logging
 import os
@@ -25,9 +25,6 @@ from paint import Terminal256Palette, brush_stroke
 LEVEL = logging.INFO
 logging.basicConfig(level=LEVEL, format='%(message)s')
 LOG = logging.getLogger(__name__)
-
-# Catch CTRL_C to let the program quit smoothly
-signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
 # Default directory
 HOME = os.path.expanduser(os.path.join('~', '.raffaello'))
@@ -377,6 +374,10 @@ class Configuration(object):
 
 def main():
     '''Entry point'''
+
+    # Catch CTRL_C to let the program quit smoothly
+    signal.signal(signal.SIGPIPE, signal.SIG_DFL)
+
     # Parse command line arguments
     docopt_dict = docopt(__doc__)
     global LEVEL
