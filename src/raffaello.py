@@ -44,6 +44,7 @@ class Raffaello(object):
         '''
         copy = line
         has_matches = False
+
         for step in self.commission:
             pattern, brush = step
 
@@ -51,6 +52,7 @@ class Raffaello(object):
                 matches = re.findall(pattern, line)
             except re.error as error:
                 LOG.error('Error in line %s: %s', line, error)
+
                 return None
 
             if matches:
@@ -58,13 +60,16 @@ class Raffaello(object):
                 LOG.debug('Match found: %s => key:"%s", pattern:"%s"',
                           step, pattern, brush)
                 LOG.debug(r'pre brush: %s', repr(copy))
+
                 if brush['open_color_tag'] is not None:
                     copy = brush_stroke(copy, matches, brush)
                     copy = copy.rstrip()
                 else:
                     return None
+
         if self.match_only and not has_matches:
             LOG.debug('Skipping %s because there is no match', copy)
+
             return None
 
         return copy
@@ -75,6 +80,7 @@ class Raffaello(object):
         while True:
             try:
                 line = self.paint(input())
+
                 if line:
                     print(line)
 
@@ -83,6 +89,7 @@ class Raffaello(object):
 
             except EOFError:
                 LOG.debug("EOF reached. Nothing else to do")
+
                 break
 
         LOG.debug("End of stream")
@@ -94,12 +101,14 @@ def parse_request(request, delimiter='=>'):
     commission = []
     # Support multiline request
     requests = request.splitlines()
+
     if len(requests) == 1:
         # Check whether there are multiple requests in a single line
         requests = request.split(' ')
 
     for req in requests:
         # empty line
+
         if not req:
             continue
 
@@ -161,6 +170,7 @@ class Configuration(object):
             self.request = request
         elif color_file:
             fullpath = get_color_file_path(color_file)
+
             if not fullpath:
                 LOG.error("Could not find configuration file %s", color_file)
                 sys.exit(os.EX_CONFIG)
@@ -176,15 +186,18 @@ class Configuration(object):
         config = open(path).readlines()
         request = ''
         include_pattern = re.compile(r'^include (.*)')
+
         for line in config:
             line = line.rstrip()
 
             # Skip empty lines and commends
+
             if not line or line[0] == '#':
                 continue
 
             # Check inner config files
             includes = include_pattern.match(line)
+
             if includes:
                 subconfig = includes.group(1)
                 LOG.debug('including preset "%s"', subconfig)
@@ -195,6 +208,7 @@ class Configuration(object):
                     inner_request = self.read_commission_from_file(subconf_fullpath)
                     LOG.debug('included request "%s"', inner_request)
                     request = request + ' ' + inner_request
+
                     continue
 
             request = request + line + ' '
@@ -236,12 +250,15 @@ def show_colors():
     color_names = list(palette.keys())
     color_names.sort()
     col = 10
+
     for color in color_names:
         # skip styled colors
+
         if '_' in color:
             continue
 
         # Foreground color is easy to see
+
         if color.startswith('bg'):
             color_num = re.match(r'bgcolor(\d+)', color).group(1)
             string = '   '
@@ -249,10 +266,12 @@ def show_colors():
             sys.stdout.flush()
 
             col -= 1
+
             if col == 0:
                 col = 10
                 print('')
     print('')
+
 
 def show_presets():
     print('''
@@ -286,6 +305,7 @@ def main():
     if conf['--list']:
         show_colors()
         show_presets()
+
         return
 
     if conf['--verbose']:
