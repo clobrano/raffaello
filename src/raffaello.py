@@ -142,7 +142,7 @@ def parse_request(requests, delimiter='=>'):
     '''Parse requests list and return a list of pattern-to-color maps'''
     commission = list()
 
-    for req in requests:
+    for req in filter(lambda x: x and len(x), requests):
         try:
             pattern, color = req.split(delimiter)
         except ValueError as err:

@@ -6,9 +6,6 @@ import collections
 
 def brush_stroke(string, matches, brush):
     '''Apply color to matching words in string'''
-    if not brush['open_color_tag']:
-        return string
-
     for match in matches:
         replacement = '%s%s%s' % (brush['open_color_tag'], match, brush['close_color_tag'])
         string = string.replace(match, replacement)
@@ -63,13 +60,6 @@ class Palette(collections.MutableMapping):
                      'open_color_tag': color_code + style_underline,
                      'close_color_tag': end}
             self._palette.update({key + '_underlined': brush})
-
-        # blind code
-        # brush = Brush('blind', None, None)
-        brush = {'name': 'blind',
-                 'open_color_tag': None,
-                 'close_color_tag': None}
-        self._palette.update({'blind': brush})
 
         return color_codes
 
