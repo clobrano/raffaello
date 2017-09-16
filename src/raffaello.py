@@ -25,7 +25,7 @@ LOG = logging.getLogger(__name__)
 
 
 class Raffaello(object):
-    '''Highlight words in text according to given request'''
+    '''Highlight words according to given request'''
 
     def __init__(self, commission, match_only=False):
         self.commission = commission
@@ -36,34 +36,23 @@ class Raffaello(object):
         Highlight patterns in line according to the given
         pattern-to-color dictionary
         '''
-        copy = line
-        has_matches = False
-
+        copy = line.rstrip()
+        has_changed = False
         for step in self.commission:
             pattern, brush = step
 
             try:
                 matches = re.findall(pattern, line)
+
+                if matches:
+                    LOG.debug('matches of %s in: %s', pattern, line)
+                    has_changed = True
+                    copy = brush_stroke(copy, matches, brush)
             except re.error as error:
                 LOG.error('Error in line %s: %s', line, error)
+                continue
 
-                return None
-
-            if matches:
-                has_matches = True
-                LOG.debug('Match found: %s => key:"%s", pattern:"%s"',
-                          step, pattern, brush)
-                LOG.debug(r'pre brush: %s', repr(copy))
-
-                if brush['open_color_tag'] is not None:
-                    copy = brush_stroke(copy, matches, brush)
-                    copy = copy.rstrip()
-                else:
-                    return None
-
-        if self.match_only and not has_matches:
-            LOG.debug('Skipping %s because there is no match', copy)
-
+        if not has_changed and self.match_only:
             return None
 
         return copy
@@ -189,6 +178,7 @@ def parse_request(requests, delimiter='=>'):
             LOG.error('Color "%s" does not exist', color)
             sys.exit(os.EX_DATAERR)
 
+    LOG.debug('commission is %s', commission)
     return commission
 
 

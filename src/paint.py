@@ -6,10 +6,11 @@ import collections
 
 def brush_stroke(string, matches, brush):
     '''Apply color to matching words in string'''
+    if not brush['open_color_tag']:
+        return string
+
     for match in matches:
-        if brush['open_color_tag'] is None:
-            return None
-        replacement = brush['open_color_tag'] + match + brush['close_color_tag']
+        replacement = '%s%s%s' % (brush['open_color_tag'], match, brush['close_color_tag'])
         string = string.replace(match, replacement)
 
     return string
