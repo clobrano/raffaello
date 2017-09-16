@@ -4,7 +4,9 @@ import unittest
 from raffaello.src.raffaello import Raffaello
 from raffaello.src.raffaello import parse_request
 
+
 class RaffaelloTest(unittest.TestCase):
+    '''Raffaello test class'''
 
     def test_color_red(self):
         '''Test highlight word'''
@@ -17,7 +19,6 @@ this=>red
         raf = Raffaello(parse_request(request))
         result = raf.paint(line)
         self.assertEqual(expected, result)
-
 
     def test_regex_pattern(self):
         '''Test highlight matching strings'''

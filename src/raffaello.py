@@ -106,58 +106,64 @@ def get_color_file_path(filepath):
             return location
 
     LOG.fatal('could not find color file "%s"', filepath)
-    sys.exit()
+
+    return None
 
 
-def read_commission_from_file(path):
+def read_request_from_file(path):
     ''' Get Pattern/Color pairs from configuration file '''
 
     LOG.debug('Reading config file %s', path)
     config = open(path).readlines()
-    request = ''
-    include_pattern = re.compile(r'^include (.*)')
+    request = list()
 
-    for line in config:
-        line = line.rstrip()
-
-        # Skip empty lines and commends
-
+    for line in map(lambda x: x.rstrip(), config):
         if not line or line[0] == '#':
             continue
 
-        # Check inner config files
-        includes = include_pattern.match(line)
+        if line.startswith('include '):
+            nested_config_file = line.split()[1]
+            LOG.debug('including color file "%s"', nested_config_file)
 
-        if includes:
-            subconfig = includes.group(1)
-            LOG.debug('including preset "%s"', subconfig)
+            fullpath = get_color_file_path(nested_config_file)
 
-            subconf_fullpath = get_color_file_path(subconfig)
-
-            if subconf_fullpath:
-                inner_request = read_commission_from_file(subconf_fullpath)
-                LOG.debug('included request "%s"', inner_request)
-                request = request + ' ' + inner_request
+            if not fullpath:
+                LOG.error('could not find nested color file %s at %s',
+                          nested_config_file, fullpath)
 
                 continue
 
-        request = request + line + ' '
+            request.extend(read_request_from_file(fullpath))
+
+            continue
+
+        request.append(line)
 
     return request
 
 
-def parse_request(request, delimiter='=>'):
+def parse_string_request(request, delimiter='=>'):
     '''Parse request string and return a list of pattern-to-color maps'''
-    commission = []
-    # Support multiline request
     requests = request.splitlines()
 
     if len(requests) == 1:
-        # Check whether there are multiple requests in a single line
         requests = request.split(' ')
 
+    return parse_request(requests, delimiter)
+
+
+def parse_request(requests, delimiter='=>'):
+    '''Parse requests list and return a list of pattern-to-color maps'''
+    commission = list()
+    # Support multiline request
+    # requests = request.splitlines()
+
+    # if len(requests) == 1:
+    #    # Check whether there are multiple requests in a single line
+    #    requests = request.split(' ')
+
     for req in requests:
-        # empty line
+        print(req)
 
         if not req:
             continue
@@ -284,19 +290,23 @@ def main():
     request = conf['--request']
     color_file = conf['--file']
 
-    if not request:
-        if not color_file:
-            LOG.fatal('You are expected to give a color request')
-            sys.exit(os.EX_CONFIG)
+    if request:
+        commission = parse_string_request(request, conf['--delimiter'])
 
+    elif color_file:
         fullpath = get_color_file_path(color_file)
+
         if not fullpath:
             LOG.fatal('%s file not found', color_file)
             sys.exit(os.EX_CONFIG)
 
-        request = read_commission_from_file(fullpath)
+        request = read_request_from_file(fullpath)
+        commission = parse_request(request, conf['--delimiter'])
 
-    commission = parse_request(request, conf['--delimiter'])
+    else:
+        LOG.fatal('You are expected to give a color request')
+        sys.exit(os.EX_CONFIG)
+
     raffaello = Raffaello(commission=commission, match_only=conf['--match-only'])
     sys.exit(raffaello.start())
 
