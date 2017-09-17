@@ -1,11 +1,12 @@
 '''
 Paint toolkit
 '''
-import collections
+from collections import MutableMapping
 
 
 def brush_stroke(string, matches, brush):
     '''Apply color to matching words in string'''
+
     for match in matches:
         replacement = '%s%s%s' % (brush['open_color_tag'], match, brush['close_color_tag'])
         string = string.replace(match, replacement)
@@ -13,7 +14,7 @@ def brush_stroke(string, matches, brush):
     return string
 
 
-class Palette(collections.MutableMapping):
+class Palette(MutableMapping):
     '''
     Container of all available colors and styles.
     '''
@@ -22,46 +23,38 @@ class Palette(collections.MutableMapping):
     end = esc + '[0m'
 
     def __init__(self):
-        collections.MutableMapping.__init__(self)
+        MutableMapping.__init__(self)
+
         self._palette = dict()
-        self._set_colors()
 
-    def _set_colors(self):
-        esc = Palette.esc
-        end = Palette.end
-
-        fg_8color_offset = 30
+        fg_7color_offset = 30
         names = ['black', 'red', 'green', 'yellow', 'blue',
                  'magenta', 'cyan', 'light_gray']
-        base_code = esc + '[%dm'
 
-        color_codes = {names[num]: base_code % (num + fg_8color_offset)
-                       for num in range(8)}
-        style_bold = esc + '[1m'
-        style_underline = esc + '[4m'
+        base_code_template = Palette.esc + '[%dm'
+        color_codes = {name: base_code_template % (i + fg_7color_offset)
+                       for i, name in enumerate(names)}
 
+        bold_style = Palette.esc + '[1m'
+        underline_style = Palette.esc + '[4m'
+
+        self._set_palette(
+            color_codes,
+            _bold=bold_style,
+            _underlined=underline_style)
+
+    def _set_palette(self, color_codes, **styles):
         for key, color_code in color_codes.items():
-            # brush = Brush(key, color_code, end)
             brush = {'name': key,
                      'open_color_tag': color_code,
-                     'close_color_tag': end}
+                     'close_color_tag': Palette.end}
             self._palette.update({key: brush})
 
-            # bold style
-            # brush = Brush(key, color_code + style_bold, end)
-            brush = {'name': key,
-                     'open_color_tag': color_code + style_bold,
-                     'close_color_tag': end}
-            self._palette.update({key + '_bold': brush})
-
-            # underline style
-            # brush = Brush(key, color_code + style_underline, end)
-            brush = {'name': key,
-                     'open_color_tag': color_code + style_underline,
-                     'close_color_tag': end}
-            self._palette.update({key + '_underlined': brush})
-
-        return color_codes
+            for style_name, style_code in styles.items():
+                brush = {'name': key + style_name,
+                         'open_color_tag': color_code + style_code,
+                         'close_color_tag': Palette.end}
+                self._palette.update({key + style_name: brush})
 
     def __getitem__(self, key=''):
         return self._palette[key.lower()]
@@ -80,40 +73,25 @@ class Palette(collections.MutableMapping):
 
 
 class Terminal256Palette(Palette):
-    '''Color palette for Terminal with 256 colors'''
-    def _set_colors(self):
-        color_codes = Palette._set_colors(self)
-        esc = Palette.esc
-        end = Palette.end
-        bg_color = 'bgcolor%03d'
-        fg_color = 'color%03d'
-        fg_code = esc + '[38;5;%dm'
-        bg_code = esc + '[48;5;%dm'
-        style_bold = esc + '[1m'
-        style_underline = esc + '[4m'
+    '''Palette for 256 colors Terminals'''
+    def __init__(self):
+        Palette.__init__(self)
 
-        color_codes.update({bg_color % num: bg_code % num
+        fg_color_template = 'color%03d'
+        fg_end_template = Palette.esc + '[38;5;%dm'
+
+        color_codes = dict()
+        color_codes.update({fg_color_template % num: fg_end_template % num
                             for num in range(256)})
-        color_codes.update({fg_color % num: fg_code % num
+        bold_style = Palette.esc + '[1m'
+        underline_style = Palette.esc + '[4m'
+        self._set_palette(
+            color_codes, _bold=bold_style, _underlined=underline_style)
+
+        bg_color_template = 'bgcolor%03d'
+        bg_end_template = Palette.esc + '[48;5;%dm'
+
+        color_codes = dict()
+        color_codes.update({bg_color_template % num: bg_end_template % num
                             for num in range(256)})
-
-        for key, color_code in color_codes.items():
-            # brush = BrushStroke(key, color_code, end)
-            brush = {'name': key,
-                     'open_color_tag': color_code,
-                     'close_color_tag': end}
-            self._palette.update({key: brush})
-
-            # bold style
-            # brush = BrushStroke(key, color_code + style_bold, end)
-            brush = {'name': key,
-                     'open_color_tag': color_code + style_bold,
-                     'close_color_tag': end}
-            self._palette.update({key + '_bold': brush})
-
-            # underline style
-            # brush = BrushStroke(key, color_code + style_underline, end)
-            brush = {'name': key,
-                     'open_color_tag': color_code + style_underline,
-                     'close_color_tag': end}
-            self._palette.update({key + '_underlined': brush})
+        self._set_palette(color_codes)

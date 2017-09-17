@@ -142,6 +142,7 @@ def parse_request(requests, delimiter='=>'):
     '''Parse requests list and return a list of pattern-to-color maps'''
     commission = list()
 
+    palette = Terminal256Palette()
     for req in filter(lambda x: x and len(x), requests):
         try:
             pattern, color = req.split(delimiter)
@@ -153,8 +154,6 @@ def parse_request(requests, delimiter='=>'):
                 LOG.error("could not parse request '%s'. %s", req, err)
 
             sys.exit(os.EX_DATAERR)
-
-        palette = Terminal256Palette()
 
         if color not in palette:
             LOG.error('Color "%s" does not exist', color)
@@ -198,14 +197,7 @@ def show_colors():
     color_names.sort()
     col = 10
 
-    for color in color_names:
-        # skip styled colors
-
-        if '_' in color:
-            continue
-
-        # Foreground color is easy to see
-
+    for color in filter(lambda x: '_' not in x, color_names):
         if color.startswith('bg'):
             color_num = re.match(r'bgcolor(\d+)', color).group(1)
             out = ' %s: %s' % (color_num, brush_stroke('   ', ['   '], palette[color]))
