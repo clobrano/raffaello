@@ -148,8 +148,7 @@ def parse_request(requests, delimiter='=>'):
             pattern, color = req.split(delimiter)
         except ValueError as err:
             if len(re.findall(delimiter, req)) > 1:
-                LOG.error('could not parse request "%s": Too many '
-                          'delimiters (%s) in request', req, delimiter)
+                LOG.error('could not parse request "%s": Too many delimiters (%s) in request', req, delimiter)
             else:
                 LOG.error("could not parse request '%s'. %s", req, err)
 
